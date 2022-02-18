@@ -3,19 +3,15 @@
     <div class="base-aside-logo">SmileX-Admin</div>
     <div class="base-aside-menu">
       <el-menu
-        default-active="1"
+        default-active="2"
         class="menu"
         @open="handleOpen"
         @close="handleClose"
       >
         <el-sub-menu index="1">
           <template #title>
-            <span>Navigator One</span>
+            <span>系统管理</span>
           </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
-          </el-menu-item-group>
           <el-menu-item-group title="Group Two">
             <el-menu-item index="1-3">item three</el-menu-item>
           </el-menu-item-group>
@@ -24,6 +20,9 @@
             <el-menu-item index="1-4-1">item one</el-menu-item>
           </el-sub-menu>
         </el-sub-menu>
+        <el-menu-item index="2">
+          <span>代码生成器</span>
+        </el-menu-item>
       </el-menu>
     </div>
   </div>

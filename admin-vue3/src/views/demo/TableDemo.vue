@@ -317,16 +317,3 @@ const tableData = [
   },
 ];
 </script>
-
-<style lang="scss" scoped>
-.table-card {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  position: relative;
-  //   overflow-y: auto;
-  &-pagination {
-    margin-top: 20px;
-  }
-}
-</style>
