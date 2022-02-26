@@ -18,14 +18,16 @@
 </template>
 
 <script>
-import { toRef } from "vue";
+import { ref } from "vue";
 
 export default {
-  setup(props) {
-    const dialogVisible = toRef(props, "visible");
+  setup() {
+    const dialogVisible = ref(false);
+    // const dialogVisible = toRef(props, "visible");
     return {
       dialogVisible,
     };
   },
+  methods: {},
 };
 </script>

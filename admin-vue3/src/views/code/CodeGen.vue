@@ -17,6 +17,7 @@
 <script setup>
 import { ref } from "vue";
 import { getAction } from "@/api/manage";
+import "./modules/CodeGenModel.vue";
 
 let tableData = ref([]);
 getAction("/generator/list", {}).then((res) => {

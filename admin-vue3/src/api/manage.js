@@ -1,4 +1,4 @@
-import Vue from "vue";
+// import Vue from "vue";
 import axios from '@/utils/request'
 
 
@@ -91,7 +91,7 @@ export function downFile(url, parameter) {
 export function downloadFile(url, fileName, parameter) {
     return downFile(url, parameter).then((data) => {
         if (!data || data.size === 0) {
-            Vue.prototype['$message'].warning('文件下载失败')
+            // Vue.prototype['$message'].warning('文件下载失败')
             return
         }
         if (typeof window.navigator.msSaveBlob !== 'undefined') {
