@@ -20,13 +20,25 @@
             <el-menu-item index="1-4-1">item one</el-menu-item>
           </el-sub-menu>
         </el-sub-menu>
-        <el-menu-item index="2">
+        <el-menu-item index="2" @click="pushPath('/codeGen')">
           <span>代码生成器</span>
         </el-menu-item>
       </el-menu>
     </div>
   </div>
 </template>
+
+<script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const pushPath = (path) => {
+  debugger;
+  router.push({
+    path: path,
+  });
+};
+</script>
 
 <style lang="scss" scoped>
 .base-aside {

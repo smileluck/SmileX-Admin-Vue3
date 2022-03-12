@@ -15,11 +15,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { reactive } from "vue";
 import { getAction } from "@/api/manage";
 import "./modules/CodeGenModel.vue";
 
-let tableData = ref([]);
+let tableData = reactive([]);
 getAction("/generator/list", {}).then((res) => {
   tableData.value = res.data;
 });
