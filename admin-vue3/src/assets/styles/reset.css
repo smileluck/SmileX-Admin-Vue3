@@ -43,6 +43,6 @@ table {
 }
 a:link, a:visited, a:hover, a:active {
     text-decoration: none;
-	letter-spacing: 2px;
+	/* letter-spacing: 2px; */
 }
 

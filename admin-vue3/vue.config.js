@@ -20,10 +20,18 @@ module.exports = {
   configureWebpack: {
     plugins: [
       AutoImport({
-        resolvers: [ElementPlusResolver()],
+        imports: ["vue"],
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: "css",
+            exclude: new RegExp(/^(?!.*loading-directive).*$/),
+          }),
+        ],
+        dts: "auto-imports.d.ts",
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [ElementPlusResolver({ importStyle: "css" })],
+        dts: "components.d.ts",
       }),
     ],
   },

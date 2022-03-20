@@ -1,12 +1,12 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="代码生成"
+    title="数据源配置"
     width="50%"
     :before-close="handleClose"
   >
     <el-form :model="form" label-width="120px" :rules="rules" ref="formRef">
-      <el-form-item label="包路径" prop="type">
+      <el-form-item label="类型" prop="type">
         <el-select v-model="form.type" placeholder="请选择数据源类型">
           <el-option label="Mysql" value="mysql" />
         </el-select>
