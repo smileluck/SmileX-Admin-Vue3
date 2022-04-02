@@ -1,20 +1,20 @@
 <template>
   <div class="table-card">
     <div class="table-search">
-      <el-form :inline="true" :model="searchForm">
+      <el-form :inline="true" :model="searchFormModel" ref="searchForm">
         <el-col :span="8">
           <el-form-item label="表名：">
             <el-input
-              v-model.trim="searchForm.tableName"
+              v-model.trim="searchFormModel.tableName"
               placeholder="请输入表名"
             /> </el-form-item
         ></el-col>
-        <el-col :span="8">
-          <el-button type="primary">
+        <el-col :span="4">
+          <el-button type="primary" @click="list()">
             <el-icon class="el-icon"><search /></el-icon>
             <span>搜索</span></el-button
           >
-          <el-button type="primary">
+          <el-button type="primary" @click="resetSearch()">
             <el-icon class="el-icon"><refresh-right /></el-icon>
             <span>重置</span></el-button
           >
@@ -22,12 +22,18 @@
       </el-form>
     </div>
     <div class="table-operate">
-      <el-col>
-        <el-button type="primary" @click="configHandle()">配置数据源</el-button>
-      </el-col>
-      <el-col>
-        <el-button type="primary" @click="configHandle()">生成数据表</el-button>
-      </el-col>
+      <el-row>
+        <el-col :span="2">
+          <el-button type="primary" @click="configHandle()"
+            >配置数据源</el-button
+          >
+        </el-col>
+        <el-col :span="2">
+          <el-button type="primary" @click="configHandle()"
+            >生成数据表</el-button
+          >
+        </el-col>
+      </el-row>
     </div>
     <div class="table-selection" v-show="selectColumn.length > 0">
       <span class="selection-span"
@@ -74,10 +80,11 @@ let tableData = ref([]);
 const loading = ref(false);
 const table = ref();
 const configModel = ref();
+const searchForm = ref();
 
 const selectColumn = ref([]);
 
-const searchForm = reactive({
+const searchFormModel = reactive({
   tableName: "",
   tableCommene: "",
 });
@@ -93,7 +100,7 @@ const handleSelectionClear = () => {
 
 const list = () => {
   loading.value = true;
-  getAction("/generator/list", toRaw(searchForm))
+  getAction("/generator/list", toRaw(searchFormModel))
     .then((res) => {
       if (res.success) {
         tableData.value = res.data;
@@ -114,7 +121,10 @@ const configHandle = () => {
   unref(configModel).initModel();
 };
 
+const resetSearch = () => {
+  unref(searchForm).resetFields();
+  list();
+};
+
 list();
 </script>
-
-<style lang="scss" scoped></style>
