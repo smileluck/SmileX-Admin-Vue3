@@ -6,6 +6,7 @@ export function postAction(url, parameter) {
   return axios.request({
     url: url,
     method: "post",
+    // data: JSON.stringify(parameter),
     data: parameter,
     headers: {
       "Content-Type": "application/json;charset=UTF-8",

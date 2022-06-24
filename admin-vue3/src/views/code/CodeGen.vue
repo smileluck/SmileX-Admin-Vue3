@@ -29,9 +29,7 @@
           >
         </el-col>
         <el-col :span="2">
-          <el-button type="primary" @click="configHandle()"
-            >生成数据表</el-button
-          >
+          <el-button type="primary" @click="genHandle()">生成数据表</el-button>
         </el-col>
       </el-row>
     </div>
@@ -65,6 +63,8 @@
 
     <!-- <column-model></column-model> -->
     <db-config-model ref="configModel" @refresh="list"></db-config-model>
+
+    <code-gen-model ref="genModel" @refresh="list"></code-gen-model>
   </div>
 </template>
 
@@ -74,12 +74,14 @@ import { ref, reactive, toRaw, unref } from "vue";
 import { getAction } from "@/api/manage";
 // import ColumnModel from "./modules/ColumnModel.vue";
 import DbConfigModel from "./modules/DbConfigModel.vue";
+import CodeGenModel from "./modules/CodeGenModel.vue";
 import { ElNotification } from "element-plus";
 
 let tableData = ref([]);
 const loading = ref(false);
 const table = ref();
 const configModel = ref();
+const genModel = ref();
 const searchForm = ref();
 
 const selectColumn = ref([]);
@@ -119,6 +121,17 @@ const list = () => {
 };
 const configHandle = () => {
   unref(configModel).initModel();
+};
+const genHandle = () => {
+  if (selectColumn.value.length == 0) {
+    ElNotification({
+      title: "系统提示",
+      message: "请选择表进行生成",
+      type: "error",
+    });
+    return;
+  }
+  unref(genModel).initModel(selectColumn.value);
 };
 
 const resetSearch = () => {

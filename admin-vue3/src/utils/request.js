@@ -3,7 +3,7 @@ import router from "@/router";
 import { ElNotification } from "element-plus";
 
 const http = axios.create({
-  baseURL: "http://localhost:8001/smilex-generator",
+  baseURL: "http://localhost:8081/smilex",
   timeout: 1000 * 30,
   withCredentials: true,
   headers: {

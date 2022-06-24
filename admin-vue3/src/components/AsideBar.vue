@@ -33,7 +33,6 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const pushPath = (path) => {
-  debugger;
   router.push({
     path: path,
   });

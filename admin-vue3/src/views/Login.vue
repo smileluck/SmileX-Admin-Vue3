@@ -37,18 +37,47 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+import { postAction } from "@/api/manage";
+import { reactive, ref, toRaw, unref } from "vue";
+import { ElNotification } from "element-plus";
+const router = useRouter();
 
-const formRef = ref("formRef");
+const formRef = ref();
+
+const form = reactive({
+  username: "",
+  password: "",
+});
 
 const onSubmit = () => {
-  formRef.value.validate((result) => {
+  const formEl = unref(formRef);
+  if (!formEl) {
+    return;
+  }
+  formEl.validate((result) => {
     if (result) {
-      console.log("登录成功");
+      postAction("/sys/login/submit", { ...toRaw(form) }).then((res) => {
+        if (res.success) {
+          ElNotification({
+            title: "系统提示",
+            message: res.msg,
+            type: "success",
+          });
+          router.push({
+            path: "/",
+          });
+        } else {
+          ElNotification({
+            title: "系统提示",
+            message: res.msg,
+            type: "error",
+          });
+        }
+      });
     }
   });
 };
-
 const onReset = () => {
   formRef.value.resetFields();
 };
@@ -82,11 +111,6 @@ const rules = reactive({
       trigger: "blur",
     },
   ],
-});
-
-const form = reactive({
-  username: "",
-  password: "",
 });
 </script>
 
