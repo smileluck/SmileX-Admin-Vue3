@@ -1,6 +1,7 @@
 import axios from "axios";
 import router from "@/router";
 import { ElNotification } from "element-plus";
+import { useUserStore } from "@/store/modules/user";
 
 const http = axios.create({
   baseURL: "http://localhost:8081/smilex",
@@ -15,7 +16,10 @@ const http = axios.create({
 http.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
-    config.headers["X-Access-Token"] = "123465";
+    const userStore = useUserStore();
+    if (userStore.getToken != null) {
+      config.headers["X-Access-Token"] = userStore.getToken;
+    }
     if (config.method == "get") {
       config.params["t"] = Date.parse(new Date()) / 1000;
     }
@@ -61,6 +65,7 @@ const err = (error) => {
           title: "系统提示",
           message: "未授权，请重新登录",
         });
+        router.push({ name: "Login" });
         break;
       default:
         ElNotification.error({
@@ -82,7 +87,7 @@ http.interceptors.response.use(function (response) {
   console.log(response.data);
   if (response.data && response.data.code === 401) {
     // 401, token失效
-    router.push({ name: "login" });
+    router.push({ name: "Login" });
   }
   //   if (response.status === 200 && response.data.success) {
   //     return response.data;
