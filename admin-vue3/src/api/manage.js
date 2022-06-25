@@ -33,7 +33,7 @@ export function putAction(url, parameter) {
 }
 
 //get
-export function getAction(url, parameter) {
+export function getAction(url, parameter = {}) {
   return axios.request({
     url: url,
     method: "get",

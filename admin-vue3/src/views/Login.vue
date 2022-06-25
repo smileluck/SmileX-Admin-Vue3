@@ -5,6 +5,7 @@
         <p class="login-title">SmileX-Admin</p>
         <div class="login-model">
           <el-form
+            label-position="left"
             ref="formRef"
             :model="form"
             :rules="rules"
@@ -24,7 +25,21 @@
                 placeholder="请输入密码"
               ></el-input>
             </el-form-item>
-
+            <el-form-item prop="captchaCode" label-width="0px">
+              <el-row justify="space-between">
+                <el-col :span="11">
+                  <el-input
+                    v-model="form.captchaCode"
+                    type="text"
+                    placeholder="请输入验证码"
+                    maxlength="4"
+                  ></el-input>
+                </el-col>
+                <el-col :span="11">
+                  <img :src="imgRef" @click="captchaGet" style="width: 100%" />
+                </el-col>
+              </el-row>
+            </el-form-item>
             <div style="text-align: center; margin: 0 auto">
               <el-button @click="onSubmit()" type="primary">登录</el-button>
               <el-button @click="onReset()">重置</el-button>
@@ -38,17 +53,25 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import { postAction } from "@/api/manage";
+import { postAction, getAction } from "@/api/manage";
 import { reactive, ref, toRaw, unref } from "vue";
 import { ElNotification } from "element-plus";
+import { useUserStore } from "@/store/modules/user";
 const router = useRouter();
 
 const formRef = ref();
+const imgRef = ref("");
+const userStore = useUserStore();
 
 const form = reactive({
   username: "",
   password: "",
+  captchaCode: "",
 });
+
+const captchaKey = ref(
+  new Date().getTime().toString() + "" + Math.random().toString(36).slice(-6)
+);
 
 const onSubmit = () => {
   const formEl = unref(formRef);
@@ -57,13 +80,17 @@ const onSubmit = () => {
   }
   formEl.validate((result) => {
     if (result) {
-      postAction("/sys/login/submit", { ...toRaw(form) }).then((res) => {
+      postAction("/sys/login/submit", {
+        ...toRaw(form),
+        captchaKey: captchaKey.value,
+      }).then((res) => {
         if (res.success) {
           ElNotification({
             title: "系统提示",
             message: res.msg,
             type: "success",
           });
+          userStore.login(res.data);
           router.push({
             path: "/",
           });
@@ -73,6 +100,7 @@ const onSubmit = () => {
             message: res.msg,
             type: "error",
           });
+          captchaGet();
         }
       });
     }
@@ -80,6 +108,24 @@ const onSubmit = () => {
 };
 const onReset = () => {
   formRef.value.resetFields();
+};
+const captchaGet = () => {
+  getAction(`/sys/login/captcha/${captchaKey.value}`).then((res) => {
+    if (res.success) {
+      imgRef.value = res.data;
+      // ElNotification({
+      //   title: "系统提示",
+      //   message: res.msg,
+      //   type: "success",
+      // });
+    } else {
+      ElNotification({
+        title: "系统提示",
+        message: res.msg,
+        type: "error",
+      });
+    }
+  });
 };
 
 const validateUname = (rule, value, callback) => {
@@ -111,7 +157,9 @@ const rules = reactive({
       trigger: "blur",
     },
   ],
+  captchaCode: [{ required: true, message: "请输入验证码", trigger: "blur" }],
 });
+captchaGet();
 </script>
 
 <style lang="scss" scoped>
@@ -133,8 +181,9 @@ const rules = reactive({
     color: #fff;
   }
   &-model {
-    background-color: #f3f3f3;
-    width: 300px;
+    // background-color: #f3f3f3;
+    background-color: rgba(200, 215, 229, 0.75);
+    width: 240px;
     padding: 40px 30px;
     border-radius: 8px;
     box-shadow: $S-Box-Shadow;
