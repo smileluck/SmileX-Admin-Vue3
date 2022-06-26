@@ -84,11 +84,11 @@ const submitForm = () => {
   });
 };
 
-const initModel = (arr) => {
+const initModel = () => {
   dialogVisible.value = true;
-  for (let i = 0; i < arr.length; i++) {
-    selectArr.push(arr[i].tableName);
-  }
+  // for (let i = 0; i < arr.length; i++) {
+  //   selectArr.push(arr[i].tableName);
+  // }
 };
 defineExpose({ initModel });
 </script>
