@@ -17,11 +17,14 @@ export default function usePages(pageSearchFormModel) {
     pageTable.value.clearSelection();
   };
 
-  const { pageList, pageTableData } = usePageList(
-    pageSearchFormModel,
-    pageLoading
-  );
-  const { pageOperaAdd, pageOperaRemove } = usePageOpera(pageOperaModel);
+  const { pageList, pageTableData,
+    pagePaginationInfo,
+    pagePaginationSizeChange,
+    pagePaginationCurrentChange, } = usePageList(
+      pageSearchFormModel,
+      pageLoading
+    );
+  const { pageOperaAdd, pageOperaRemove } = usePageOpera(pageOperaModel, pageSelectColumn, pageList);
   const { pageSearchForm, pageSearchReset } = usePageSearch(pageList);
   return {
     // 组件引用
@@ -34,6 +37,11 @@ export default function usePages(pageSearchFormModel) {
     pageTableData,
     pageSelectChange,
     pageSelectClear,
+    // 分页
+
+    pagePaginationInfo,
+    pagePaginationSizeChange,
+    pagePaginationCurrentChange,
     // 操作
     pageOperaAdd,
     pageOperaRemove,

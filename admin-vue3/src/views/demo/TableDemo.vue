@@ -18,7 +18,7 @@
     </el-table>
     <el-pagination
       class="table-card-pagination"
-      v-model:currentPage="curretPage"
+      :currentPage="curretPage"
       :page-sizes="[10, 20, 50, 100]"
       :page-size="pageSize"
       layout="total, sizes, prev, pager, next, jumper"

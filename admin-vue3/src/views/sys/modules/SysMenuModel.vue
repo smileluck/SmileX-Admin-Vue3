@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    title="新增"
+    :title="`${form.id != null ? '修改' : '新增'}`"
     width="50%"
     :before-close="handleClose"
   >
@@ -27,8 +27,7 @@
 
 <script setup>
 import { ref, unref, reactive, toRaw, defineExpose, defineEmits } from "vue";
-import { postAction } from "@/api/manage";
-import { ElNotification } from "element-plus";
+import { postAction, getAction } from "@/api/manage";
 
 const emit = defineEmits(["refresh"]);
 
@@ -37,6 +36,7 @@ const formRef = ref();
 const selectArr = [];
 
 const form = reactive({
+  id: null,
   packagePath: "top.zsmile.modules",
   moduleName: "sys",
   savePath: "D:\\test\\generator\\",
@@ -50,6 +50,13 @@ const rules = reactive({
   savePath: [{ required: true, message: "请输入用户名", trigger: "blur" }],
 });
 
+const getInfo = () => {
+  getAction(`/sys/menu/info/${form.id}`, {}).then((res) => {
+    if (res.success) {
+    }
+  });
+};
+
 const submitForm = () => {
   // if (!formEl) return;
   const formEl = unref(formRef);
@@ -58,24 +65,13 @@ const submitForm = () => {
   }
   formEl.validate((valid, fields) => {
     if (valid) {
-      postAction("/generator/genFileByLocal", {
+      postAction(`/sys/menu/${form.id != null ? "update" : "save"}`, {
         ...toRaw(form),
         tableName: selectArr,
       }).then((res) => {
         if (res.success) {
-          ElNotification({
-            title: "成功",
-            message: res.msg,
-            type: "success",
-          });
           emit("refresh");
           dialogVisible.value = false;
-        } else {
-          ElNotification({
-            title: "异常",
-            message: res.msg,
-            type: "error",
-          });
         }
       });
     } else {
@@ -84,11 +80,12 @@ const submitForm = () => {
   });
 };
 
-const initModel = () => {
+const initModel = (id) => {
   dialogVisible.value = true;
-  // for (let i = 0; i < arr.length; i++) {
-  //   selectArr.push(arr[i].tableName);
-  // }
+  form.id = id;
+  if (id != null) {
+    getInfo();
+  }
 };
 defineExpose({ initModel });
 </script>

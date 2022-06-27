@@ -55,7 +55,6 @@
 import { useRouter } from "vue-router";
 import { postAction, getAction } from "@/api/manage";
 import { reactive, ref, toRaw, unref } from "vue";
-import { ElNotification } from "element-plus";
 import { useUserStore } from "@/store/modules/user";
 const router = useRouter();
 
@@ -85,21 +84,11 @@ const onSubmit = () => {
         captchaKey: captchaKey.value,
       }).then((res) => {
         if (res.success) {
-          ElNotification({
-            title: "系统提示",
-            message: res.msg,
-            type: "success",
-          });
           userStore.login(res.data);
           router.push({
             path: "/",
           });
         } else {
-          ElNotification({
-            title: "系统提示",
-            message: res.msg,
-            type: "error",
-          });
           captchaGet();
         }
       });
@@ -113,17 +102,6 @@ const captchaGet = () => {
   getAction(`/sys/login/captcha/${captchaKey.value}`).then((res) => {
     if (res.success) {
       imgRef.value = res.data;
-      // ElNotification({
-      //   title: "系统提示",
-      //   message: res.msg,
-      //   type: "success",
-      // });
-    } else {
-      ElNotification({
-        title: "系统提示",
-        message: res.msg,
-        type: "error",
-      });
     }
   });
 };

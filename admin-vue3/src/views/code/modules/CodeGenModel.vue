@@ -28,7 +28,6 @@
 <script setup>
 import { ref, unref, reactive, toRaw, defineExpose, defineEmits } from "vue";
 import { postAction } from "@/api/manage";
-import { ElNotification } from "element-plus";
 
 const emit = defineEmits(["refresh"]);
 
@@ -63,19 +62,8 @@ const submitForm = () => {
         tableName: selectArr,
       }).then((res) => {
         if (res.success) {
-          ElNotification({
-            title: "成功",
-            message: res.msg,
-            type: "success",
-          });
           emit("refresh");
           dialogVisible.value = false;
-        } else {
-          ElNotification({
-            title: "异常",
-            message: res.msg,
-            type: "error",
-          });
         }
       });
     } else {

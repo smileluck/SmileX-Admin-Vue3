@@ -108,11 +108,6 @@ const list = () => {
         tableData.value = res.data;
       } else {
         tableData.value = [];
-        ElNotification({
-          title: "系统提示",
-          message: res.msg,
-          type: "error",
-        });
       }
     })
     .finally(() => {

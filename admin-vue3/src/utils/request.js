@@ -5,6 +5,7 @@ import { useUserStore } from "@/store/modules/user";
 
 const http = axios.create({
   baseURL: "http://localhost:8081/smilex",
+  // baseURL: "http://localhost:8001/smilex",
   timeout: 1000 * 30,
   withCredentials: true,
   headers: {
@@ -20,9 +21,9 @@ http.interceptors.request.use(
     if (userStore.getToken != null) {
       config.headers["X-Access-Token"] = userStore.getToken;
     }
-    if (config.method == "get") {
-      config.params["t"] = Date.parse(new Date()) / 1000;
-    }
+    // if (config.method == "get") {
+    //   config.params["t"] = Date.parse(new Date()) / 1000;
+    // }
     return config;
   },
   function (error) {
@@ -92,6 +93,19 @@ http.interceptors.response.use(function (response) {
   //   if (response.status === 200 && response.data.success) {
   //     return response.data;
   //   }
+  if (response.data.success) {
+    ElNotification({
+      title: "系统提示",
+      message: response.data.msg,
+      type: "success",
+    });
+  } else {
+    ElNotification({
+      title: "异常",
+      message: response.data.msg,
+      type: "error",
+    });
+  }
   return response.data;
 }, err);
 
