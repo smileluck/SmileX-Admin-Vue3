@@ -161,7 +161,6 @@
       @current-change="pagePaginationCurrentChange"
     >
     </el-pagination>
-
     <sys-menu-model ref="pageOperaModel" @refresh="pageList"></sys-menu-model>
   </div>
 </template>
