@@ -3,7 +3,7 @@
         v-model="dialogVisible"
         :title='`${form.info.id!= null ? "修改" : "新增"}`'
         width="50%"
-        :before-close="handleClose"
+        :before-close="cancelForm"
     >
         <el-form
                 :model="form.info"
@@ -80,7 +80,7 @@
                 }).then((res) => {
                     if (res.success) {
                         emit("refresh");
-                        dialogVisible.value = false;
+                        cancelForm();
                     }
                 });
             } else {

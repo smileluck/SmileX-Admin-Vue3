@@ -3,7 +3,7 @@
     v-model="dialogVisible"
     :title="`${form.info.id != null ? '修改' : '新增'}`"
     width="50%"
-    :before-close="handleClose"
+    :before-close="cancelForm"
   >
     <el-form
       :model="form.info"
@@ -41,10 +41,10 @@
           placeholder="请输入路由视图"
         />
       </el-form-item>
-      <el-form-item label="菜单类型(0:一级菜单; 1:子菜单:2:按钮权限)">
+      <el-form-item label="菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)">
         <el-input
           v-model.trim="form.info.menuType"
-          placeholder="请输入菜单类型(0:一级菜单; 1:子菜单:2:按钮权限)"
+          placeholder="请输入菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)"
         />
       </el-form-item>
       <el-form-item label="权限标识">
@@ -53,10 +53,10 @@
       <el-form-item label="排序">
         <el-input v-model.trim="form.info.orderNum" placeholder="请输入排序" />
       </el-form-item>
-      <el-form-item label="状态  0：正常   1:禁用">
+      <el-form-item label="是否启用，0禁用1启用">
         <el-input
           v-model.trim="form.info.enableFlag"
-          placeholder="请输入状态  0：正常   1:禁用"
+          placeholder="请输入是否启用，0禁用1启用"
         />
       </el-form-item>
     </el-form>
@@ -104,18 +104,14 @@ const rules = reactive({
   menuType: [
     {
       required: true,
-      message: "请选择菜单类型(0:一级菜单; 1:子菜单:2:按钮权限)",
+      message: "请选择菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)",
       trigger: "blur",
     },
   ],
   perm: [{ required: true, message: "请选择权限标识", trigger: "blur" }],
   orderNum: [{ required: true, message: "请选择排序", trigger: "blur" }],
   enableFlag: [
-    {
-      required: true,
-      message: "请选择状态  0：正常   1:禁用",
-      trigger: "blur",
-    },
+    { required: true, message: "请选择是否启用，0禁用1启用", trigger: "blur" },
   ],
 });
 
@@ -146,7 +142,7 @@ const submitForm = () => {
       }).then((res) => {
         if (res.success) {
           emit("refresh");
-          dialogVisible.value = false;
+          cancelForm();
         }
       });
     } else {
