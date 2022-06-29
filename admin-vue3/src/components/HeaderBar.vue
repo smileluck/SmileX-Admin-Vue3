@@ -11,7 +11,7 @@
         <el-avatar :size="30" :src="circleUrl"></el-avatar>
         <span>Admin</span>
       </div>
-      <div class="user-box" style="cursor: pointer">
+      <div class="user-box" style="cursor: pointer" @click="loginOut">
         <el-icon :size="30"><switch-button /></el-icon>
         <span>退出登录</span>
       </div>
@@ -23,11 +23,22 @@
 import { ref } from "vue";
 
 import { SwitchButton, Fold, Expand } from "@element-plus/icons-vue";
+import { useUserStore } from "@/store/modules/user";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+const userStore = useUserStore();
 const expandAside = ref(true);
 
 const changeExpand = () => {
   expandAside.value = !expandAside.value;
+};
+
+const loginOut = () => {
+  userStore.loginOut();
+  router.push({
+    path: "/login",
+  });
 };
 </script>
 

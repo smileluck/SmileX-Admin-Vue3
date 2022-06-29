@@ -2,26 +2,10 @@
   <div class="base-aside">
     <div class="base-aside-logo">SmileX-Admin</div>
     <div class="base-aside-menu">
-      <el-menu
-        default-active="2"
-        class="menu"
-        @open="handleOpen"
-        @close="handleClose"
-      >
-        <el-sub-menu index="1">
-          <template #title>
-            <span>系统管理</span>
-          </template>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1" @click="pushPath('/menu')">
-              <span>代码生成器</span>
-            </el-menu-item>
-          </el-menu-item-group>
-          <el-sub-menu index="1-4">
-            <template #title>item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
-          </el-sub-menu>
-        </el-sub-menu>
+      <el-menu default-active="999" class="menu">
+        <el-menu-item index="999" @click="pushPath('/home')">
+          <span>首页</span>
+        </el-menu-item>
         <el-menu-item index="2" @click="pushPath('/codeGen')">
           <span>代码生成器</span>
         </el-menu-item>
@@ -35,6 +19,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 const pushPath = (path) => {
+  console.log(router);
   router.push({
     path: path,
   });
