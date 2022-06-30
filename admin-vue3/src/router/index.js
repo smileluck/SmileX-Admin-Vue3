@@ -4,7 +4,11 @@ import { getAction } from "@/api/manage";
 
 console.log("env,", process.env.NODE_ENV)
 
-const _import = require('./import-' +process.env.NODE_ENV)
+/*
+ * 开发环境不能使用 import 动态加载组件，这里开发环境用require替代，否则将会白屏不渲染界面
+ * 生产环境可以使用 import 动态懒加载组件。
+ */
+const _import = require('./import-' + process.env.NODE_ENV)
 
 // 全局路由
 const globalRoutes = [{
