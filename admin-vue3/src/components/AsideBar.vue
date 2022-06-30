@@ -9,14 +9,40 @@
         <el-menu-item index="2" @click="pushPath('/codeGen')">
           <span>代码生成器</span>
         </el-menu-item>
+        <!-- <el-sub-menu index="1-4">
+          <template #title>item four</template>
+          <el-sub-menu index="1-6">
+            <template #title>item 1</template>
+            <el-menu-item index="2" @click="pushPath('/codeGen')">
+              <span>1111</span>
+            </el-menu-item>
+          </el-sub-menu>
+          <el-sub-menu index="1-99">
+            <template #title>item 1</template>
+            <el-menu-item index="2" @click="pushPath('/codeGen')">
+              <span>1111</span>
+            </el-menu-item>
+          </el-sub-menu>
+        </el-sub-menu> -->
+        <sub-menu
+          v-for="(item, index) in menus"
+          :menu="itme"
+          :key="index"
+        ></sub-menu>
       </el-menu>
     </div>
   </div>
 </template>
 
 <script setup>
+import SubMenu from "./AsideBar-sub-menu.vue";
 import { useRouter } from "vue-router";
+import { useUserStore } from "@/store/modules/user";
+
 const router = useRouter();
+const userStore = useUserStore();
+
+const menus = userStore.getMenus;
 
 const pushPath = (path) => {
   console.log(router);
