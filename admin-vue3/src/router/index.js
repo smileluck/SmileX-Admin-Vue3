@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 import { getAction } from "@/api/manage";
 
+console.log("env,", process.env.NODE_ENV)
+
+const _import = require('./import-' +process.env.NODE_ENV)
 
 // 全局路由
 const globalRoutes = [{
@@ -34,6 +37,11 @@ const baseRouters = [
       //   component: () =>
       //     import("@/views/demo/TableDemo.vue"),
       // },
+      {
+        path: "/menu",
+        name: "menu",
+        component: () => import("@/views/sys/SysMenu.vue")
+      },
       {
         path: "/codeGen",
         name: "codeGen",
@@ -75,10 +83,11 @@ router.beforeEach((to, from, next) => {
           const menus = res.data.menus
           const perms = res.data.perms
           userStore.menusAndPerms(menus, perms)
-          dynamicRouterMenus(menus);
+          userStore.setShowMenus(dynamicRouterMenus(menus))
           next({ ...to, replace: true });
         } else {
           userStore.menusAndPerms([], [])
+          userStore.setShowMenus([])
           next()
         }
       });
@@ -89,22 +98,20 @@ router.beforeEach((to, from, next) => {
 
 
 const dynamicRouterMenus = (menus) => {
-
   for (let i = menus.length - 1; i >= 0; i--) {
     // 将菜单添加到路由里面，menuType=1为菜单
-    if (menus.menuType == 1) {
+    let menu = menus[i]
+    if (menu.menuType == 1) {
       router.addRoute("baseLayout", {
-        path: menus[i].routeUrl,
-        name: menus[i].id,
+        path: menu.routeUrl,
+        name: menu.id,
         component: () =>
-          import(menus[i].routeView),
+          _import(menu.routeView),
       })
     }
   }
   const storeMenus = dynamicRouterMenusTree(menus, 0);
-  console.log(storeMenus);
-  console.log(router.getRoutes())
-
+  return storeMenus;
 }
 
 // 数组递归转换数结构

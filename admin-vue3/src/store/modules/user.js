@@ -8,7 +8,8 @@ export const useUserStore = defineStore("user", {
       username: localStorage.store_user_username != null ? localStorage.store_user_username : null,
       dynamicMenuState: false,
       menus: [],
-      perms: []
+      perms: [],
+      showMenus: [],
     };
   },
   getters: {
@@ -20,6 +21,9 @@ export const useUserStore = defineStore("user", {
     },
     getDynamicMenuState(state) {
       return state.dynamicMenuState
+    },
+    getShowMenus(state) {
+      return state.showMenus
     }
   },
   actions: {
@@ -39,6 +43,8 @@ export const useUserStore = defineStore("user", {
       this.menus = menus;
       this.perms = perms;
     },
-
+    setShowMenus(menus) {
+      this.showMenus = menus;
+    }
   },
 });
