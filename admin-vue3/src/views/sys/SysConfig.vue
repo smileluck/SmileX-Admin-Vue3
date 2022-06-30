@@ -87,7 +87,7 @@
                 @selection-change="pageSelectChange"
         >
             <el-table-column type="selection" width="50" />
-            <el-table-column prop="id" label="ID" width="150" />
+            <el-table-column prop="id" label="ID" width="180" />
             <el-table-column prop="configName" label="配置名称" width="200" />
             <el-table-column prop="configKey" label="配置key" width="200" />
             <el-table-column prop="configType" label="配置类型，1text,2json" width="200" />

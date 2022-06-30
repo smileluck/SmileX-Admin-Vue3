@@ -101,7 +101,7 @@
                 @selection-change="pageSelectChange"
         >
             <el-table-column type="selection" width="50" />
-            <el-table-column prop="id" label="ID" width="150" />
+            <el-table-column prop="id" label="ID" width="180" />
             <el-table-column prop="tenantId" label="租户ID" width="200" />
             <el-table-column prop="username" label="用户名" width="200" />
             <el-table-column prop="realName" label="真实名称" width="200" />

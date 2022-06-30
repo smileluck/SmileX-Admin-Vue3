@@ -87,7 +87,7 @@
                 @selection-change="pageSelectChange"
         >
             <el-table-column type="selection" width="50" />
-            <el-table-column prop="id" label="ID" width="150" />
+            <el-table-column prop="id" label="ID" width="180" />
             <el-table-column prop="dictId" label="字典ID" width="200" />
             <el-table-column prop="dictCode" label="字典编码" width="200" />
             <el-table-column prop="dictValue" label="数据值" width="200" />

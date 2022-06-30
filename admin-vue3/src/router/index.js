@@ -42,15 +42,15 @@ const baseRouters = [
           import("@/views/code/CodeGen.vue"),
       }
     ],
-    // beforeEnter: (to, from, next) => {
-    //   console.debug("to:", to, ",from:", from)
-    //   const userStore = useUserStore();
-    //   const token = userStore.getToken
-    //   if (token == null) {
-    //     next({ path: '/login' })
-    //   }
-    //   next();
-    // }
+    beforeEnter: (to, from, next) => {
+      console.debug("to:", to, ",from:", from)
+      const userStore = useUserStore();
+      const token = userStore.getToken
+      if (token == null) {
+        next({ path: '/login' })
+      }
+      next();
+    }
   }
 ];
 
