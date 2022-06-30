@@ -104,6 +104,7 @@ const dynamicRouterMenus = (menus) => {
     }
   }
   const storeMenus = dynamicRouterMenusTree(menus, 0);
+  console.log(storeMenus)
   return storeMenus;
 }
 
