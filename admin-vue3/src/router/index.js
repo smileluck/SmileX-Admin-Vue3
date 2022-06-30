@@ -35,17 +35,6 @@ const baseRouters = [
         component: () =>
           import("@/views/Home.vue"),
       },
-      // {
-      //   path: "/table",
-      //   name: "table",
-      //   component: () =>
-      //     import("@/views/demo/TableDemo.vue"),
-      // },
-      {
-        path: "/menu",
-        name: "menu",
-        component: () => import("@/views/sys/SysMenu.vue")
-      },
       {
         path: "/codeGen",
         name: "codeGen",

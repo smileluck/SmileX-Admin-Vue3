@@ -2,11 +2,11 @@
   <div class="base-aside">
     <div class="base-aside-logo">SmileX-Admin</div>
     <div class="base-aside-menu">
-      <el-menu default-active="999" class="menu">
-        <el-menu-item index="999" @click="pushPath('/home')">
+      <el-menu default-active="home" class="menu">
+        <el-menu-item index="home" @click="pushPath('/home')">
           <span>首页</span>
         </el-menu-item>
-        <el-menu-item index="2" @click="pushPath('/codeGen')">
+        <el-menu-item index="codeGen" @click="pushPath('/codeGen')">
           <span>代码生成器</span>
         </el-menu-item>
         <el-sub-menu
