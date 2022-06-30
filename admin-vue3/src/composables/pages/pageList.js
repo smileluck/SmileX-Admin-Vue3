@@ -1,7 +1,7 @@
 import { ref, onMounted, toRaw, reactive } from "vue";
 import { getAction } from "@/api/manage";
 
-export default function usePageList(pageSearchFormModel, pageLoading) {
+export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix) {
   let pageTableData = ref([]);
   let pagePaginationInfo = reactive({
     current: 1,
@@ -24,7 +24,7 @@ export default function usePageList(pageSearchFormModel, pageLoading) {
 
   const pageList = () => {
     pageLoading.value = true;
-    getAction("/sys/menu/list", {
+    getAction(reqPrefix + "/list", {
       ...toRaw(pageSearchFormModel),
       size: pagePaginationInfo.size,
       page: pagePaginationInfo.current,
