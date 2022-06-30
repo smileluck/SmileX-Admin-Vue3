@@ -46,10 +46,10 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="菜单类型(0:一级菜单; 1:子菜单:2:按钮权限)：">
+            <el-form-item label="菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)：">
               <el-input
                 v-model.trim="pageSearchFormModel.menuType"
-                placeholder="请输入菜单类型(0:一级菜单; 1:子菜单:2:按钮权限)"
+                placeholder="请输入菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -67,10 +67,10 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="状态  0：正常   1:禁用：">
+            <el-form-item label="是否启用，0禁用1启用：">
               <el-input
                 v-model.trim="pageSearchFormModel.enableFlag"
-                placeholder="请输入状态  0：正常   1:禁用"
+                placeholder="请输入是否启用，0禁用1启用"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -123,14 +123,14 @@
       <el-table-column prop="routeView" label="路由视图" width="200" />
       <el-table-column
         prop="menuType"
-        label="菜单类型(0:一级菜单; 1:子菜单:2:按钮权限)"
+        label="菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)"
         width="200"
       />
       <el-table-column prop="perm" label="权限标识" width="200" />
       <el-table-column prop="orderNum" label="排序" width="200" />
       <el-table-column
         prop="enableFlag"
-        label="状态  0：正常   1:禁用"
+        label="是否启用，0禁用1启用"
         width="200"
       />
       <el-table-column fixed="right" label="Operations" width="120">
@@ -184,6 +184,8 @@ const pageSearchFormModel = reactive({
   enableFlag: "",
 });
 
+const reqPrefix = "/sys/menu";
+
 const {
   // 组件引用
   pageLoading,
@@ -204,5 +206,5 @@ const {
 
   pageSearchForm,
   pageSearchReset,
-} = usePages(pageSearchFormModel);
+} = usePages(pageSearchFormModel, reqPrefix);
 </script>

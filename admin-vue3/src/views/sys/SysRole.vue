@@ -114,6 +114,8 @@
         roleName:"",
     });
 
+    const reqPrefix = "/sys/role"
+
     const {
         // 组件引用
         pageLoading,
@@ -134,5 +136,5 @@
 
         pageSearchForm,
         pageSearchReset,
-    } = usePages(pageSearchFormModel);
+    } = usePages(pageSearchFormModel,reqPrefix);
 </script>

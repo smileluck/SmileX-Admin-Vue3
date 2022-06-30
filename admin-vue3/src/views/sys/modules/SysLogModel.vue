@@ -61,7 +61,7 @@
         }
         formEl.validate((valid, fields) => {
             if (valid) {
-                postAction(`/sys/menu/${form.info.id != null ? "update" : "save"}`, {
+                postAction(`/sys/log/${form.info.id != null ? "update" : "save"}`, {
                     ...toRaw(form.info)
                 }).then((res) => {
                     if (res.success) {

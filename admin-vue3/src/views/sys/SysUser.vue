@@ -159,6 +159,8 @@
         remark:"",
     });
 
+    const reqPrefix = "/sys/user"
+
     const {
         // 组件引用
         pageLoading,
@@ -179,5 +181,5 @@
 
         pageSearchForm,
         pageSearchReset,
-    } = usePages(pageSearchFormModel);
+    } = usePages(pageSearchFormModel,reqPrefix);
 </script>

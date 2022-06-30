@@ -85,6 +85,8 @@ router.beforeEach((to, from, next) => {
         }
       });
     }
+  } else {
+    next();
   }
   // return next.fullPath
 })

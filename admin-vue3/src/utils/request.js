@@ -4,8 +4,8 @@ import { ElNotification } from "element-plus";
 import { useUserStore } from "@/store/modules/user";
 
 const http = axios.create({
-  baseURL: "http://localhost:8081/smilex",
-  // baseURL: "http://localhost:8001/smilex",
+  // baseURL: "http://localhost:8081/smilex",
+  baseURL: "http://localhost:8001/smilex",
   timeout: 1000 * 30,
   withCredentials: true,
   headers: {
