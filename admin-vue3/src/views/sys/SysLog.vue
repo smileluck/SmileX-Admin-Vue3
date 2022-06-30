@@ -52,7 +52,7 @@
                 @selection-change="pageSelectChange"
         >
             <el-table-column type="selection" width="50" />
-            <el-table-column prop="id" label="ID" width="" />
+            <el-table-column prop="id" label="ID" width="150" />
             <el-table-column fixed="right" label="Operations" width="120">
                 <template v-slot:default="scope">
                     <el-button type="text" @click="pageOperaAdd(scope.row.id)"

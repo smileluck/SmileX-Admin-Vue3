@@ -115,7 +115,7 @@
       @selection-change="pageSelectChange"
     >
       <el-table-column type="selection" width="50" />
-      <el-table-column prop="id" label="ID" width="" />
+      <el-table-column prop="id" label="ID" width="150" />
       <el-table-column prop="parentId" label="父ID,最上级则为0" width="200" />
       <el-table-column prop="menuName" label="菜单名称" width="200" />
       <el-table-column prop="menuIcon" label="菜单icon" width="200" />

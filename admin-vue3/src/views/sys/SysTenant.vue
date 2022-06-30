@@ -59,7 +59,7 @@
                 @selection-change="pageSelectChange"
         >
             <el-table-column type="selection" width="50" />
-            <el-table-column prop="id" label="ID" width="" />
+            <el-table-column prop="id" label="ID" width="150" />
             <el-table-column prop="tenantName" label="租户名称" width="200" />
             <el-table-column fixed="right" label="Operations" width="120">
                 <template v-slot:default="scope">

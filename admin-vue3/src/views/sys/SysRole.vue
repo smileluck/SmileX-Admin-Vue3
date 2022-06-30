@@ -66,7 +66,7 @@
                 @selection-change="pageSelectChange"
         >
             <el-table-column type="selection" width="50" />
-            <el-table-column prop="id" label="ID" width="" />
+            <el-table-column prop="id" label="ID" width="150" />
             <el-table-column prop="tenantId" label="租户ID" width="200" />
             <el-table-column prop="roleName" label="角色名称" width="200" />
             <el-table-column fixed="right" label="Operations" width="120">
