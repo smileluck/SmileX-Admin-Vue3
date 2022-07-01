@@ -164,4 +164,5 @@
         pageSearchForm,
         pageSearchReset,
     } = usePages(pageSearchFormModel,reqPrefix);
+pageList();
 </script>

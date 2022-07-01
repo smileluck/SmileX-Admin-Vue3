@@ -1,4 +1,4 @@
-import { ref, onMounted, toRaw, reactive } from "vue";
+import { ref, toRaw, reactive } from "vue";
 import { getAction } from "@/api/manage";
 
 export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix) {
@@ -22,7 +22,7 @@ export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix)
     pageList();
   };
 
-  const pageList = () => {
+  const pageList = (callback) => {
     pageLoading.value = true;
     getAction(reqPrefix + "/list", {
       ...toRaw(pageSearchFormModel),
@@ -38,6 +38,9 @@ export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix)
           pagePaginationInfo.total = res.data.total
           pagePaginationInfo.pages = res.data.pages
           console.log(pagePaginationInfo)
+          if (typeof callback === 'function') {
+            callback();
+          }
         } else {
           pageTableData.value = [];
           pagePaginationInfo.current = 1
@@ -50,7 +53,6 @@ export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix)
         pageLoading.value = false;
       });
   };
-  onMounted(pageList);
   return {
     pageList,
     pagePaginationInfo,
