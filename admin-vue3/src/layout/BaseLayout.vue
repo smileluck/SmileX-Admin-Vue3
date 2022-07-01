@@ -1,6 +1,6 @@
 <template>
   <section class="layout">
-    <aside class="layout-aside">
+    <aside :class="['layout-aside', expandAside ? '' : 'layout-aside-hide']">
       <aside-bar></aside-bar>
     </aside>
     <section class="layout layout_vertical">
@@ -18,9 +18,23 @@
 </template>
 
 <script setup>
+import { watch, ref } from "vue";
 import ScrollBarNav from "@/components/ScrollBarNav.vue";
 import AsideBar from "@/components/AsideBar.vue";
+import { useCommonStore } from "@/store/modules/common";
 import HeaderBar from "@/components/HeaderBar.vue";
+
+const commonStore = useCommonStore();
+const expandAside = ref(commonStore.getExpandAside);
+watch(
+  () => {
+    return commonStore.getExpandAside;
+  },
+  (newVal, oldVal) => {
+    console.log(newVal, oldVal);
+    expandAside.value = newVal;
+  }
+);
 </script>
 <style lang="scss" scoped>
 .layout {
@@ -39,6 +53,12 @@ import HeaderBar from "@/components/HeaderBar.vue";
     max-width: 200px;
     min-width: 200px;
     width: 200px;
+    transition: all 0.3s;
+    &-hide {
+      width: 0;
+      flex: 0 0 0px;
+      min-width: 0;
+    }
   }
   &-header {
     flex: 0 0 60px;

@@ -24,14 +24,18 @@ import { ref } from "vue";
 
 import { SwitchButton, Fold, Expand } from "@element-plus/icons-vue";
 import { useUserStore } from "@/store/modules/user";
+import { useCommonStore } from "@/store/modules/common";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 const userStore = useUserStore();
-const expandAside = ref(true);
+const commonStore = useCommonStore();
+const expandAside = ref(commonStore.getExpandAside);
 
 const changeExpand = () => {
   expandAside.value = !expandAside.value;
+  commonStore.setExpandAside(expandAside.value);
+  console.log("changeExpand", expandAside.value);
 };
 
 const loginOut = () => {
