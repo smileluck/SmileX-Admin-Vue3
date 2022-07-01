@@ -124,14 +124,12 @@
       <el-table-column prop="tenantId" label="租户ID" width="200" />
       <el-table-column prop="username" label="用户名" width="200" />
       <el-table-column prop="realName" label="真实名称" width="200" />
-      <el-table-column prop="password" label="密码" width="200" />
-      <el-table-column prop="salt" label="salt" width="200" />
       <el-table-column
         prop="enableFlag"
         label="是否启用，0禁用1启用"
         width="200"
       />
-      <el-table-column prop="remark" label="备注" width="200" />
+      <el-table-column prop="remark" label="备注" />
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">
           <el-button type="text" @click="pageOperaAdd(scope.row.id)"

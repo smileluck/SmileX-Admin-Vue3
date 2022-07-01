@@ -112,6 +112,7 @@
       element-loading-text="Loading..."
       :data="pageTableData"
       row-key="id"
+      default-expand-all
       style="width: 100%"
       @selection-change="pageSelectChange"
     >
