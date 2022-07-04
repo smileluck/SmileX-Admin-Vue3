@@ -10,16 +10,19 @@ export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix)
     pages: 1
   })
   const pagePaginationCurrentChange = (val) => {
-    console.log(val)
     pagePaginationInfo.current = val;
-    pageList();
+    if (!pageLoading.value) {
+      pageList();
+    }
   };
 
   const pagePaginationSizeChange = (val) => {
     console.log(val)
     pagePaginationInfo.size = val
     pagePaginationInfo.current = 1
-    pageList();
+    if (!pageLoading.value) {
+      pageList();
+    }
   };
 
   const pageList = (callback) => {
@@ -30,14 +33,13 @@ export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix)
       page: pagePaginationInfo.current,
     })
       .then((res) => {
-        console.log(res);
         if (res.success) {
           pageTableData.value = res.data.records;
           pagePaginationInfo.current = res.data.current
           pagePaginationInfo.size = res.data.size
-          pagePaginationInfo.total = res.data.total
+          pagePaginationInfo.total = Number(res.data.total)
           pagePaginationInfo.pages = res.data.pages
-          console.log(pagePaginationInfo)
+          console.log(111)
           if (typeof callback === 'function') {
             callback();
           }
@@ -50,6 +52,7 @@ export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix)
         }
       })
       .finally(() => {
+        console.log(222)
         pageLoading.value = false;
       });
   };
