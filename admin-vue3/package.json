@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^0.2.6",
-    "@kangc/v-md-editor": "^2.3.15",
     "axios": "^0.25.0",
     "core-js": "^3.6.5",
     "element-plus": "^2.1.4",
     "pinia": "^2.0.14",
     "three": "^0.137.5",
+    "vditor": "^3.8.15",
     "vue": "^3.2.37",
     "vue-router": "^4.0.0-0"
   },
