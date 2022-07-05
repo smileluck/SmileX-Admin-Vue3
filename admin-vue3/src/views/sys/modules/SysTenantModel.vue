@@ -52,7 +52,7 @@ const form = reactive({
 
 const rules = reactive({
   tenantName: [{ required: true, message: "请选择租户名称", trigger: "blur" }],
-  password: [{ required: true, message: "请选择租户名称", trigger: "blur" }],
+  password: [{ required: true, message: "请选择统一密码", trigger: "blur" }],
 });
 
 const getInfo = () => {
