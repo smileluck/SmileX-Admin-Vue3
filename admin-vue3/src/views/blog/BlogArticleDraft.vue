@@ -18,17 +18,10 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="栏目ID：">
+            <el-form-item label="文章ID：">
               <el-input
-                v-model.trim="pageSearchFormModel.sectionId"
-                placeholder="请输入栏目ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="标签id，以,分割：">
-              <el-input
-                v-model.trim="pageSearchFormModel.tagIds"
-                placeholder="请输入标签id，以,分割"
+                v-model.trim="pageSearchFormModel.articleId"
+                placeholder="请输入文章ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -39,31 +32,10 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="文章简介：">
-              <el-input
-                v-model.trim="pageSearchFormModel.articleDigest"
-                placeholder="请输入文章简介"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
             <el-form-item label="文章内容：">
               <el-input
                 v-model.trim="pageSearchFormModel.articleContent"
                 placeholder="请输入文章内容"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="语法类型，1markdown，2html：">
-              <el-input
-                v-model.trim="pageSearchFormModel.grammarType"
-                placeholder="请输入语法类型，1markdown，2html"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="访问类型,1通用类型，2统一密码，3独立密码：">
-              <el-input
-                v-model.trim="pageSearchFormModel.visitType"
-                placeholder="请输入访问类型,1通用类型，2统一密码，3独立密码"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -136,21 +108,9 @@
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
       <el-table-column prop="tenantId" label="租户ID" width="200" />
-      <el-table-column prop="sectionId" label="栏目ID" width="200" />
-      <el-table-column prop="tagIds" label="标签id，以,分割" width="200" />
+      <el-table-column prop="articleId" label="文章ID" width="200" />
       <el-table-column prop="articleTitle" label="文章标题" width="200" />
-      <el-table-column prop="articleDigest" label="文章简介" width="200" />
       <el-table-column prop="articleContent" label="文章内容" width="200" />
-      <el-table-column
-        prop="grammarType"
-        label="语法类型，1markdown，2html"
-        width="200"
-      />
-      <el-table-column
-        prop="visitType"
-        label="访问类型,1通用类型，2统一密码，3独立密码"
-        width="200"
-      />
       <el-table-column
         prop="publishFlag"
         label="发布状态，0未发布，1已发布"
@@ -184,35 +144,29 @@
       @current-change="pagePaginationCurrentChange"
     >
     </el-pagination>
-    <blog-article-model
+    <blog-article-draft-model
       ref="pageOperaModel"
       @refresh="pageList"
-    ></blog-article-model>
+    ></blog-article-draft-model>
   </div>
 </template>
 
 <script setup>
 import { Search, RefreshRight } from "@element-plus/icons-vue";
 import { reactive } from "vue";
-import BlogArticleModel from "./modules/BlogArticleModel.vue";
+import BlogArticleDraftModel from "./modules/BlogArticleDraftModel.vue";
 import usePages from "@/composables/pages";
 
 const pageSearchFormModel = reactive({
   id: "",
   tenantId: "",
-  sectionId: "",
-  tagIds: "",
+  articleId: "",
   articleTitle: "",
-  articleDigest: "",
   articleContent: "",
-  grammarType: "",
-  visitType: "",
-  password: "",
-  salt: "",
   publishFlag: "",
 });
 
-const reqPrefix = "/blog/article";
+const reqPrefix = "/blog/article/draft";
 
 const {
   // 组件引用

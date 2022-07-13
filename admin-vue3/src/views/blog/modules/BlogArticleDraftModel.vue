@@ -17,16 +17,10 @@
           placeholder="请输入租户ID"
         />
       </el-form-item>
-      <el-form-item label="栏目ID" prop="sectionId">
+      <el-form-item label="文章ID" prop="articleId">
         <el-input
-          v-model.trim="form.info.sectionId"
-          placeholder="请输入栏目ID"
-        />
-      </el-form-item>
-      <el-form-item label="标签id，以,分割" prop="tagIds">
-        <el-input
-          v-model.trim="form.info.tagIds"
-          placeholder="请输入标签id，以,分割"
+          v-model.trim="form.info.articleId"
+          placeholder="请输入文章ID"
         />
       </el-form-item>
       <el-form-item label="文章标题" prop="articleTitle">
@@ -35,41 +29,11 @@
           placeholder="请输入文章标题"
         />
       </el-form-item>
-      <el-form-item label="文章简介" prop="articleDigest">
-        <el-input
-          v-model.trim="form.info.articleDigest"
-          placeholder="请输入文章简介"
-        />
-      </el-form-item>
       <el-form-item label="文章内容" prop="articleContent">
         <el-input
           v-model.trim="form.info.articleContent"
           placeholder="请输入文章内容"
         />
-      </el-form-item>
-      <el-form-item label="语法类型，1markdown，2html" prop="grammarType">
-        <el-input
-          v-model.trim="form.info.grammarType"
-          placeholder="请输入语法类型，1markdown，2html"
-        />
-      </el-form-item>
-      <el-form-item
-        label="访问类型,1通用类型，2统一密码，3独立密码"
-        prop="visitType"
-      >
-        <el-input
-          v-model.trim="form.info.visitType"
-          placeholder="请输入访问类型,1通用类型，2统一密码，3独立密码"
-        />
-      </el-form-item>
-      <el-form-item label="独立密码" prop="password">
-        <el-input
-          v-model.trim="form.info.password"
-          placeholder="请输入独立密码"
-        />
-      </el-form-item>
-      <el-form-item label="salt" prop="salt">
-        <el-input v-model.trim="form.info.salt" placeholder="请输入salt" />
       </el-form-item>
       <el-form-item label="发布状态，0未发布，1已发布" prop="publishFlag">
         <el-input
@@ -100,50 +64,22 @@ const form = reactive({
   info: {
     id: null,
     tenantId: "",
-    sectionId: "",
-    tagIds: "",
+    articleId: "",
     articleTitle: "",
-    articleDigest: "",
     articleContent: "",
-    grammarType: "",
-    visitType: "",
-    password: "",
-    salt: "",
     publishFlag: "",
   },
 });
 
 const rules = reactive({
   tenantId: [{ required: true, message: "请选择租户ID", trigger: "blur" }],
-  sectionId: [{ required: true, message: "请选择栏目ID", trigger: "blur" }],
-  tagIds: [
-    { required: true, message: "请选择标签id，以,分割", trigger: "blur" },
-  ],
+  articleId: [{ required: true, message: "请选择文章ID", trigger: "blur" }],
   articleTitle: [
     { required: true, message: "请选择文章标题", trigger: "blur" },
-  ],
-  articleDigest: [
-    { required: true, message: "请选择文章简介", trigger: "blur" },
   ],
   articleContent: [
     { required: true, message: "请选择文章内容", trigger: "blur" },
   ],
-  grammarType: [
-    {
-      required: true,
-      message: "请选择语法类型，1markdown，2html",
-      trigger: "blur",
-    },
-  ],
-  visitType: [
-    {
-      required: true,
-      message: "请选择访问类型,1通用类型，2统一密码，3独立密码",
-      trigger: "blur",
-    },
-  ],
-  password: [{ required: true, message: "请选择独立密码", trigger: "blur" }],
-  salt: [{ required: true, message: "请选择salt", trigger: "blur" }],
   publishFlag: [
     {
       required: true,
@@ -154,7 +90,7 @@ const rules = reactive({
 });
 
 const getInfo = () => {
-  getAction(`/blog/article/info/${form.info.id}`, {}).then((res) => {
+  getAction(`/blog/article/draft/info/${form.info.id}`, {}).then((res) => {
     if (res.success) {
       form.info = { ...res.data };
     }
@@ -175,9 +111,12 @@ const submitForm = () => {
   }
   formEl.validate((valid, fields) => {
     if (valid) {
-      postAction(`/blog/article/${form.info.id != null ? "update" : "save"}`, {
-        ...toRaw(form.info),
-      }).then((res) => {
+      postAction(
+        `/blog/article/draft/${form.info.id != null ? "update" : "save"}`,
+        {
+          ...toRaw(form.info),
+        }
+      ).then((res) => {
         if (res.success) {
           emit("refresh");
           cancelForm();

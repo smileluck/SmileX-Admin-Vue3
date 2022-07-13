@@ -11,10 +11,10 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="父ID：">
+            <el-form-item label="父ID,最上级为0：">
               <el-input
                 v-model.trim="pageSearchFormModel.parentId"
-                placeholder="请输入父ID"
+                placeholder="请输入父ID,最上级为0"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -107,6 +107,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
+      <el-table-column prop="parentId" label="父ID,最上级为0" width="200" />
       <el-table-column prop="tenantId" label="租户ID" width="200" />
       <el-table-column prop="sectionName" label="栏目名称" width="200" />
       <el-table-column

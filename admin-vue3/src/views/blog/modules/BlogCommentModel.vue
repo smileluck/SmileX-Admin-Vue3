@@ -11,17 +11,17 @@
                 :rules="rules"
                 ref="formRef"
         >
-            <el-form-item label="租户ID">
+            <el-form-item label="租户ID" prop="tenantId">
             <el-input
                     v-model.trim="form.info.tenantId"
                     placeholder="请输入租户ID"
             /> </el-form-item>
-            <el-form-item label="开放用户ID">
+            <el-form-item label="开放用户ID" prop="openUserId">
             <el-input
                     v-model.trim="form.info.openUserId"
                     placeholder="请输入开放用户ID"
             /> </el-form-item>
-            <el-form-item label="评论内容">
+            <el-form-item label="评论内容" prop="content">
             <el-input
                     v-model.trim="form.info.content"
                     placeholder="请输入评论内容"
