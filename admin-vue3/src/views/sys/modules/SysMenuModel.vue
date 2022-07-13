@@ -11,49 +11,52 @@
       :rules="rules"
       ref="formRef"
     >
-      <el-form-item label="父ID,最上级则为0">
+      <el-form-item label="父ID,最上级则为0" prop="parentId">
         <el-input
           v-model.trim="form.info.parentId"
           placeholder="请输入父ID,最上级则为0"
         />
       </el-form-item>
-      <el-form-item label="菜单名称">
+      <el-form-item label="菜单名称" prop="menuName">
         <el-input
           v-model.trim="form.info.menuName"
           placeholder="请输入菜单名称"
         />
       </el-form-item>
-      <el-form-item label="菜单icon">
+      <el-form-item label="菜单icon" prop="menuIcon">
         <el-input
           v-model.trim="form.info.menuIcon"
           placeholder="请输入菜单icon"
         />
       </el-form-item>
-      <el-form-item label="路由地址">
+      <el-form-item label="路由地址" prop="routeUrl">
         <el-input
           v-model.trim="form.info.routeUrl"
           placeholder="请输入路由地址"
         />
       </el-form-item>
-      <el-form-item label="路由视图">
+      <el-form-item label="路由视图" prop="routeView">
         <el-input
           v-model.trim="form.info.routeView"
           placeholder="请输入路由视图"
         />
       </el-form-item>
-      <el-form-item label="菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)">
+      <el-form-item
+        label="菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)"
+        prop="menuType"
+      >
         <el-input
           v-model.trim="form.info.menuType"
           placeholder="请输入菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)"
         />
       </el-form-item>
-      <el-form-item label="权限标识">
+      <el-form-item label="权限标识" prop="perm">
         <el-input v-model.trim="form.info.perm" placeholder="请输入权限标识" />
       </el-form-item>
-      <el-form-item label="排序">
+      <el-form-item label="排序" prop="orderNum">
         <el-input v-model.trim="form.info.orderNum" placeholder="请输入排序" />
       </el-form-item>
-      <el-form-item label="是否启用，0禁用1启用">
+      <el-form-item label="是否启用，0禁用1启用" prop="enableFlag">
         <el-input
           v-model.trim="form.info.enableFlag"
           placeholder="请输入是否启用，0禁用1启用"

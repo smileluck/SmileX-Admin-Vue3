@@ -11,17 +11,17 @@
       :rules="rules"
       ref="formRef"
     >
-      <el-form-item label="租户名称">
+      <el-form-item label="租户名称" prop="tenantName">
         <el-input
           v-model.trim="form.info.tenantName"
           placeholder="请输入租户名称"
         />
       </el-form-item>
-      <el-form-item label="统一密码" v-if="form.info.id == null ">
-        <el-input
-          v-model.trim="form.info.password"
-          placeholder="请输入租户名称"
-        />
+      <el-form-item label="密码" prop="password">
+        <el-input v-model.trim="form.info.password" placeholder="请输入密码" />
+      </el-form-item>
+      <el-form-item label="salt" prop="salt">
+        <el-input v-model.trim="form.info.salt" placeholder="请输入salt" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -47,12 +47,14 @@ const form = reactive({
     id: null,
     tenantName: "",
     password: "",
+    salt: "",
   },
 });
 
 const rules = reactive({
   tenantName: [{ required: true, message: "请选择租户名称", trigger: "blur" }],
-  password: [{ required: true, message: "请选择统一密码", trigger: "blur" }],
+  password: [{ required: true, message: "请选择密码", trigger: "blur" }],
+  salt: [{ required: true, message: "请选择salt", trigger: "blur" }],
 });
 
 const getInfo = () => {

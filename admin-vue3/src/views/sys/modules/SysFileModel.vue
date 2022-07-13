@@ -11,16 +11,34 @@
       :rules="rules"
       ref="formRef"
     >
-      <el-form-item label="租户ID" prop="tenantId">
+      <el-form-item label="模块，alioss,minio" prop="modules">
         <el-input
-          v-model.trim="form.info.tenantId"
-          placeholder="请输入租户ID"
+          v-model.trim="form.info.modules"
+          placeholder="请输入模块，alioss,minio"
         />
       </el-form-item>
-      <el-form-item label="角色名称" prop="roleName">
+      <el-form-item label="网络地址" prop="netPath">
         <el-input
-          v-model.trim="form.info.roleName"
-          placeholder="请输入角色名称"
+          v-model.trim="form.info.netPath"
+          placeholder="请输入网络地址"
+        />
+      </el-form-item>
+      <el-form-item label="文件地址" prop="filePath">
+        <el-input
+          v-model.trim="form.info.filePath"
+          placeholder="请输入文件地址"
+        />
+      </el-form-item>
+      <el-form-item label="文件大小" prop="fileSize">
+        <el-input
+          v-model.trim="form.info.fileSize"
+          placeholder="请输入文件大小"
+        />
+      </el-form-item>
+      <el-form-item label="文件后缀" prop="fileSuffix">
+        <el-input
+          v-model.trim="form.info.fileSuffix"
+          placeholder="请输入文件后缀"
         />
       </el-form-item>
     </el-form>
@@ -45,18 +63,26 @@ const formRef = ref();
 const form = reactive({
   info: {
     id: null,
-    tenantId: "",
-    roleName: "",
+    modules: "",
+    netPath: "",
+    filePath: "",
+    fileSize: "",
+    fileSuffix: "",
   },
 });
 
 const rules = reactive({
-  tenantId: [{ required: true, message: "请选择租户ID", trigger: "blur" }],
-  roleName: [{ required: true, message: "请选择角色名称", trigger: "blur" }],
+  modules: [
+    { required: true, message: "请选择模块，alioss,minio", trigger: "blur" },
+  ],
+  netPath: [{ required: true, message: "请选择网络地址", trigger: "blur" }],
+  filePath: [{ required: true, message: "请选择文件地址", trigger: "blur" }],
+  fileSize: [{ required: true, message: "请选择文件大小", trigger: "blur" }],
+  fileSuffix: [{ required: true, message: "请选择文件后缀", trigger: "blur" }],
 });
 
 const getInfo = () => {
-  getAction(`/sys/role/info/${form.info.id}`, {}).then((res) => {
+  getAction(`/sys/file/info/${form.info.id}`, {}).then((res) => {
     if (res.success) {
       form.info = { ...res.data };
     }
@@ -77,7 +103,7 @@ const submitForm = () => {
   }
   formEl.validate((valid, fields) => {
     if (valid) {
-      postAction(`/sys/role/${form.info.id != null ? "update" : "save"}`, {
+      postAction(`/sys/file/${form.info.id != null ? "update" : "save"}`, {
         ...toRaw(form.info),
       }).then((res) => {
         if (res.success) {

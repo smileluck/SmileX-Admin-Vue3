@@ -11,19 +11,19 @@
       :rules="rules"
       ref="formRef"
     >
-      <el-form-item label="字典编码">
+      <el-form-item label="字典编码" prop="dictCode">
         <el-input
           v-model.trim="form.info.dictCode"
           placeholder="请输入字典编码"
         />
       </el-form-item>
-      <el-form-item label="字典名称">
+      <el-form-item label="字典名称" prop="dictName">
         <el-input
           v-model.trim="form.info.dictName"
           placeholder="请输入字典名称"
         />
       </el-form-item>
-      <el-form-item label="备注">
+      <el-form-item label="备注" prop="remark">
         <el-input v-model.trim="form.info.remark" placeholder="请输入备注" />
       </el-form-item>
     </el-form>
@@ -99,7 +99,6 @@ const submitForm = () => {
 const initModel = (id) => {
   dialogVisible.value = true;
   if (id != null) {
-    debugger;
     form.info.id = id;
     getInfo();
   }

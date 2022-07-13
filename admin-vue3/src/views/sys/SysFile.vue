@@ -11,96 +11,38 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="日志模块，sys,blog：">
+            <el-form-item label="模块，alioss,minio：">
               <el-input
-                v-model.trim="pageSearchFormModel.logModule"
-                placeholder="请输入日志模块，sys,blog"
+                v-model.trim="pageSearchFormModel.modules"
+                placeholder="请输入模块，alioss,minio"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="日志标题：">
+            <el-form-item label="网络地址：">
               <el-input
-                v-model.trim="pageSearchFormModel.logTitle"
-                placeholder="请输入日志标题"
+                v-model.trim="pageSearchFormModel.netPath"
+                placeholder="请输入网络地址"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="日志内容：">
+            <el-form-item label="文件地址：">
               <el-input
-                v-model.trim="pageSearchFormModel.logValue"
-                placeholder="请输入日志内容"
+                v-model.trim="pageSearchFormModel.filePath"
+                placeholder="请输入文件地址"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item
-              label="日志类型1:登录日志;2:操作日志;3:定时任务;4:异常日志;："
-            >
+            <el-form-item label="文件大小：">
               <el-input
-                v-model.trim="pageSearchFormModel.logType"
-                placeholder="请输入日志类型1:登录日志;2:操作日志;3:定时任务;4:异常日志;"
+                v-model.trim="pageSearchFormModel.fileSize"
+                placeholder="请输入文件大小"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="用户ID：">
+            <el-form-item label="文件后缀：">
               <el-input
-                v-model.trim="pageSearchFormModel.userId"
-                placeholder="请输入用户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="操作类型：">
-              <el-input
-                v-model.trim="pageSearchFormModel.operateType"
-                placeholder="请输入操作类型"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="IP地址：">
-              <el-input
-                v-model.trim="pageSearchFormModel.ipAddress"
-                placeholder="请输入IP地址"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="请求方法：">
-              <el-input
-                v-model.trim="pageSearchFormModel.method"
-                placeholder="请输入请求方法"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="请求url路径：">
-              <el-input
-                v-model.trim="pageSearchFormModel.requestUrl"
-                placeholder="请输入请求url路径"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="请求类型：">
-              <el-input
-                v-model.trim="pageSearchFormModel.requestType"
-                placeholder="请输入请求类型"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="请求参数：">
-              <el-input
-                v-model.trim="pageSearchFormModel.requestParams"
-                placeholder="请输入请求参数"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="耗费时间：">
-              <el-input
-                v-model.trim="pageSearchFormModel.costTime"
-                placeholder="请输入耗费时间"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="异常信息：">
-              <el-input
-                v-model.trim="pageSearchFormModel.errMsg"
-                placeholder="请输入异常信息"
+                v-model.trim="pageSearchFormModel.fileSuffix"
+                placeholder="请输入文件后缀"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -165,27 +107,11 @@
         </template>
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column
-        prop="logModule"
-        label="日志模块，sys,blog"
-        width="200"
-      />
-      <el-table-column prop="logTitle" label="日志标题" width="200" />
-      <el-table-column prop="logValue" label="日志内容" width="200" />
-      <el-table-column
-        prop="logType"
-        label="日志类型1:登录日志;2:操作日志;3:定时任务;4:异常日志;"
-        width="200"
-      />
-      <el-table-column prop="userId" label="用户ID" width="200" />
-      <el-table-column prop="operateType" label="操作类型" width="200" />
-      <el-table-column prop="ipAddress" label="IP地址" width="200" />
-      <el-table-column prop="method" label="请求方法" width="200" />
-      <el-table-column prop="requestUrl" label="请求url路径" width="200" />
-      <el-table-column prop="requestType" label="请求类型" width="200" />
-      <el-table-column prop="requestParams" label="请求参数" width="200" />
-      <el-table-column prop="costTime" label="耗费时间" width="200" />
-      <el-table-column prop="errMsg" label="异常信息" width="200" />
+      <el-table-column prop="modules" label="模块，alioss,minio" width="200" />
+      <el-table-column prop="netPath" label="网络地址" width="200" />
+      <el-table-column prop="filePath" label="文件地址" width="200" />
+      <el-table-column prop="fileSize" label="文件大小" width="200" />
+      <el-table-column prop="fileSuffix" label="文件后缀" width="200" />
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">
           <el-button type="text" @click="pageOperaAdd(scope.row.id)"
@@ -214,34 +140,26 @@
       @current-change="pagePaginationCurrentChange"
     >
     </el-pagination>
-    <sys-log-model ref="pageOperaModel" @refresh="pageList"></sys-log-model>
+    <sys-file-model ref="pageOperaModel" @refresh="pageList"></sys-file-model>
   </div>
 </template>
 
 <script setup>
 import { Search, RefreshRight } from "@element-plus/icons-vue";
 import { reactive } from "vue";
-import SysLogModel from "./modules/SysLogModel.vue";
+import SysFileModel from "./modules/SysFileModel.vue";
 import usePages from "@/composables/pages";
 
 const pageSearchFormModel = reactive({
   id: "",
-  logModule: "",
-  logTitle: "",
-  logValue: "",
-  logType: "",
-  userId: "",
-  operateType: "",
-  ipAddress: "",
-  method: "",
-  requestUrl: "",
-  requestType: "",
-  requestParams: "",
-  costTime: "",
-  errMsg: "",
+  modules: "",
+  netPath: "",
+  filePath: "",
+  fileSize: "",
+  fileSuffix: "",
 });
 
-const reqPrefix = "/sys/log";
+const reqPrefix = "/sys/file";
 
 const {
   // 组件引用
