@@ -100,11 +100,25 @@ http.interceptors.response.use(function (response) {
       type: "success",
     });
   } else {
-    ElNotification({
-      title: "异常",
-      message: response.data.msg,
-      type: "error",
-    });
+    if (response.data instanceof Blob) {
+      const reader = new FileReader();  //创建一个FileReader实例
+      reader.readAsText(response.data, 'utf-8'); //读取文件,结果用字符串形式表示
+      reader.onload = function () {//读取完成后,**获取reader.result**
+        const { msg } = JSON.parse(reader.result);
+        console.log(msg);
+        // this.$Message.error(msg); //弹出错误提示
+        ElNotification.error({
+          title: "系统提示",
+          message: msg,
+        });
+      }
+    } else {
+      ElNotification({
+        title: "异常",
+        message: response.data.msg,
+        type: "error",
+      });
+    }
   }
   return response.data;
 }, err);

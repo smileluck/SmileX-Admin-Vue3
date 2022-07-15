@@ -76,9 +76,12 @@ export function uploadAction(url, parameter) {
 export function downFile(url, parameter) {
   return axios.request({
     url: url,
-    params: parameter,
-    method: "get",
+    data: parameter,
+    method: "post",
     responseType: "blob",
+    headers: {
+      "Content-Type": "application/json;charset=UTF-8",
+    },
   });
 }
 
@@ -94,6 +97,9 @@ export function downloadFile(url, fileName, parameter) {
     if (!data || data.size === 0) {
       // Vue.prototype['$message'].warning('文件下载失败')
       return;
+    }
+    if (data.type === "application/json") {
+      return
     }
     if (typeof window.navigator.msSaveBlob !== "undefined") {
       window.navigator.msSaveBlob(new Blob([data]), fileName);
