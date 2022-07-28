@@ -32,7 +32,7 @@
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button @click="handleClose()">取消</el-button>
         <el-button type="primary" @click="submitForm()">确定</el-button>
       </span>
     </template>
@@ -107,6 +107,12 @@ const submitForm = () => {
     }
   });
 };
+
+const handleClose = ()=>{
+  
+  formRef.value.resetFields();
+  dialogVisible.value = false;
+}
 
 const initModel = (arr) => {
   dialogVisible.value = true;

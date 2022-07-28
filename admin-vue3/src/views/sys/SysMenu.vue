@@ -112,13 +112,12 @@
       element-loading-text="Loading..."
       :data="pageTableData"
       row-key="id"
-      default-expand-all
       style="width: 100%"
       @selection-change="pageSelectChange"
     >
       <el-table-column type="selection" width="50" />
-      <el-table-column prop="id" label="ID" width="210" />
-      <el-table-column prop="parentId" label="父ID,最上级则为0" width="200" />
+      <!-- <el-table-column prop="id" label="ID" width="210" /> -->
+      <!-- <el-table-column prop="parentId" label="父ID,最上级则为0" width="200" /> -->
       <el-table-column prop="menuName" label="菜单名称" width="200" />
       <el-table-column prop="menuIcon" label="菜单icon" width="200" />
       <el-table-column prop="routeUrl" label="路由地址" width="200" />
@@ -152,7 +151,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
+    <!-- <el-pagination
       class="table-card-pagination"
       :page-sizes="[10, 20, 50, 100]"
       layout="total, sizes, prev, pager, next, jumper"
@@ -162,7 +161,7 @@
       @size-change="pagePaginationSizeChange"
       @current-change="pagePaginationCurrentChange"
     >
-    </el-pagination>
+    </el-pagination> -->
     <sys-menu-model ref="pageOperaModel" @refresh="pageList"></sys-menu-model>
   </div>
 </template>
@@ -196,9 +195,6 @@ const {
   pageSelectColumn,
 
   pageList,
-  pagePaginationInfo,
-  pagePaginationSizeChange,
-  pagePaginationCurrentChange,
   pageTableData,
   pageSelectChange,
   pageSelectClear,
@@ -208,11 +204,11 @@ const {
 
   pageSearchForm,
   pageSearchReset,
-} = usePages(pageSearchFormModel, reqPrefix);
-pageList(() => {
+} = usePages(pageSearchFormModel, reqPrefix, () => {
   pageTableData.value = dynamicRouterMenusTree(pageTableData.value, 0);
   console.log(pageTableData.value);
 });
+pageList();
 
 // 数组递归转换数结构
 const dynamicRouterMenusTree = (list, pid) => {
@@ -228,6 +224,4 @@ const dynamicRouterMenusTree = (list, pid) => {
   });
   return arr;
 };
-pageTableData.value = dynamicRouterMenusTree(pageTableData.value, 0);
-console.log(pageTableData.value);
 </script>

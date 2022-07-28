@@ -3,7 +3,7 @@ import usePageList from "./pageList";
 import usePageOpera from "./pageOpera";
 import usePageSearch from "./pageSearch";
 
-export default function usePages(pageSearchFormModel, reqPrefix) {
+export default function usePages(pageSearchFormModel, reqPrefix,pageCallback) {
   const pageLoading = ref();
   const pageOperaModel = ref();
   const pageTable = ref();
@@ -23,7 +23,8 @@ export default function usePages(pageSearchFormModel, reqPrefix) {
     pagePaginationCurrentChange, } = usePageList(
       pageSearchFormModel,
       pageLoading,
-      reqPrefix
+      reqPrefix,
+      pageCallback
     );
   const { pageOperaAdd, pageOperaRemove } = usePageOpera(pageOperaModel, pageSelectColumn, pageList);
   const { pageSearchForm, pageSearchReset } = usePageSearch(pageList);

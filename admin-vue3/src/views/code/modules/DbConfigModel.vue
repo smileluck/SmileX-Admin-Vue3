@@ -52,7 +52,7 @@
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button @click="handleClose()">取消</el-button>
         <el-button type="primary" @click="submitForm()">确定</el-button>
       </span>
     </template>
@@ -121,6 +121,16 @@ const submitForm = () => {
     }
   });
 };
+
+const handleClose = ()=>{
+  console.log(111);
+  formRef.value.resetFields();
+  dialogVisible.value = false;
+  form.address = ""
+  form.username = ""
+  form.password = ""
+  form.databaseName = ""
+}
 
 const initModel = () => {
   dialogVisible.value = true;

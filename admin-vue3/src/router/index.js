@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 import { getAction } from "@/api/manage";
+import { dictGet } from "@/api/common"
 
 console.log("env,", process.env.NODE_ENV)
 
@@ -71,6 +72,7 @@ router.beforeEach((to, from, next) => {
     if (userStore.getDynamicMenuState) {
       next();
     } else {
+      console.log("===============初始化路由===============")
       getAction(`/sys/menu/perms`).then((res) => {
         if (res.success) {
           const menus = res.data.menus
@@ -89,6 +91,9 @@ router.beforeEach((to, from, next) => {
         userStore.setShowMenus([])
         next()
       });
+
+      console.log("===============初始化字典===============")
+      dictGet();
     }
   } else {
     next();
