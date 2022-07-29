@@ -206,7 +206,6 @@ const {
   pageSearchReset,
 } = usePages(pageSearchFormModel, reqPrefix, () => {
   pageTableData.value = dynamicRouterMenusTree(pageTableData.value, 0);
-  console.log(pageTableData.value);
 });
 pageList();
 

@@ -1,20 +1,58 @@
 <template>
-  <el-select v-model="value" class="m-2" placeholder="Select">
+  <el-select
+    v-model="dictValue"
+    :placeholder="props.placeholder"
+    @change="dictChange"
+  >
     <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
+      v-for="item in options.arr"
+      :key="item.dictValue"
+      :label="item.dictLabel"
+      :value="item.dictValue"
     />
   </el-select>
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-defineProps({
-  dictCode: String,
+import { defineProps, defineEmits, reactive, ref } from "vue";
+import { useCommonStore } from "@/store/modules/common";
+
+const commonStore = useCommonStore();
+const dict = ref(commonStore.getDict).value;
+
+const props = defineProps({
+  value: {
+    required: true,
+    default: null,
+  },
+  dictCode: {
+    type: String,
+    required: true,
+  },
+  placeholder: {
+    type: String,
+    default: "请选择",
+  },
 });
-const arr = [];
+
+const emits = defineEmits(["change"]);
+
+let options = reactive({
+  arr: [],
+});
+
+console.log("prop", props.value);
+
+const dictValue = ref(props.value);
+if (dict[props.dictCode]) {
+  options.arr = dict[props.dictCode];
+}
+
+const dictChange = (value) => {
+  dictValue.value = value;
+  // console.log(value);
+  emits("change", value);
+};
 </script>
 
 <style>

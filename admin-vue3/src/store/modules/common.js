@@ -5,7 +5,7 @@ export const useCommonStore = defineStore("common", {
     state: () => {
         return {
             expandAside: localStorage.store_common_expandAside != null ? localStorage.store_common_expandAside : true,
-            dict: [],
+            dict: {},
         };
     },
     getters: {
@@ -21,8 +21,8 @@ export const useCommonStore = defineStore("common", {
             this.expandAside = expandAside;
             localStorage.store_common_expandAside = expandAside;
         },
-        setDict(dictList) {
-            this.dict = dictList
+        setDict(dictObj) {
+            this.dict = dictObj
         }
     },
 });
