@@ -35,11 +35,10 @@ export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix,
       .then((res) => {
         if (res.success) {
           pageTableData.value = res.data.records;
-          pagePaginationInfo.current = res.data.current
+          pagePaginationInfo.current = Number(res.data.current)
           pagePaginationInfo.size = res.data.size
           pagePaginationInfo.total = Number(res.data.total)
           pagePaginationInfo.pages = res.data.pages
-          console.log(111)
           if (typeof pageCallback === 'function') {
             pageCallback();
           }
@@ -52,7 +51,6 @@ export default function usePageList(pageSearchFormModel, pageLoading, reqPrefix,
         }
       })
       .finally(() => {
-        console.log(222)
         pageLoading.value = false;
       });
   };

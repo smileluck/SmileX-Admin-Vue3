@@ -98,7 +98,7 @@
             <el-table-column prop="enableFlag" label="是否启用，0禁用1启用" width="200" />
             <el-table-column fixed="right" label="Operations" width="120">
                 <template v-slot:default="scope">
-                    <el-button type="text" @click="pageOperaAdd(scope.row.id)"
+                    <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
                     >修改</el-button
                     >
                     <el-popconfirm
@@ -107,7 +107,7 @@
                             s
                     >
                         <template #reference>
-                            <el-button type="text">删除</el-button>
+                            <el-button type="danger" link>删除</el-button>
                         </template>
                     </el-popconfirm>
                 </template>

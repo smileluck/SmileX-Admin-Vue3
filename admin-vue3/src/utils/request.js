@@ -85,7 +85,7 @@ const err = (error) => {
 };
 //响应拦截器
 http.interceptors.response.use(function (response) {
-  console.log(response.data);
+  // console.log(response.data);
   if (response.data && response.data.code === 401) {
     // 401, token失效
     router.push({ name: "Login" });

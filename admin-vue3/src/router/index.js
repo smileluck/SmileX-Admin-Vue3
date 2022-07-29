@@ -44,7 +44,7 @@ const baseRouters = [
       }
     ],
     beforeEnter: (to, from, next) => {
-      console.debug("to:", to, ",from:", from)
+      // console.debug("to:", to, ",from:", from)
       const userStore = useUserStore();
       const token = userStore.getToken
       if (token == null) {
@@ -65,10 +65,10 @@ const router = createRouter({
 
 // router 前置容器
 router.beforeEach((to, from, next) => {
-  console.debug("to:", to, ",from:", from)
+  // console.debug("to:", to, ",from:", from)
   const userStore = useUserStore();
   if (userStore.isLogin()) {
-    console.log("getDynamicMenuState", userStore.getDynamicMenuState)
+    // console.log("getDynamicMenuState", userStore.getDynamicMenuState)
     if (userStore.getDynamicMenuState) {
       next();
     } else {
@@ -86,7 +86,7 @@ router.beforeEach((to, from, next) => {
           next()
         }
       }).catch(ex => {
-        console.log(ex);
+        console.error(ex);
         userStore.menusAndPerms([], [])
         userStore.setShowMenus([])
         next()
@@ -116,7 +116,6 @@ const dynamicRouterMenus = (menus) => {
     }
   }
   const storeMenus = dynamicRouterMenusTree(menus, 0);
-  console.log(storeMenus)
   return storeMenus;
 }
 

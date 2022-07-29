@@ -6,6 +6,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AsideBar: typeof import('./src/components/AsideBar.vue')['default']
     AsideBarSubMenu: typeof import('./src/components/AsideBar-sub-menu.vue')['default']
+    DictSelect: typeof import('./src/components/DictSelect.vue')['default']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
