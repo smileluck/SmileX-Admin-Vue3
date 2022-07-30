@@ -11,14 +11,15 @@
       :rules="rules"
       ref="formRef"
     >
-      <el-form-item label="字典ID" prop="dictId">
-        <el-input v-model.trim="form.info.dictId" placeholder="请输入字典ID" />
-      </el-form-item>
-      <el-form-item label="字典编码" prop="dictCode">
-        <el-input
-          v-model.trim="form.info.dictCode"
-          placeholder="请输入字典编码"
-        />
+      <el-form-item label="字典" prop="dictId">
+        <el-select v-model="form.info.dictId" placeholder="请选择字典">
+          <el-option
+            v-for="item in dictList"
+            :key="item.id"
+            :label="item.dictName"
+            :value="item.id"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item label="数据值" prop="dictValue">
         <el-input
@@ -66,17 +67,27 @@ const form = reactive({
 });
 
 const rules = reactive({
-  dictId: [{ required: true, message: "请选择字典ID", trigger: "blur" }],
-  dictCode: [{ required: true, message: "请选择字典编码", trigger: "blur" }],
-  dictValue: [{ required: true, message: "请选择数据值", trigger: "blur" }],
-  dictLabel: [{ required: true, message: "请选择数据显示项", trigger: "blur" }],
-  remark: [{ required: true, message: "请选择备注", trigger: "blur" }],
+  dictId: [{ required: true, message: "请输入字典ID", trigger: "blur" }],
+  dictValue: [{ required: true, message: "请输入数据值", trigger: "blur" }],
+  dictLabel: [{ required: true, message: "请输入数据显示项", trigger: "blur" }],
+  remark: [{ required: false, message: "请输入备注", trigger: "blur" }],
 });
 
 const getInfo = () => {
   getAction(`/sys/dict/item/info/${form.info.id}`, {}).then((res) => {
     if (res.success) {
       form.info = { ...res.data };
+    }
+  });
+};
+
+let dictList = ref([]);
+const getDictInfo = () => {
+  getAction(`/sys/dict/item/info/dictList`, {}).then((res) => {
+    if (res.success) {
+      dictList.value = res.data;
+    } else {
+      dictList.value = [];
     }
   });
 };
@@ -111,6 +122,7 @@ const submitForm = () => {
 
 const initModel = (id) => {
   dialogVisible.value = true;
+  getDictInfo();
   if (id != null) {
     form.info.id = id;
     getInfo();

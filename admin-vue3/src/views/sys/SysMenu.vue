@@ -46,10 +46,11 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)：">
-              <el-input
-                v-model.trim="pageSearchFormModel.menuType"
-                placeholder="请输入菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)"
+            <el-form-item label="菜单类型：">
+              <dict-select
+                dictCode="menuType"
+                v-model="pageSearchFormModel.menuType"
+                :clearable="true"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -67,10 +68,11 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="是否启用，0禁用1启用：">
-              <el-input
-                v-model.trim="pageSearchFormModel.enableFlag"
-                placeholder="请输入是否启用，0禁用1启用"
+            <el-form-item label="启用状态：">
+              <dict-select
+                dictCode="enableFlag"
+                v-model="pageSearchFormModel.enableFlag"
+                :clearable="true"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -122,18 +124,24 @@
       <el-table-column prop="menuIcon" label="菜单icon" width="200" />
       <el-table-column prop="routeUrl" label="路由地址" width="200" />
       <el-table-column prop="routeView" label="路由视图" width="200" />
-      <el-table-column
-        prop="menuType"
-        label="菜单类型(0:菜单组; 1:子菜单; 2:按钮权限)"
-        width="200"
-      />
+      <el-table-column prop="menuType" label="菜单类型" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="sysMenuType"
+            :value="scope.row.menuType"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column prop="perm" label="权限标识" width="200" />
       <el-table-column prop="orderNum" label="排序" width="200" />
-      <el-table-column
-        prop="enableFlag"
-        label="是否启用，0禁用1启用"
-        width="200"
-      />
+      <el-table-column prop="enableFlag" label="状态" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="enableFlag"
+            :value="scope.row.enableFlag"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"

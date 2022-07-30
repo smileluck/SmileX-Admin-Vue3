@@ -155,7 +155,6 @@ import { Search, RefreshRight } from "@element-plus/icons-vue";
 import { reactive } from "vue";
 import SysUserModel from "./modules/SysUserModel.vue";
 import usePages from "@/composables/pages";
-import TableColumnDict from "@/components/TableColumnDict.vue";
 
 const pageSearchFormModel = reactive({
   id: "",

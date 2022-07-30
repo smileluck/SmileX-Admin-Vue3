@@ -22,7 +22,7 @@ const commonStore = useCommonStore();
 const dict = ref(commonStore.getDict).value;
 
 const props = defineProps({
-  value: {
+  modelValue: {
     required: true,
     default: null,
   },

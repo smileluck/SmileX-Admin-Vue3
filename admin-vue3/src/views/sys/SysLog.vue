@@ -172,13 +172,23 @@
       />
       <el-table-column prop="logTitle" label="日志标题" width="200" />
       <el-table-column prop="logValue" label="日志内容" width="200" />
-      <el-table-column
-        prop="logType"
-        label="日志类型1:登录日志;2:操作日志;3:定时任务;4:异常日志;"
-        width="200"
-      />
+      <el-table-column prop="logType" label="日志类型" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="logType"
+            :value="scope.row.logType"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column prop="userId" label="用户ID" width="200" />
-      <el-table-column prop="operateType" label="操作类型" width="200" />
+      <el-table-column prop="operateType" label="操作类型" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="logOperateType"
+            :value="scope.row.operateType"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column prop="ipAddress" label="IP地址" width="200" />
       <el-table-column prop="method" label="请求方法" width="200" />
       <el-table-column prop="requestUrl" label="请求url路径" width="200" />

@@ -1,5 +1,5 @@
 <template>
-  <el-tag effect="plain">{{ showLabel }}</el-tag>
+  <el-tag effect="plain" :type="tagType">{{ showLabel }}</el-tag>
 </template>
 
 <script setup>
@@ -18,8 +18,11 @@ const props = defineProps({
   },
 });
 
+const tagType = ref("warning");
 const showLabel = ref("匹配失败");
 
-console.log(dictTree);
-showLabel.value = dictTree[props.dictCode][props.value];
+if (dictTree[props.dictCode]) {
+  tagType.value = "primary";
+  showLabel.value = dictTree[props.dictCode][props.value];
+}
 </script>

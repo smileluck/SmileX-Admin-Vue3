@@ -11,7 +11,7 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="字典ID：">
+            <el-form-item label="字典：">
               <el-input
                 v-model.trim="pageSearchFormModel.dictId"
                 placeholder="请输入字典ID"
