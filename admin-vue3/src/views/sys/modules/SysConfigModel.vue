@@ -35,10 +35,13 @@
           placeholder="请输入配置信息"
         />
       </el-form-item>
-      <el-form-item label="是否启用，0启用1禁用" prop="status">
-        <el-input
-          v-model.trim="form.info.status"
-          placeholder="请输入是否启用，0启用1禁用"
+      <el-form-item label="状态" prop="enableFlag">
+        <el-switch
+          v-model="form.info.enableFlag"
+          active-text="启用"
+          inactive-text="禁用"
+          active-value="1"
+          inactive-value="0"
         />
       </el-form-item>
     </el-form>
@@ -67,7 +70,7 @@ const form = reactive({
     configKey: "",
     configType: "",
     configValue: "",
-    status: "",
+    enableFlag: "",
   },
 });
 
@@ -78,8 +81,8 @@ const rules = reactive({
     { required: true, message: "请选择配置类型，1text,2json", trigger: "blur" },
   ],
   configValue: [{ required: true, message: "请选择配置信息", trigger: "blur" }],
-  status: [
-    { required: true, message: "请选择是否启用，0启用1禁用", trigger: "blur" },
+  enableFlag: [
+    { required: true, message: "请选择是否启用", trigger: "blur" },
   ],
 });
 

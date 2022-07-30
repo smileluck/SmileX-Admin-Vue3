@@ -35,10 +35,13 @@
       <el-form-item label="salt" prop="salt">
         <el-input v-model.trim="form.info.salt" placeholder="请输入salt" />
       </el-form-item>
-      <el-form-item label="是否启用，0禁用1启用" prop="enableFlag">
-        <el-input
-          v-model.trim="form.info.enableFlag"
-          placeholder="请输入是否启用，0禁用1启用"
+      <el-form-item label="状态" prop="enableFlag">
+        <el-switch
+          v-model="form.info.enableFlag"
+          active-text="启用"
+          inactive-text="禁用"
+          active-value="1"
+          inactive-value="0"
         />
       </el-form-item>
       <el-form-item label="备注" prop="remark">

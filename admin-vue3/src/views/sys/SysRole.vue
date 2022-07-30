@@ -96,7 +96,6 @@
           <el-popconfirm
             :title="'是否确认删除id=[' + scope.row.id + ']?'"
             @confirm="pageOperaRemove(scope.row.id)"
-            s
           >
             <template #reference>
               <el-button type="danger" link>删除</el-button>

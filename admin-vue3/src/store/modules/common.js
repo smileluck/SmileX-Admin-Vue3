@@ -6,6 +6,7 @@ export const useCommonStore = defineStore("common", {
         return {
             expandAside: localStorage.store_common_expandAside != null ? localStorage.store_common_expandAside : true,
             dict: {},
+            dictTree: {}
         };
     },
     getters: {
@@ -14,6 +15,9 @@ export const useCommonStore = defineStore("common", {
         },
         getDict(state) {
             return state.dict
+        },
+        getDictTree(state) {
+            return state.dictTree
         }
     },
     actions: {
@@ -23,6 +27,22 @@ export const useCommonStore = defineStore("common", {
         },
         setDict(dictObj) {
             this.dict = dictObj
+            this.dictTree = ChangeDictTrees(dictObj);
         }
     },
 });
+
+const ChangeDictTrees = (dictObj) => {
+    const dictTree = {};
+    const keys = Object.keys(dictObj);
+    for (let i = 0; i < keys.length; i++) {
+        const dict = {};
+        let arr = dictObj[keys[i]];
+        for (let j = 0; j < arr.length; j++) {
+            let item = arr[j];
+            dict[item.dictValue] = item.dictLabel;
+        }
+        dictTree[keys[i]] = dict;
+    }
+    return dictTree;
+}

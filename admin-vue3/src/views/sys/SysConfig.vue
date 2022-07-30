@@ -115,7 +115,14 @@
         width="200"
       />
       <el-table-column prop="configValue" label="配置信息" width="200" />
-      <el-table-column prop="status" label="是否启用，0启用1禁用" width="200" />
+      <el-table-column prop="enableFlag" label="启用状态" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="enableFlag"
+            :value="scope.row.enableFlag"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
@@ -124,7 +131,6 @@
           <el-popconfirm
             :title="'是否确认删除id=[' + scope.row.id + ']?'"
             @confirm="pageOperaRemove(scope.row.id)"
-            s
           >
             <template #reference>
               <el-button type="danger" link>删除</el-button>

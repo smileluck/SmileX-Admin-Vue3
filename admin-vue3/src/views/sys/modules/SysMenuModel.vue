@@ -11,7 +11,6 @@
       :rules="form.rules"
       ref="formRef"
     >
-      {{ form.info.menuType }}
       <el-form-item label="上级菜单" prop="parentId">
         <el-input v-model.trim="form.info.parentId" placeholder="上级菜单" />
       </el-form-item>
@@ -54,7 +53,7 @@
       <el-form-item label="菜单类型" prop="menuType">
         <dict-select
           dictCode="sysMenuType"
-          :value="form.info.menuType"
+          v-model="form.info.menuType"
           @change="menuTypeChange"
         />
       </el-form-item>
@@ -84,14 +83,7 @@
 </template>
 
 <script setup>
-import {
-  ref,
-  unref,
-  reactive,
-  toRaw,
-  defineExpose,
-  defineEmits,
-} from "vue";
+import { ref, unref, reactive, toRaw, defineExpose, defineEmits } from "vue";
 import { postAction, getAction } from "@/api/manage";
 import DictSelect from "@/components/DictSelect";
 
@@ -190,8 +182,6 @@ const initModel = (id) => {
 };
 
 const menuTypeChange = (value) => {
-  console.log(value);
-  form.info.menuType = value;
   switch (value) {
     //0:菜单组; 1:子菜单; 2:按钮权限
     case 0: //菜单组

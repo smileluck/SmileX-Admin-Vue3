@@ -32,25 +32,11 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="密码：">
-              <el-input
-                v-model.trim="pageSearchFormModel.password"
-                placeholder="请输入密码"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="salt：">
-              <el-input
-                v-model.trim="pageSearchFormModel.salt"
-                placeholder="请输入salt"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="是否启用，0禁用1启用：">
-              <el-input
-                v-model.trim="pageSearchFormModel.enableFlag"
-                placeholder="请输入是否启用，0禁用1启用"
-              /> </el-form-item
+            <el-form-item label="启用状态：">
+              <dict-select
+                dictCode="enableFlag"
+                v-model="pageSearchFormModel.enableFlag"
+                :clearable="true" /></el-form-item
           ></el-col>
           <el-col :span="4">
             <el-form-item label="备注：">
@@ -124,11 +110,14 @@
       <el-table-column prop="tenantId" label="租户ID" width="200" />
       <el-table-column prop="username" label="用户名" width="200" />
       <el-table-column prop="realName" label="真实名称" width="200" />
-      <el-table-column
-        prop="enableFlag"
-        label="是否启用，0禁用1启用"
-        width="200"
-      />
+      <el-table-column prop="enableFlag" label="状态" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="enableFlag"
+            :value="scope.row.enableFlag"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column prop="remark" label="备注" />
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">
@@ -138,7 +127,6 @@
           <el-popconfirm
             :title="'是否确认删除id=[' + scope.row.id + ']?'"
             @confirm="pageOperaRemove(scope.row.id)"
-            s
           >
             <template #reference>
               <el-button type="danger" link>删除</el-button>
@@ -167,6 +155,7 @@ import { Search, RefreshRight } from "@element-plus/icons-vue";
 import { reactive } from "vue";
 import SysUserModel from "./modules/SysUserModel.vue";
 import usePages from "@/composables/pages";
+import TableColumnDict from "@/components/TableColumnDict.vue";
 
 const pageSearchFormModel = reactive({
   id: "",
@@ -175,7 +164,7 @@ const pageSearchFormModel = reactive({
   realName: "",
   password: "",
   salt: "",
-  enableFlag: "",
+  enableFlag: "1",
   remark: "",
 });
 

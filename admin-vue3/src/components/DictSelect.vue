@@ -3,6 +3,7 @@
     v-model="dictValue"
     :placeholder="props.placeholder"
     @change="dictChange"
+    :clearable="props.clearable"
   >
     <el-option
       v-for="item in options.arr"
@@ -33,24 +34,28 @@ const props = defineProps({
     type: String,
     default: "请选择",
   },
+  clearable: {
+    defalt: false,
+  },
 });
 
-const emits = defineEmits(["change"]);
+const emits = defineEmits(["change", "update:modelValue"]);
 
 let options = reactive({
   arr: [],
 });
 
-console.log("prop", props.value);
-
-const dictValue = ref(props.value);
+const dictValue = ref(props.modelValue);
 if (dict[props.dictCode]) {
   options.arr = dict[props.dictCode];
 }
 
+console.log(dictValue);
+
 const dictChange = (value) => {
+  console.log(value);
   dictValue.value = value;
-  // console.log(value);
+  emits("update:modelValue", value);
   emits("change", value);
 };
 </script>
