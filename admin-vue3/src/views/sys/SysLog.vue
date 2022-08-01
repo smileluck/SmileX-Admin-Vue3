@@ -11,10 +11,11 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="日志模块，sys,blog：">
-              <el-input
-                v-model.trim="pageSearchFormModel.logModule"
-                placeholder="请输入日志模块，sys,blog"
+            <el-form-item label="日志模块">
+              <dict-select
+                dictCode="logModule"
+                v-model="pageSearchFormModel.logModule"
+                :clearable="true"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -32,33 +33,19 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item
-              label="日志类型1:登录日志;2:操作日志;3:定时任务;4:异常日志;："
-            >
-              <el-input
-                v-model.trim="pageSearchFormModel.logType"
-                placeholder="请输入日志类型1:登录日志;2:操作日志;3:定时任务;4:异常日志;"
+            <el-form-item label="日志类型：">
+              <dict-select
+                dictCode="logType"
+                v-model="pageSearchFormModel.logType"
+                :clearable="true"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="用户ID：">
-              <el-input
-                v-model.trim="pageSearchFormModel.userId"
-                placeholder="请输入用户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="操作类型：">
-              <el-input
-                v-model.trim="pageSearchFormModel.operateType"
-                placeholder="请输入操作类型"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="IP地址：">
-              <el-input
-                v-model.trim="pageSearchFormModel.ipAddress"
-                placeholder="请输入IP地址"
+            <el-form-item label="操作类型：" prop="operateType">
+              <dict-select
+                dictCode="logOperateType"
+                v-model="pageSearchFormModel.operateType"
+                :clearable="true"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -69,10 +56,10 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="请求url路径：">
+            <el-form-item label="请求路径：">
               <el-input
                 v-model.trim="pageSearchFormModel.requestUrl"
-                placeholder="请输入请求url路径"
+                placeholder="请输入请求路径"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -83,32 +70,11 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="请求参数：">
-              <el-input
-                v-model.trim="pageSearchFormModel.requestParams"
-                placeholder="请输入请求参数"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="耗费时间：">
-              <el-input
-                v-model.trim="pageSearchFormModel.costTime"
-                placeholder="请输入耗费时间"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="异常信息：">
-              <el-input
-                v-model.trim="pageSearchFormModel.errMsg"
-                placeholder="请输入异常信息"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
             <el-button type="primary" @click="pageList()">
               <el-icon class="el-icon"><search /></el-icon>
               <span>搜索</span></el-button
             >
-            <el-button type="primary" @click="pageSearchReset()">
+            <el-button type="primary" @click="pageSearchReset(pageSearchFormModel)">
               <el-icon class="el-icon"><refresh-right /></el-icon>
               <span>重置</span></el-button
             >
@@ -151,25 +117,50 @@
             ><el-card class="box-card" style="min-width: 500px; width: 50%">
               <template #header>
                 <div class="card-header">
-                  <span>额外信息</span>
+                  <span>详细信息</span>
                 </div>
               </template>
-              <div class="text item">创建时间: {{ props.row.createTime }}</div>
-              <div class="text item">创建人: {{ props.row.createBy }}</div>
-              <div class="text item">
-                最后更新时间: {{ props.row.updateTime }}
+              <div style="width: 800px; padding: 0 20px">
+                <div class="text item">
+                  操作类型: {{ props.row.operateType }}
+                </div>
+                <div class="text item">请求方法: {{ props.row.method }}</div>
+                <div class="text item">
+                  请求url路径: {{ props.row.requestUrl }}
+                </div>
+                <div class="text item">
+                  请求类型: {{ props.row.requestType }}
+                </div>
+                <div class="text item">
+                  请求参数: {{ props.row.requestParams }}
+                </div>
+                <!-- <el-row :gutter="20"> -->
+                <div class="text item">异常信息: {{ props.row.errMsg }}</div>
+                <!-- </el-row> -->
+                <div class="text item">
+                  创建时间: {{ props.row.createTime }}
+                </div>
+                <div class="text item">创建人: {{ props.row.createBy }}</div>
+                <div class="text item">
+                  最后更新时间: {{ props.row.updateTime }}
+                </div>
+                <div class="text item">
+                  最后更新人: {{ props.row.updateBy }}
+                </div>
               </div>
-              <div class="text item">最后更新人: {{ props.row.updateBy }}</div>
             </el-card>
           </el-space>
         </template>
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column
-        prop="logModule"
-        label="日志模块，sys,blog"
-        width="200"
-      />
+      <el-table-column prop="logModule" label="日志模块" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="logModule"
+            :value="scope.row.logModule"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column prop="logTitle" label="日志标题" width="200" />
       <el-table-column prop="logValue" label="日志内容" width="200" />
       <el-table-column prop="logType" label="日志类型" width="200">
@@ -193,9 +184,19 @@
       <el-table-column prop="method" label="请求方法" width="200" />
       <el-table-column prop="requestUrl" label="请求url路径" width="200" />
       <el-table-column prop="requestType" label="请求类型" width="200" />
-      <el-table-column prop="requestParams" label="请求参数" width="200" />
+      <el-table-column
+        prop="requestParams"
+        label="请求参数"
+        width="200"
+        show-overflow-tooltip="true"
+      />
       <el-table-column prop="costTime" label="耗费时间" width="200" />
-      <el-table-column prop="errMsg" label="异常信息" width="200" />
+      <el-table-column
+        prop="errMsg"
+        label="异常信息"
+        width="200"
+        show-overflow-tooltip="true"
+      />
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"

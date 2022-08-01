@@ -85,7 +85,6 @@
 <script setup>
 import { ref, unref, reactive, toRaw, defineExpose, defineEmits } from "vue";
 import { postAction, getAction } from "@/api/manage";
-import DictSelect from "@/components/DictSelect";
 
 const emit = defineEmits(["refresh"]);
 

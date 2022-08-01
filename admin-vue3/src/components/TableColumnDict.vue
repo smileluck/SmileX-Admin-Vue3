@@ -22,7 +22,7 @@ const tagType = ref("warning");
 const showLabel = ref("匹配失败");
 
 if (dictTree[props.dictCode]) {
-  tagType.value = "primary";
+  tagType.value = "";
   showLabel.value = dictTree[props.dictCode][props.value];
 }
 </script>
