@@ -4,49 +4,49 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="父ID,最上级则为0：">
+            <el-form-item label="父ID,最上级则为0：" prop="parentId">
               <el-input
                 v-model.trim="pageSearchFormModel.parentId"
                 placeholder="请输入父ID,最上级则为0"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="菜单名称：">
+            <el-form-item label="菜单名称：" prop="menuName">
               <el-input
                 v-model.trim="pageSearchFormModel.menuName"
                 placeholder="请输入菜单名称"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="菜单icon：">
+            <el-form-item label="菜单icon：" prop="menuIcon">
               <el-input
                 v-model.trim="pageSearchFormModel.menuIcon"
                 placeholder="请输入菜单icon"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="路由地址：">
+            <el-form-item label="路由地址：" prop="routeUrl">
               <el-input
                 v-model.trim="pageSearchFormModel.routeUrl"
                 placeholder="请输入路由地址"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="路由视图：">
+            <el-form-item label="路由视图：" prop="routeView">
               <el-input
                 v-model.trim="pageSearchFormModel.routeView"
                 placeholder="请输入路由视图"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="菜单类型：">
+            <el-form-item label="菜单类型：" prop="menuType">
               <dict-select
                 dictCode="menuType"
                 v-model="pageSearchFormModel.menuType"
@@ -54,21 +54,21 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="权限标识：">
+            <el-form-item label="权限标识：" prop="perm">
               <el-input
                 v-model.trim="pageSearchFormModel.perm"
                 placeholder="请输入权限标识"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="排序：">
+            <el-form-item label="排序：" prop="orderNum">
               <el-input
                 v-model.trim="pageSearchFormModel.orderNum"
                 placeholder="请输入排序"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="启用状态：">
+            <el-form-item label="启用状态：" prop="enableFlag">
               <dict-select
                 dictCode="enableFlag"
                 v-model="pageSearchFormModel.enableFlag"
@@ -134,7 +134,7 @@
       </el-table-column>
       <el-table-column prop="perm" label="权限标识" width="200" />
       <el-table-column prop="orderNum" label="排序" width="200" />
-      <el-table-column prop="enableFlag" label="状态" width="200">
+      <el-table-column prop="enableFlag" label="启用状态" width="200">
         <template #default="scope">
           <table-column-dict
             dictCode="enableFlag"

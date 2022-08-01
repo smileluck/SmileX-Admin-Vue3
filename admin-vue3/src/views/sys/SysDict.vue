@@ -4,28 +4,28 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="字典编码：">
+            <el-form-item label="字典编码：" prop="dictCode">
               <el-input
                 v-model.trim="pageSearchFormModel.dictCode"
                 placeholder="请输入字典编码"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="字典名称：">
+            <el-form-item label="字典名称：" prop="dictName">
               <el-input
                 v-model.trim="pageSearchFormModel.dictName"
                 placeholder="请输入字典名称"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="备注：">
+            <el-form-item label="备注：" prop="remark">
               <el-input
                 v-model.trim="pageSearchFormModel.remark"
                 placeholder="请输入备注"
@@ -95,7 +95,7 @@
       <el-table-column prop="id" label="ID" width="180" />
       <el-table-column prop="dictCode" label="字典编码" width="200" />
       <el-table-column prop="dictName" label="字典名称" width="200" />
-      <el-table-column prop="remark" label="备注" />
+      <el-table-column prop="remark" label="备注" width="200" />
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"

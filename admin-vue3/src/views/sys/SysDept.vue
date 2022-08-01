@@ -4,28 +4,28 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户ID：">
+            <el-form-item label="租户ID：" prop="tenantId">
               <el-input
                 v-model.trim="pageSearchFormModel.tenantId"
                 placeholder="请输入租户ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="父级部门，不存在则为0：">
+            <el-form-item label="父级部门，不存在则为0：" prop="parentId">
               <el-input
                 v-model.trim="pageSearchFormModel.parentId"
                 placeholder="请输入父级部门，不存在则为0"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="部门名称：">
+            <el-form-item label="部门名称：" prop="deptName">
               <el-input
                 v-model.trim="pageSearchFormModel.deptName"
                 placeholder="请输入部门名称"

@@ -4,14 +4,14 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="日志模块">
+            <el-form-item label="日志模块" prop="logModule">
               <dict-select
                 dictCode="logModule"
                 v-model="pageSearchFormModel.logModule"
@@ -19,25 +19,32 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="日志标题：">
+            <el-form-item label="日志标题：" prop="logTitle">
               <el-input
                 v-model.trim="pageSearchFormModel.logTitle"
                 placeholder="请输入日志标题"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="日志内容：">
+            <el-form-item label="日志内容：" prop="logValue">
               <el-input
                 v-model.trim="pageSearchFormModel.logValue"
                 placeholder="请输入日志内容"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="日志类型：">
+            <el-form-item label="日志类型：" prop="logType">
               <dict-select
                 dictCode="logType"
                 v-model="pageSearchFormModel.logType"
                 :clearable="true"
+              /> </el-form-item
+          ></el-col>
+          <el-col :span="4">
+            <el-form-item label="用户ID：" prop="userId">
+              <el-input
+                v-model.trim="pageSearchFormModel.userId"
+                placeholder="请输入用户ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -49,21 +56,28 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="请求方法：">
+            <el-form-item label="IP地址：" prop="ipAddress">
+              <el-input
+                v-model.trim="pageSearchFormModel.ipAddress"
+                placeholder="请输入IP地址"
+              /> </el-form-item
+          ></el-col>
+          <el-col :span="4">
+            <el-form-item label="请求方法：" prop="method">
               <el-input
                 v-model.trim="pageSearchFormModel.method"
                 placeholder="请输入请求方法"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="请求路径：">
+            <el-form-item label="请求路径：" prop="requestUrl">
               <el-input
                 v-model.trim="pageSearchFormModel.requestUrl"
                 placeholder="请输入请求路径"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="请求类型：">
+            <el-form-item label="请求类型：" prop="requestType">
               <el-input
                 v-model.trim="pageSearchFormModel.requestType"
                 placeholder="请输入请求类型"
@@ -74,7 +88,7 @@
               <el-icon class="el-icon"><search /></el-icon>
               <span>搜索</span></el-button
             >
-            <el-button type="primary" @click="pageSearchReset(pageSearchFormModel)">
+            <el-button type="primary" @click="pageSearchReset()">
               <el-icon class="el-icon"><refresh-right /></el-icon>
               <span>重置</span></el-button
             >
@@ -148,6 +162,7 @@
                   最后更新人: {{ props.row.updateBy }}
                 </div>
               </div>
+              <div class="text item">最后更新人: {{ props.row.updateBy }}</div>
             </el-card>
           </el-space>
         </template>

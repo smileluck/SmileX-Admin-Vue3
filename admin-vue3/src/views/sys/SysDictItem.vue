@@ -4,42 +4,42 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="字典：">
+            <el-form-item label="字典ID：" prop="dictId">
               <el-input
                 v-model.trim="pageSearchFormModel.dictId"
                 placeholder="请输入字典ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="字典编码：">
+            <el-form-item label="字典编码：" prop="dictCode">
               <el-input
                 v-model.trim="pageSearchFormModel.dictCode"
                 placeholder="请输入字典编码"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="数据值：">
+            <el-form-item label="数据值：" prop="dictValue">
               <el-input
                 v-model.trim="pageSearchFormModel.dictValue"
                 placeholder="请输入数据值"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="数据显示项：">
+            <el-form-item label="数据显示项：" prop="dictLabel">
               <el-input
                 v-model.trim="pageSearchFormModel.dictLabel"
                 placeholder="请输入数据显示项"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="备注：">
+            <el-form-item label="备注：" prop="remark">
               <el-input
                 v-model.trim="pageSearchFormModel.remark"
                 placeholder="请输入备注"
@@ -111,7 +111,7 @@
       <el-table-column prop="dictCode" label="字典编码" width="200" />
       <el-table-column prop="dictValue" label="数据值" width="200" />
       <el-table-column prop="dictLabel" label="数据显示项" width="200" />
-      <el-table-column prop="remark" label="备注" />
+      <el-table-column prop="remark" label="备注" width="200" />
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"

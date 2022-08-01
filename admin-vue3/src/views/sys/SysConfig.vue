@@ -4,45 +4,46 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="配置名称：">
+            <el-form-item label="配置名称：" prop="configName">
               <el-input
                 v-model.trim="pageSearchFormModel.configName"
                 placeholder="请输入配置名称"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="配置key：">
+            <el-form-item label="配置key：" prop="configKey">
               <el-input
                 v-model.trim="pageSearchFormModel.configKey"
                 placeholder="请输入配置key"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="配置类型，1text,2json：">
+            <el-form-item label="配置类型，1text,2json：" prop="configType">
               <el-input
                 v-model.trim="pageSearchFormModel.configType"
                 placeholder="请输入配置类型，1text,2json"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="配置信息：">
+            <el-form-item label="配置信息：" prop="configValue">
               <el-input
                 v-model.trim="pageSearchFormModel.configValue"
                 placeholder="请输入配置信息"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="是否启用，0启用1禁用：">
-              <el-input
-                v-model.trim="pageSearchFormModel.status"
-                placeholder="请输入是否启用，0启用1禁用"
+            <el-form-item label="启用状态：" prop="enableFlag">
+              <dict-select
+                dictCode="enableFlag"
+                v-model="pageSearchFormModel.enableFlag"
+                :clearable="true"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -169,7 +170,7 @@ const pageSearchFormModel = reactive({
   configKey: "",
   configType: "",
   configValue: "",
-  status: "",
+  enableFlag: "",
 });
 
 const reqPrefix = "/sys/config";

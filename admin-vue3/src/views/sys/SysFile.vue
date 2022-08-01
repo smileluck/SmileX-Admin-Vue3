@@ -4,42 +4,42 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="模块，alioss,minio：">
+            <el-form-item label="模块，alioss,minio：" prop="modules">
               <el-input
                 v-model.trim="pageSearchFormModel.modules"
                 placeholder="请输入模块，alioss,minio"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="网络地址：">
+            <el-form-item label="网络地址：" prop="netPath">
               <el-input
                 v-model.trim="pageSearchFormModel.netPath"
                 placeholder="请输入网络地址"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="文件地址：">
+            <el-form-item label="文件地址：" prop="filePath">
               <el-input
                 v-model.trim="pageSearchFormModel.filePath"
                 placeholder="请输入文件地址"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="文件大小：">
+            <el-form-item label="文件大小：" prop="fileSize">
               <el-input
                 v-model.trim="pageSearchFormModel.fileSize"
                 placeholder="请输入文件大小"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="文件后缀：">
+            <el-form-item label="文件后缀：" prop="fileSuffix">
               <el-input
                 v-model.trim="pageSearchFormModel.fileSuffix"
                 placeholder="请输入文件后缀"

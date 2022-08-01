@@ -4,14 +4,14 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户名称：">
+            <el-form-item label="租户名称：" prop="tenantName">
               <el-input
                 v-model.trim="pageSearchFormModel.tenantName"
                 placeholder="请输入租户名称"

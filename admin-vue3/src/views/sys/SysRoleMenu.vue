@@ -4,21 +4,21 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="角色id：">
+            <el-form-item label="角色id：" prop="roleId">
               <el-input
                 v-model.trim="pageSearchFormModel.roleId"
                 placeholder="请输入角色id"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="菜单id：">
+            <el-form-item label="菜单id：" prop="menuId">
               <el-input
                 v-model.trim="pageSearchFormModel.menuId"
                 placeholder="请输入菜单id"

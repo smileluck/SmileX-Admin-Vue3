@@ -4,42 +4,42 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户ID：">
+            <el-form-item label="租户ID：" prop="tenantId">
               <el-input
                 v-model.trim="pageSearchFormModel.tenantId"
                 placeholder="请输入租户ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="用户名：">
+            <el-form-item label="用户名：" prop="username">
               <el-input
                 v-model.trim="pageSearchFormModel.username"
                 placeholder="请输入用户名"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="真实名称：">
+            <el-form-item label="真实名称：" prop="realName">
               <el-input
                 v-model.trim="pageSearchFormModel.realName"
                 placeholder="请输入真实名称"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="启用状态：">
+            <el-form-item label="启用状态：" prop="enableFlag">
               <dict-select
                 dictCode="enableFlag"
                 v-model="pageSearchFormModel.enableFlag"
                 :clearable="true" /></el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="备注：">
+            <el-form-item label="备注：" prop="remark">
               <el-input
                 v-model.trim="pageSearchFormModel.remark"
                 placeholder="请输入备注"
@@ -118,7 +118,7 @@
           ></table-column-dict>
         </template>
       </el-table-column>
-      <el-table-column prop="remark" label="备注" />
+      <el-table-column prop="remark" label="备注" width="200" />
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
@@ -163,7 +163,7 @@ const pageSearchFormModel = reactive({
   realName: "",
   password: "",
   salt: "",
-  enableFlag: "1",
+  enableFlag: "",
   remark: "",
 });
 
