@@ -56,7 +56,7 @@
       <el-table-column prop="engine" label="引擎" width="200" />
       <el-table-column prop="tableComment" label="表注释" />
       <el-table-column prop="createTime" label="创建时间" width="200" />
-      <!-- <el-table-column fixed="right" label="Operations" width="120">
+      <!-- <el-table-column fixed="right" label="操作" width="120">
         <template #default>
           <el-button type="text">查看列</el-button>
         </template>

@@ -96,7 +96,7 @@
             <el-table-column prop="tenantId" label="租户ID" width="200" />
             <el-table-column prop="tagName" label="标签名" width="200" />
             <el-table-column prop="enableFlag" label="是否启用，0禁用1启用" width="200" />
-            <el-table-column fixed="right" label="Operations" width="120">
+            <el-table-column fixed="right" label="操作" width="120">
                 <template v-slot:default="scope">
                     <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
                     >修改</el-button

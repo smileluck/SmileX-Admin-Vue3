@@ -116,7 +116,7 @@
         label="发布状态，0未发布，1已发布"
         width="200"
       />
-      <el-table-column fixed="right" label="Operations" width="120">
+      <el-table-column fixed="right" label="操作" width="120">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button

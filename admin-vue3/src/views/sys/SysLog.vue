@@ -213,7 +213,7 @@
         width="200"
         :show-overflow-tooltip="true"
       />
-      <el-table-column fixed="right" label="Operations" width="120">
+      <el-table-column fixed="right" label="操作" width="120">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button

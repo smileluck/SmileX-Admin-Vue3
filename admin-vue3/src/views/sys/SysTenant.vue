@@ -80,7 +80,7 @@
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
       <el-table-column prop="tenantName" label="租户名称" />
-      <el-table-column fixed="right" label="Operations" width="120">
+      <el-table-column fixed="right" label="操作" width="120">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button
