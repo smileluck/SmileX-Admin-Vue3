@@ -189,6 +189,7 @@
       <el-table-column prop="userId" label="用户ID" width="200" />
       <el-table-column prop="operateType" label="操作类型" width="200">
         <template #default="scope">
+          {{ scope.row.operateType }}
           <table-column-dict
             dictCode="logOperateType"
             :value="scope.row.operateType"
@@ -203,14 +204,14 @@
         prop="requestParams"
         label="请求参数"
         width="200"
-        show-overflow-tooltip="true"
+        :show-overflow-tooltip="true"
       />
       <el-table-column prop="costTime" label="耗费时间" width="200" />
       <el-table-column
         prop="errMsg"
         label="异常信息"
         width="200"
-        show-overflow-tooltip="true"
+        :show-overflow-tooltip="true"
       />
       <el-table-column fixed="right" label="Operations" width="120">
         <template v-slot:default="scope">

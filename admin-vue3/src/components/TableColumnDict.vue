@@ -1,5 +1,7 @@
 <template>
-  <el-tag effect="plain" :type="tagType">{{ showLabel }}</el-tag>
+  <div>
+    <el-tag effect="plain" :type="tagType">{{ showLabel[props.value] }}</el-tag>
+  </div>
 </template>
 
 <script setup>
@@ -21,8 +23,6 @@ const props = defineProps({
 const tagType = ref("warning");
 const showLabel = ref("匹配失败");
 
-if (dictTree[props.dictCode]) {
-  tagType.value = "";
-  showLabel.value = dictTree[props.dictCode][props.value];
-}
+tagType.value = "";
+showLabel.value = dictTree[props.dictCode];
 </script>

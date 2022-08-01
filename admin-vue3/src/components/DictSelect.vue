@@ -5,6 +5,7 @@
     @change="dictChange"
     :clearable="props.clearable"
   >
+    {{ props.modelValue }}
     <el-option
       v-for="item in options.arr"
       :key="item.dictValue"
@@ -15,7 +16,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, reactive, ref } from "vue";
+import { defineProps, defineEmits, reactive, ref, toRef } from "vue";
 import { useCommonStore } from "@/store/modules/common";
 
 const commonStore = useCommonStore();
@@ -45,12 +46,20 @@ let options = reactive({
   arr: [],
 });
 
-const dictValue = ref(props.modelValue);
+// watch(
+//   () => props.modelValue,
+//   (newVal) => {
+//     console.log("watch", newVal);
+//     // dictValue.value = newVal;
+//   }
+// );
+// const dictValue = ref(props.modelValue);
+
+const dictValue = toRef(props, "modelValue");
+
 if (dict[props.dictCode]) {
   options.arr = dict[props.dictCode];
 }
-
-console.log(dictValue);
 
 const dictChange = (value) => {
   console.log(value);

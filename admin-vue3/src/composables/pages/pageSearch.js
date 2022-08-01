@@ -1,10 +1,10 @@
-import { ref, unref } from "vue";
+import { ref } from "vue";
 
 export default function usePageSearch(pageList) {
-  const pageSearchForm = ref();
+  const pageSearchForm = ref(null);
 
   const pageSearchReset = () => {
-    unref(pageSearchForm).resetFields();
+    pageSearchForm.value.resetFields();
     pageList();
   };
   return {

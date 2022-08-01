@@ -2,23 +2,25 @@
   <div class="table-card">
     <div class="table-search">
       <el-form :inline="true" :model="searchFormModel" ref="searchForm">
-        <el-col :span="8">
-          <el-form-item label="表名：">
-            <el-input
-              v-model.trim="searchFormModel.tableName"
-              placeholder="请输入表名"
-            /> </el-form-item
-        ></el-col>
-        <el-col :span="4">
-          <el-button type="primary" @click="list()">
-            <el-icon class="el-icon"><search /></el-icon>
-            <span>搜索</span></el-button
-          >
-          <el-button type="primary" @click="resetSearch()">
-            <el-icon class="el-icon"><refresh-right /></el-icon>
-            <span>重置</span></el-button
-          >
-        </el-col>
+        <el-row :gutter="10">
+          <el-col :span="4">
+            <el-form-item label="表名：">
+              <el-input
+                v-model.trim="searchFormModel.tableName"
+                placeholder="请输入表名"
+              /> </el-form-item
+          ></el-col>
+          <el-col :span="4">
+            <el-button type="primary" @click="list()">
+              <el-icon class="el-icon"><search /></el-icon>
+              <span>搜索</span></el-button
+            >
+            <el-button type="primary" @click="resetSearch()">
+              <el-icon class="el-icon"><refresh-right /></el-icon>
+              <span>重置</span></el-button
+            >
+          </el-col>
+        </el-row>
       </el-form>
     </div>
     <div class="table-operate">
