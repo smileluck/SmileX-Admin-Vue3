@@ -37,6 +37,7 @@ declare module 'vue' {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     Loading: typeof import('element-plus/es')['ElLoadingDirective']
     ScrollBarNav: typeof import('./src/components/ScrollBarNav.vue')['default']
+    TableColumnDict: typeof import('./src/components/TableColumnDict.vue')['default']
   }
 }
 
