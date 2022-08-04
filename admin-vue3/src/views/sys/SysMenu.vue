@@ -48,7 +48,7 @@
           <el-col :span="4">
             <el-form-item label="菜单类型：" prop="menuType">
               <dict-select
-                dictCode="menuType"
+                dictCode="sysMenuType"
                 v-model="pageSearchFormModel.menuType"
                 :clearable="true"
               /> </el-form-item
@@ -228,6 +228,10 @@ const dynamicRouterMenusTree = (list, pid) => {
       arr.push(item);
     }
   });
+  console.log(arr);
+  if (pid == 0 && arr.length == 0) {
+    arr = list;
+  }
   return arr;
 };
 </script>

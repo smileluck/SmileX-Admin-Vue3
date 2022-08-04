@@ -5,7 +5,6 @@
     @change="dictChange"
     :clearable="props.clearable"
   >
-    {{ props.modelValue }}
     <el-option
       v-for="item in options.arr"
       :key="item.dictValue"
