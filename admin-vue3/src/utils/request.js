@@ -66,7 +66,7 @@ const err = (error) => {
           title: "系统提示",
           message: "未授权，请重新登录",
         });
-        router.push({ name: "Login" });
+        router.push({ name: "login" });
         break;
       default:
         ElNotification.error({
@@ -88,7 +88,7 @@ http.interceptors.response.use(function (response) {
   // console.log(response.data);
   if (response.data && response.data.code === 401) {
     // 401, token失效
-    router.push({ name: "Login" });
+    router.push({ name: "login" });
   }
   //   if (response.status === 200 && response.data.success) {
   //     return response.data;

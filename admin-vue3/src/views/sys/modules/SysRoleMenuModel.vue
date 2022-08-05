@@ -107,14 +107,14 @@ const cancel = () => {
 };
 
 const submit = () => {
-  const arr = treeRef.value
-    .getCheckedKeys(false)
+  const arr = treeRef.value.getCheckedKeys(false);
   if (arr.length == 0) {
     return;
   }
   postAction(`/sys/role/menu/save`, {
     roleId: tree.id,
     menuIds: arr,
+    halfMenuIds: treeRef.value.getHalfCheckedKeys(),
   }).then((res) => {
     if (res.success) {
       emit("refresh");
