@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useUserStore } from "@/store/modules/user";
 import { getAction } from "@/api/manage";
 import { dictGet } from "@/api/common"
+import { dynamicTree } from "@/utils/common"
 
 console.log("env,", process.env.NODE_ENV)
 
@@ -115,23 +116,8 @@ const dynamicRouterMenus = (menus) => {
       })
     }
   }
-  const storeMenus = dynamicRouterMenusTree(menus, 0);
+  const storeMenus = dynamicTree(menus, 0);
   return storeMenus;
-}
-
-// 数组递归转换数结构
-const dynamicRouterMenusTree = (list, pid) => {
-  const arr = [];
-  list.forEach(item => {
-    if (item.parentId == pid) {
-      const children = dynamicRouterMenusTree(list, item.id);
-      if (children.length != 0) {
-        item.children = children
-      }
-      arr.push(item);
-    }
-  })
-  return arr
 }
 
 export default router;

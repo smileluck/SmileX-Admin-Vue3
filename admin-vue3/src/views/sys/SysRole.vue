@@ -11,13 +11,6 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户ID：" prop="tenantId">
-              <el-input
-                v-model.trim="pageSearchFormModel.tenantId"
-                placeholder="请输入租户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
             <el-form-item label="角色名称：" prop="roleName">
               <el-input
                 v-model.trim="pageSearchFormModel.roleName"
@@ -85,13 +78,15 @@
           </el-space>
         </template>
       </el-table-column>
-      <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column prop="tenantId" label="租户ID" width="200" />
-      <el-table-column prop="roleName" label="角色名称" width="200" />
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column prop="id" label="ID" width="180" />>
+      <el-table-column prop="roleName" label="角色名称" />
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button
+          >
+          <el-button type="primary" link @click="roleMenuHandle(scope.row.id)"
+            >授权</el-button
           >
           <el-popconfirm
             :title="'是否确认删除id=[' + scope.row.id + ']?'"
@@ -116,13 +111,18 @@
     >
     </el-pagination>
     <sys-role-model ref="pageOperaModel" @refresh="pageList"></sys-role-model>
+    <sys-role-menu-model
+      ref="roleMenuModel"
+      @refresh="pageList"
+    ></sys-role-menu-model>
   </div>
 </template>
 
 <script setup>
 import { Search, RefreshRight } from "@element-plus/icons-vue";
-import { reactive } from "vue";
+import { ref, reactive } from "vue";
 import SysRoleModel from "./modules/SysRoleModel.vue";
+import SysRoleMenuModel from "./modules/SysRoleMenuModel.vue";
 import usePages from "@/composables/pages";
 
 const pageSearchFormModel = reactive({
@@ -155,4 +155,10 @@ const {
   pageSearchReset,
 } = usePages(pageSearchFormModel, reqPrefix);
 pageList();
+
+// 角色授权
+const roleMenuModel = ref();
+const roleMenuHandle = (id) => {
+  roleMenuModel.value.initModel(id);
+};
 </script>
