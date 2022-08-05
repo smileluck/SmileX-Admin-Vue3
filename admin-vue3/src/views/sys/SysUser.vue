@@ -11,13 +11,6 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户ID：" prop="tenantId">
-              <el-input
-                v-model.trim="pageSearchFormModel.tenantId"
-                placeholder="请输入租户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
             <el-form-item label="用户名：" prop="username">
               <el-input
                 v-model.trim="pageSearchFormModel.username"
@@ -107,7 +100,6 @@
         </template>
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column prop="tenantId" label="租户ID" width="200" />
       <el-table-column prop="username" label="用户名" width="200" />
       <el-table-column prop="realName" label="真实名称" width="200" />
       <el-table-column prop="enableFlag" label="状态" width="200">
@@ -118,8 +110,8 @@
           ></table-column-dict>
         </template>
       </el-table-column>
-      <el-table-column prop="remark" label="备注" width="200" />
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column prop="remark" label="备注" />
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button

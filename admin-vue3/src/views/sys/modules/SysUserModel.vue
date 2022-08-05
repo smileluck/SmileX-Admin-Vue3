@@ -11,12 +11,6 @@
       :rules="rules"
       ref="formRef"
     >
-      <el-form-item label="租户ID" prop="tenantId">
-        <el-input
-          v-model.trim="form.info.tenantId"
-          placeholder="请输入租户ID"
-        />
-      </el-form-item>
       <el-form-item label="用户名" prop="username">
         <el-input
           v-model.trim="form.info.username"
@@ -80,7 +74,6 @@ const form = reactive({
 });
 
 const rules = reactive({
-  tenantId: [{ required: true, message: "请选择租户ID", trigger: "blur" }],
   username: [{ required: true, message: "请选择用户名", trigger: "blur" }],
   realName: [{ required: true, message: "请选择真实名称", trigger: "blur" }],
   password: [{ required: true, message: "请选择密码", trigger: "blur" }],

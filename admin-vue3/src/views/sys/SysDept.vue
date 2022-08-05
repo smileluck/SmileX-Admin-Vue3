@@ -11,13 +11,6 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户ID：" prop="tenantId">
-              <el-input
-                v-model.trim="pageSearchFormModel.tenantId"
-                placeholder="请输入租户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
             <el-form-item label="父级部门，不存在则为0：" prop="parentId">
               <el-input
                 v-model.trim="pageSearchFormModel.parentId"
@@ -93,7 +86,6 @@
         </template>
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column prop="tenantId" label="租户ID" width="200" />
       <el-table-column
         prop="parentId"
         label="父级部门，不存在则为0"
