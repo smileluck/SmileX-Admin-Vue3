@@ -24,18 +24,15 @@
         />
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model.trim="form.info.password" placeholder="请输入密码" />
-      </el-form-item>
-      <el-form-item label="salt" prop="salt">
-        <el-input v-model.trim="form.info.salt" placeholder="请输入salt" />
+        <el-input v-model.trim="form.info.password" type="password" placeholder="请输入密码" />
       </el-form-item>
       <el-form-item label="状态" prop="enableFlag">
         <el-switch
           v-model="form.info.enableFlag"
           active-text="启用"
           inactive-text="禁用"
-          active-value="1"
-          inactive-value="0"
+          :active-value="1"
+          :inactive-value="0"
         />
       </el-form-item>
       <el-form-item label="备注" prop="remark">
