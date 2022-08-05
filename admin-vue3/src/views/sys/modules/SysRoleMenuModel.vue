@@ -86,10 +86,20 @@ const getInfo = () => {
   getAction(`/sys/role/menu/${tree.id}`, {}).then((res) => {
     if (res.success) {
       let temp = dynamicTree(res.data.menus, 0);
-      tree.allKeys = getKeys(res.data.menus, "id");
       treeRef.value.setCheckedKeys(res.data.roleMenus, true);
-      tree.info = { roleMenus: res.data.roleMenus, menus: temp };
+      tree.info = {
+        roleMenus: res.data.roleMenus,
+        menus: temp,
+        allKeys: getKeys(res.data.menus, "id"),
+      };
       console.log(tree);
+    } else {
+      treeRef.value.setCheckedKeys([], true);
+      tree.info = {
+        roleMenus: [],
+        menus: [],
+        allKeys: [],
+      };
     }
   });
 };
