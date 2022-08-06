@@ -1,6 +1,10 @@
 <template>
   <div>
-    <el-tag effect="plain" :type="tagType">{{ showLabel[props.value] }}</el-tag>
+    <el-tag effect="plain" :type="dictTree[props.dictCode] ? '' : 'warning'">{{
+      dictTree[props.dictCode]
+        ? dictTree[props.dictCode][props.value]
+        : "匹配失败"
+    }}</el-tag>
   </div>
 </template>
 
@@ -20,9 +24,4 @@ const props = defineProps({
   },
 });
 
-const tagType = ref("warning");
-const showLabel = ref("匹配失败");
-
-tagType.value = "";
-showLabel.value = dictTree[props.dictCode];
 </script>

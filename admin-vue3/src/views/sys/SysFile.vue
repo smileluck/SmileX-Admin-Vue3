@@ -112,7 +112,7 @@
       <el-table-column prop="filePath" label="文件地址" width="200" />
       <el-table-column prop="fileSize" label="文件大小" width="200" />
       <el-table-column prop="fileSuffix" label="文件后缀" width="200" />
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button

@@ -95,8 +95,8 @@
       <el-table-column prop="id" label="ID" width="180" />
       <el-table-column prop="dictCode" label="字典编码" width="200" />
       <el-table-column prop="dictName" label="字典名称" width="200" />
-      <el-table-column prop="remark" label="备注" width="200" />
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column prop="remark" label="备注" />
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button

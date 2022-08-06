@@ -4,74 +4,48 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户ID：">
-              <el-input
-                v-model.trim="pageSearchFormModel.tenantId"
-                placeholder="请输入租户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="栏目ID：">
+            <el-form-item label="栏目ID：" prop="sectionId">
               <el-input
                 v-model.trim="pageSearchFormModel.sectionId"
                 placeholder="请输入栏目ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="标签id，以,分割：">
-              <el-input
-                v-model.trim="pageSearchFormModel.tagIds"
-                placeholder="请输入标签id，以,分割"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="文章标题：">
+            <el-form-item label="文章标题：" prop="articleTitle">
               <el-input
                 v-model.trim="pageSearchFormModel.articleTitle"
                 placeholder="请输入文章标题"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="文章简介：">
-              <el-input
-                v-model.trim="pageSearchFormModel.articleDigest"
-                placeholder="请输入文章简介"
+            <el-form-item label="语法类型：" prop="grammarType">
+              <dict-select
+                dictCode="blogGrammarType"
+                v-model="pageSearchFormModel.grammarType"
+                :clearable="true"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="文章内容：">
-              <el-input
-                v-model.trim="pageSearchFormModel.articleContent"
-                placeholder="请输入文章内容"
+            <el-form-item label="访问类型：" prop="visitType">
+              <dict-select
+                dictCode="blogVisitType"
+                v-model="pageSearchFormModel.visitType"
+                :clearable="true"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="语法类型，1markdown，2html：">
-              <el-input
-                v-model.trim="pageSearchFormModel.grammarType"
-                placeholder="请输入语法类型，1markdown，2html"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="访问类型,1通用类型，2统一密码，3独立密码：">
-              <el-input
-                v-model.trim="pageSearchFormModel.visitType"
-                placeholder="请输入访问类型,1通用类型，2统一密码，3独立密码"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="发布状态，0未发布，1已发布：">
-              <el-input
-                v-model.trim="pageSearchFormModel.publishFlag"
-                placeholder="请输入发布状态，0未发布，1已发布"
-              /> </el-form-item
+            <el-form-item label="发布状态：" prop="publishFlag">
+              <dict-select
+                dictCode="blogPublishFlag"
+                v-model="pageSearchFormModel.publishFlag"
+                :clearable="true" /></el-form-item
           ></el-col>
           <el-col :span="4">
             <el-button type="primary" @click="pageList()">
@@ -135,28 +109,40 @@
         </template>
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column prop="tenantId" label="租户ID" width="200" />
       <el-table-column prop="sectionId" label="栏目ID" width="200" />
       <el-table-column prop="tagIds" label="标签id，以,分割" width="200" />
       <el-table-column prop="articleTitle" label="文章标题" width="200" />
       <el-table-column prop="articleDigest" label="文章简介" width="200" />
       <el-table-column prop="articleContent" label="文章内容" width="200" />
-      <el-table-column
-        prop="grammarType"
-        label="语法类型，1markdown，2html"
-        width="200"
-      />
-      <el-table-column
-        prop="visitType"
-        label="访问类型,1通用类型，2统一密码，3独立密码"
-        width="200"
-      />
+      <el-table-column prop="grammarType" label="语法类型" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="blogGrammarType"
+            :value="scope.row.grammarType"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
+      <el-table-column prop="visitType" label="访问类型" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="blogVisitType"
+            :value="scope.row.visitType"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="publishFlag"
-        label="发布状态，0未发布，1已发布"
+        label="发布状态"
         width="200"
-      />
-      <el-table-column fixed="right" label="操作" width="120">
+      >
+        <template #default="scope">
+          <table-column-dict
+            dictCode="blogPublishFlag"
+            :value="scope.row.publishFlag"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button
@@ -198,16 +184,10 @@ import usePages from "@/composables/pages";
 
 const pageSearchFormModel = reactive({
   id: "",
-  tenantId: "",
   sectionId: "",
-  tagIds: "",
   articleTitle: "",
-  articleDigest: "",
-  articleContent: "",
   grammarType: "",
   visitType: "",
-  password: "",
-  salt: "",
   publishFlag: "",
 });
 

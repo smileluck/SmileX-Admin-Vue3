@@ -4,45 +4,32 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="父ID,最上级为0：">
+            <el-form-item label="父ID,最上级为0：" prop="parentId">
               <el-input
                 v-model.trim="pageSearchFormModel.parentId"
                 placeholder="请输入父ID,最上级为0"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户ID：">
-              <el-input
-                v-model.trim="pageSearchFormModel.tenantId"
-                placeholder="请输入租户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="栏目名称：">
+            <el-form-item label="栏目名称：" prop="sectionName">
               <el-input
                 v-model.trim="pageSearchFormModel.sectionName"
                 placeholder="请输入栏目名称"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="访问类型，1无限制，2统一密码访问：">
-              <el-input
-                v-model.trim="pageSearchFormModel.visitType"
-                placeholder="请输入访问类型，1无限制，2统一密码访问"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="排序：">
-              <el-input
-                v-model.trim="pageSearchFormModel.orderNum"
-                placeholder="请输入排序"
+            <el-form-item label="访问类型：" prop="visitType">
+              <dict-select
+                dictCode="blogSectionVisitType"
+                v-model="pageSearchFormModel.visitType"
+                :clearable="true"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -108,15 +95,17 @@
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
       <el-table-column prop="parentId" label="父ID,最上级为0" width="200" />
-      <el-table-column prop="tenantId" label="租户ID" width="200" />
-      <el-table-column prop="sectionName" label="栏目名称" width="200" />
-      <el-table-column
-        prop="visitType"
-        label="访问类型，1无限制，2统一密码访问"
-        width="200"
-      />
+      <el-table-column prop="sectionName" label="栏目名称" />
+      <el-table-column prop="visitType" label="访问类型" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="blogSectionVisitType"
+            :value="scope.row.visitType"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column prop="orderNum" label="排序" width="200" />
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button
@@ -159,10 +148,8 @@ import usePages from "@/composables/pages";
 const pageSearchFormModel = reactive({
   id: "",
   parentId: "",
-  tenantId: "",
   sectionName: "",
   visitType: "",
-  orderNum: "",
 });
 
 const reqPrefix = "/blog/section";

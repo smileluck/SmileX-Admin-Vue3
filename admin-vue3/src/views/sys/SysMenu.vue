@@ -142,7 +142,7 @@
           ></table-column-dict>
         </template>
       </el-table-column>
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button
@@ -218,7 +218,7 @@ pageList();
 
 // 数组递归转换数结构
 const dynamicRouterMenusTree = (list, pid) => {
-  const arr = [];
+  let arr = [];
   list.forEach((item) => {
     if (item.parentId == pid) {
       const children = dynamicRouterMenusTree(list, item.id);
@@ -228,7 +228,6 @@ const dynamicRouterMenusTree = (list, pid) => {
       arr.push(item);
     }
   });
-  console.log(arr);
   if (pid == 0 && arr.length == 0) {
     arr = list;
   }

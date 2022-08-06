@@ -4,46 +4,25 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户ID：">
-              <el-input
-                v-model.trim="pageSearchFormModel.tenantId"
-                placeholder="请输入租户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="文章ID：">
+            <el-form-item label="文章ID：" prop="articleId">
               <el-input
                 v-model.trim="pageSearchFormModel.articleId"
                 placeholder="请输入文章ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="文章标题：">
-              <el-input
-                v-model.trim="pageSearchFormModel.articleTitle"
-                placeholder="请输入文章标题"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="文章内容：">
-              <el-input
-                v-model.trim="pageSearchFormModel.articleContent"
-                placeholder="请输入文章内容"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="发布状态，0未发布，1已发布：">
-              <el-input
-                v-model.trim="pageSearchFormModel.publishFlag"
-                placeholder="请输入发布状态，0未发布，1已发布"
-              /> </el-form-item
+            <el-form-item label="发布状态：" prop="publishFlag">
+              <dict-select
+                dictCode="blogPublishFlag"
+                v-model="pageSearchFormModel.publishFlag"
+                :clearable="true" /></el-form-item
           ></el-col>
           <el-col :span="4">
             <el-button type="primary" @click="pageList()">
@@ -111,12 +90,15 @@
       <el-table-column prop="articleId" label="文章ID" width="200" />
       <el-table-column prop="articleTitle" label="文章标题" width="200" />
       <el-table-column prop="articleContent" label="文章内容" width="200" />
-      <el-table-column
-        prop="publishFlag"
-        label="发布状态，0未发布，1已发布"
-        width="200"
-      />
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column prop="publishFlag" label="发布状态" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="blogPublishFlag"
+            :value="scope.row.publishFlag"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button
@@ -158,10 +140,7 @@ import usePages from "@/composables/pages";
 
 const pageSearchFormModel = reactive({
   id: "",
-  tenantId: "",
   articleId: "",
-  articleTitle: "",
-  articleContent: "",
   publishFlag: "",
 });
 

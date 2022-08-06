@@ -57,7 +57,7 @@ const form = reactive({
 const rules = reactive({
   dictCode: [{ required: true, message: "请选择字典编码", trigger: "blur" }],
   dictName: [{ required: true, message: "请选择字典名称", trigger: "blur" }],
-  remark: [{ required: true, message: "请选择备注", trigger: "blur" }],
+  remark: [{ required: false, message: "请选择备注", trigger: "blur" }],
 });
 
 const getInfo = () => {

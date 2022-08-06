@@ -4,31 +4,17 @@
       <el-form :inline="true" :model="pageSearchFormModel" ref="pageSearchForm">
         <el-row :gutter="10">
           <el-col :span="4">
-            <el-form-item label="ID：">
+            <el-form-item label="ID：" prop="id">
               <el-input
                 v-model.trim="pageSearchFormModel.id"
                 placeholder="请输入ID"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="租户ID：">
-              <el-input
-                v-model.trim="pageSearchFormModel.tenantId"
-                placeholder="请输入租户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="开放用户ID：">
+            <el-form-item label="开放用户ID：" prop="openUserId">
               <el-input
                 v-model.trim="pageSearchFormModel.openUserId"
                 placeholder="请输入开放用户ID"
-              /> </el-form-item
-          ></el-col>
-          <el-col :span="4">
-            <el-form-item label="评论内容：">
-              <el-input
-                v-model.trim="pageSearchFormModel.content"
-                placeholder="请输入评论内容"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
@@ -93,10 +79,9 @@
         </template>
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column prop="tenantId" label="租户ID" width="200" />
       <el-table-column prop="openUserId" label="开放用户ID" width="200" />
-      <el-table-column prop="content" label="评论内容" width="200" />
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column prop="content" label="评论内容" />
+      <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button
@@ -138,9 +123,7 @@ import usePages from "@/composables/pages";
 
 const pageSearchFormModel = reactive({
   id: "",
-  tenantId: "",
   openUserId: "",
-  content: "",
 });
 
 const reqPrefix = "/blog/comment";
