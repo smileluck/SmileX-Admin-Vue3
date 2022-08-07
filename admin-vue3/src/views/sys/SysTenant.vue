@@ -18,6 +18,13 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
+            <el-form-item label="启用状态：" prop="enableFlag">
+              <dict-select
+                dictCode="enableFlag"
+                v-model="pageSearchFormModel.enableFlag"
+                :clearable="true" /></el-form-item
+          ></el-col>
+          <el-col :span="4">
             <el-button type="primary" @click="pageList()">
               <el-icon class="el-icon"><search /></el-icon>
               <span>搜索</span></el-button
@@ -80,6 +87,14 @@
       </el-table-column>
       <el-table-column prop="id" label="ID" width="180" />
       <el-table-column prop="tenantName" label="租户名称" />
+      <el-table-column prop="enableFlag" label="状态" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="enableFlag"
+            :value="scope.row.enableFlag"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
@@ -123,6 +138,7 @@ import usePages from "@/composables/pages";
 const pageSearchFormModel = reactive({
   id: "",
   tenantName: "",
+  enableFlag: "",
 });
 
 const reqPrefix = "/sys/tenant";
