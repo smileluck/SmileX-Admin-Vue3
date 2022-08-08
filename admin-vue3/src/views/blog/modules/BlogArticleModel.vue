@@ -68,15 +68,6 @@
           placeholder="请输入独立密码"
         />
       </el-form-item>
-      <el-form-item label="salt" prop="salt">
-        <el-input v-model.trim="form.info.salt" placeholder="请输入salt" />
-      </el-form-item>
-      <el-form-item label="发布状态，0未发布，1已发布" prop="publishFlag">
-        <el-input
-          v-model.trim="form.info.publishFlag"
-          placeholder="请输入发布状态，0未发布，1已发布"
-        />
-      </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">

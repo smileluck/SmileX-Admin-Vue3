@@ -36,7 +36,7 @@ export const useUserStore = defineStore("user", {
       localStorage.store_user_token = null;
     },
     isLogin() {
-      return this.token != null;
+      return this.token != null && this.token != "null";
     },
     menusAndPerms(menus, perms) {
       this.dynamicMenuState = true;
