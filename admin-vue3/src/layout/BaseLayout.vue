@@ -8,7 +8,7 @@
         <header-bar></header-bar>
       </header>
       <main class="layout-main">
-        <scroll-bar-nav></scroll-bar-nav>
+        <!-- <scroll-bar-nav></scroll-bar-nav> -->
         <el-card class="box-card">
           <router-view />
         </el-card>
@@ -19,7 +19,7 @@
 
 <script setup>
 import { watch, ref } from "vue";
-import ScrollBarNav from "@/components/ScrollBarNav.vue";
+// import ScrollBarNav from "@/components/ScrollBarNav.vue";
 import AsideBar from "@/components/AsideBar.vue";
 import { useCommonStore } from "@/store/modules/common";
 import HeaderBar from "@/components/HeaderBar.vue";

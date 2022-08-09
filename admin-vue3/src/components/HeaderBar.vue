@@ -1,9 +1,16 @@
 <template>
   <div class="header">
     <div class="left-wrapper">
-      <el-icon @click="changeExpand" class="expand-btn" :size="30"
-        ><fold v-if="expandAside" /> <expand v-else
-      /></el-icon>
+      <el-icon
+        @click="changeExpand"
+        :style="{ transform: expandAside ? 'rotateZ(180deg)' : 'rotateZ(0)' }"
+        class="expand-btn"
+        :size="30"
+      >
+        <!-- v-if="expandAside" -->
+        <fold />
+        <!-- <expand v-else /> -->
+      </el-icon>
       <span>欢迎使用 SmileX-Admin 管理平台</span>
     </div>
     <div class="user-wrapper">
@@ -22,7 +29,7 @@
 <script setup>
 import { ref } from "vue";
 
-import { SwitchButton, Fold, Expand } from "@element-plus/icons-vue";
+import { SwitchButton, Fold } from "@element-plus/icons-vue";
 import { useUserStore } from "@/store/modules/user";
 import { useCommonStore } from "@/store/modules/common";
 import { useRouter } from "vue-router";
@@ -77,7 +84,7 @@ const loginOut = () => {
   }
   .expand-btn {
     cursor: pointer;
-    transition: all 0.3ms;
+    transition: all 0.3s;
   }
 }
 </style>
