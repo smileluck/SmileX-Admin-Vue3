@@ -11,16 +11,12 @@
       :rules="rules"
       ref="formRef"
     >
-      <el-form-item label="父ID,最上级为0" prop="parentId">
-        <el-input
-          v-model.trim="form.info.parentId"
-          placeholder="请输入父ID,最上级为0"
-        />
-      </el-form-item>
-      <el-form-item label="租户ID" prop="tenantId">
-        <el-input
-          v-model.trim="form.info.tenantId"
-          placeholder="请输入租户ID"
+      <el-form-item label="上级栏目" prop="parentId">
+        <dict-select
+          :type="2"
+          dictCode="/blog/common/section,id,sectionName"
+          v-model="form.info.sectionId"
+          placeholder="请选择栏目"
         />
       </el-form-item>
       <el-form-item label="栏目名称" prop="sectionName">
@@ -29,10 +25,11 @@
           placeholder="请输入栏目名称"
         />
       </el-form-item>
-      <el-form-item label="访问类型，1无限制，2统一密码访问" prop="visitType">
-        <el-input
-          v-model.trim="form.info.visitType"
-          placeholder="请输入访问类型，1无限制，2统一密码访问"
+      <el-form-item label="访问类型" prop="visitType">
+        <dict-select
+          dictCode="blogVisitType"
+          v-model="form.info.visitType"
+          @change="menuTypeChange"
         />
       </el-form-item>
       <el-form-item label="排序" prop="orderNum">
@@ -60,19 +57,17 @@ const formRef = ref();
 const form = reactive({
   info: {
     id: null,
-    parentId: "",
     tenantId: "",
     sectionName: "",
     visitType: "",
-    orderNum: "",
+    orderNum: "1",
   },
 });
 
 const rules = reactive({
   parentId: [
-    { required: true, message: "请选择父ID,最上级为0", trigger: "blur" },
+    { required: false, message: "请选择父ID,最上级为0", trigger: "blur" },
   ],
-  tenantId: [{ required: true, message: "请选择租户ID", trigger: "blur" }],
   sectionName: [{ required: true, message: "请选择栏目名称", trigger: "blur" }],
   visitType: [
     {

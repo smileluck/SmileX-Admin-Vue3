@@ -44,7 +44,7 @@
       />
     </el-form-item>
     <el-form-item label="文章内容" prop="password">
-      <div ref="editorRef"></div>
+      <div class="editor" ref="editorRef"></div>
     </el-form-item>
     <el-form-item>
       <el-button @click="cancelForm()">保存草稿箱</el-button>
@@ -57,7 +57,7 @@
 // 组件：vditor
 // https://ld246.com/article/1549638745630#id
 import { postAction } from "@/api/manage";
-import { onMounted, ref, nextTick, reactive } from "vue";
+import { onMounted, ref, nextTick, reactive, toRaw } from "vue";
 import Vditor from "vditor";
 import "vditor/dist/index.css";
 
@@ -144,10 +144,7 @@ const submitForm = () => {
         tagIds: form.info.tagIds.join(","),
         articleContent: instance.getValue(),
       }).then((res) => {
-        if (res.success) {
-          emit("refresh");
-          cancelForm();
-        }
+        console.log(res);
       });
     } else {
       console.log("error submit!", fields);
@@ -155,3 +152,11 @@ const submitForm = () => {
   });
 };
 </script>
+
+<style lang="scss" scoped>
+.editor {
+  ::v-deep ol {
+    list-style: auto !important;
+  }
+}
+</style>

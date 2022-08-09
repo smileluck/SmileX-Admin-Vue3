@@ -11,19 +11,16 @@
       :rules="rules"
       ref="formRef"
     >
-      <el-form-item label="租户ID" prop="tenantId">
-        <el-input
-          v-model.trim="form.info.tenantId"
-          placeholder="请输入租户ID"
-        />
-      </el-form-item>
       <el-form-item label="标签名" prop="tagName">
         <el-input v-model.trim="form.info.tagName" placeholder="请输入标签名" />
       </el-form-item>
-      <el-form-item label="是否启用，0禁用1启用" prop="enableFlag">
-        <el-input
-          v-model.trim="form.info.enableFlag"
-          placeholder="请输入是否启用，0禁用1启用"
+      <el-form-item label="是否启用" prop="enableFlag">
+        <el-switch
+          v-model="form.info.enableFlag"
+          active-text="启用"
+          inactive-text="禁用"
+          :active-value="1"
+          :inactive-value="0"
         />
       </el-form-item>
     </el-form>
@@ -48,14 +45,12 @@ const formRef = ref();
 const form = reactive({
   info: {
     id: null,
-    tenantId: "",
     tagName: "",
     enableFlag: "",
   },
 });
 
 const rules = reactive({
-  tenantId: [{ required: true, message: "请选择租户ID", trigger: "blur" }],
   tagName: [{ required: true, message: "请选择标签名", trigger: "blur" }],
   enableFlag: [
     { required: true, message: "请选择是否启用，0禁用1启用", trigger: "blur" },

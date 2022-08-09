@@ -11,10 +11,12 @@
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
-            <el-form-item label="父ID,最上级为0：" prop="parentId">
-              <el-input
-                v-model.trim="pageSearchFormModel.parentId"
-                placeholder="请输入父ID,最上级为0"
+            <el-form-item label="父栏目：" prop="parentId">
+              <dict-select
+                :type="2"
+                dictCode="/blog/common/section,id,sectionName"
+                v-model="pageSearchFormModel.parentId"
+                placeholder="请选择栏目"
               /> </el-form-item
           ></el-col>
           <el-col :span="4">
