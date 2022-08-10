@@ -21,6 +21,8 @@ const globalRoutes = [{
   path: "/404",
   name: "404",
   component: () => import("@/views/common/404.vue"),
+}, {
+  path: '/:pathMatch(.*)', redirect: '/404', hidden: true
 }]
 
 // 进入主页后的路由
@@ -47,8 +49,7 @@ const baseRouters = [
     beforeEnter: (to, from, next) => {
       // console.debug("to:", to, ",from:", from)
       const userStore = useUserStore();
-      const token = userStore.getToken
-      if (token == null) {
+      if (!userStore.isLogin()) {
         next({ path: '/login' })
       }
       next();
@@ -116,6 +117,7 @@ const dynamicRouterMenus = (menus) => {
       })
     }
   }
+  // router.addRoute()
   const storeMenus = dynamicTree(menus, 0);
   return storeMenus;
 }
