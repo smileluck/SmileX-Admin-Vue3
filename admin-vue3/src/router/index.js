@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
   // console.debug("to:", to, ",from:", from)
   const userStore = useUserStore();
   if (userStore.isLogin()) {
-    // console.log("getDynamicMenuState", userStore.getDynamicMenuState)
+    console.log("getDynamicMenuState", userStore.getDynamicMenuState)
     if (userStore.getDynamicMenuState) {
       next();
     } else {
