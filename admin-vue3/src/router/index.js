@@ -16,13 +16,9 @@ const _import = require('./import-' + process.env.NODE_ENV)
 const globalRoutes = [{
   path: "/login",
   name: "login",
-  component: () => import("@/views/Login.vue"),
+  component: () => import("@/views/Login.vue"), hidden: true
 }, {
-  path: "/404",
-  name: "404",
-  component: () => import("@/views/common/404.vue"),
-}, {
-  path: '/:pathMatch(.*)', redirect: '/404', hidden: true
+  path: "/:pathMatch(.*)*", component: () => import("@/views/common/404.vue"), hidden: true
 }]
 
 // 进入主页后的路由
@@ -79,8 +75,8 @@ router.beforeEach((to, from, next) => {
         if (res.success) {
           const menus = res.data.menus
           const perms = res.data.perms
-          userStore.menusAndPerms(menus, perms)
           userStore.setShowMenus(dynamicRouterMenus(menus))
+          userStore.menusAndPerms(menus, perms)
           next({ ...to, replace: true });
         } else {
           userStore.menusAndPerms([], [])
