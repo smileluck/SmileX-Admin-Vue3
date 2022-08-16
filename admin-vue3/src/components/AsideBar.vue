@@ -15,7 +15,7 @@
         <el-menu-item index="/codeGen">
           <span>代码生成器</span>
         </el-menu-item>
-        <el-sub-menu
+        <!-- <el-sub-menu
           v-for="item in menus"
           :key="item.id"
           :index="item.routeUrl"
@@ -26,7 +26,13 @@
             :menu="item2"
             :key="index2"
           ></aside-bar-sub-menu>
-        </el-sub-menu>
+        </el-sub-menu> -->
+        <aside-bar-sub-menu
+          v-for="item in menus"
+          :key="item.id"
+          :menu="item"
+        >
+        </aside-bar-sub-menu>
       </el-menu>
     </div>
   </div>
@@ -44,6 +50,7 @@ const activeNum = ref("/home");
 const menuRef = ref();
 
 const menus = userStore.getShowMenus;
+console.log(menus);
 activeNum.value = router.currentRoute.value.path;
 </script>
 
