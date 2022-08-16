@@ -16,3 +16,4 @@ A Admin Managerment Platform by Vue3
 # 参考框架
 - [vue-element-admin](https://panjiachen.github.io/vue-element-admin-site/zh/)
 - [soybean](https://soybean.pro/)
+- [element-plus](https://element-plus.gitee.io/)
