@@ -4,7 +4,7 @@ import { ElNotification } from "element-plus";
 import { useUserStore } from "@/store/modules/user";
 
 const http = axios.create({
-  baseURL: "http://localhost:7081/smilex",
+  baseURL: process.env.VUE_APP_BASE_URL,
   // baseURL: "http://localhost:8001/smilex",
   timeout: 1000 * 30,
   withCredentials: true,

@@ -5,46 +5,9 @@
     width="50%"
     :before-close="cancelForm"
   >
-    <!-- <el-form
-      :model="form.info"
-      label-width="120px"
-      :rules="rules"
-      ref="formRef"
-    >
-      <el-form-item label="模块，alioss,minio" prop="modules">
-        <el-input
-          v-model.trim="form.info.modules"
-          placeholder="请输入模块，alioss,minio"
-        />
-      </el-form-item>
-      <el-form-item label="网络地址" prop="netPath">
-        <el-input
-          v-model.trim="form.info.netPath"
-          placeholder="请输入网络地址"
-        />
-      </el-form-item>
-      <el-form-item label="文件地址" prop="filePath">
-        <el-input
-          v-model.trim="form.info.filePath"
-          placeholder="请输入文件地址"
-        />
-      </el-form-item>
-      <el-form-item label="文件大小" prop="fileSize">
-        <el-input
-          v-model.trim="form.info.fileSize"
-          placeholder="请输入文件大小"
-        />
-      </el-form-item>
-      <el-form-item label="文件后缀" prop="fileSuffix">
-        <el-input
-          v-model.trim="form.info.fileSuffix"
-          placeholder="请输入文件后缀"
-        />
-      </el-form-item>
-    </el-form> -->
     <el-upload
       v-model="fileList"
-      action="http://127.0.0.1:7081/smilex/sys/demo/file/simple"
+      :action="url"
       with-credentials
       :headers="headers"
       name="file"
@@ -80,6 +43,8 @@ const headers = ref({
   "X-Access-Token": userStore.getToken,
 });
 
+const url = ref(process.env.VUE_APP_BASE_URL + "/sys/demo/file/simple");
+
 const dialogVisible = ref(false);
 const fileList = ref();
 
@@ -97,7 +62,7 @@ const handleSuccess = (res, file, fileList) => {
 
 const handleBeforeUpload = (file) => {
   console.log("before", file);
-  if (file.size / 1024 / 1024 > 0.01) {
+  if (file.size / 1024 / 1024 > 10) {
     ElNotification.error({
       title: "系统提示",
       message: "单张图片大小不能超过10MB",
@@ -109,7 +74,6 @@ const handleBeforeUpload = (file) => {
 const cancelForm = () => {
   dialogVisible.value = false;
 };
-
 const initModel = () => {
   dialogVisible.value = true;
 };
