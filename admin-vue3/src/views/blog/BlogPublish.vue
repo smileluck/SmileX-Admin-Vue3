@@ -58,8 +58,10 @@
 // https://ld246.com/article/1549638745630#id
 import { postAction } from "@/api/manage";
 import { onMounted, ref, nextTick, reactive, toRaw } from "vue";
+import { useUserStore } from "@/store/modules/user";
 import Vditor from "vditor";
 import "vditor/dist/index.css";
+const userStore = useUserStore();
 
 const formRef = ref();
 
@@ -123,7 +125,47 @@ const init = () => {
       instance.setValue(content.value);
     },
     // 这里写上传
-    upload: {},
+    upload: {
+      url: process.env.VUE_APP_BASE_URL + "/sys/demo/file/multi",
+      headers: {
+        "X-Access-Token": userStore.getToken,
+      },
+      withCredentials: true,
+      validate: (file) => {
+        console.log("validate", file);
+        return true;
+      },
+      // handler: (file) => {
+      //   console.log("handler", file);
+      // },
+      // success: (file, resMsg) => {
+      //   console.log("success", file, resMsg);
+      // },
+      format: (files, resMsg) => {
+        console.log("format", files, resMsg);
+        const obj = {
+          msg: "",
+          code: 0,
+          data: {
+            errFiles: [],
+            succMap: {},
+          },
+        };
+        const res = JSON.parse(resMsg);
+        if (res.success) {
+          const succMap = {};
+          for (let i = 0; i < res.data.length; i++) {
+            let stt = res.data[i];
+            stt.substring(stt.lastIndexOf("/") + 1, stt.lastIndexOf("."));
+            succMap[stt] =
+              "https://smile-sxd.oss-cn-shenzhen.aliyuncs.com/" + res.data[i];
+          }
+          obj.data.succMap = succMap;
+        }
+        resMsg = JSON.stringify(obj);
+        return resMsg;
+      },
+    },
   });
 };
 onMounted(() => {
