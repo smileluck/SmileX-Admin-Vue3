@@ -8,17 +8,31 @@
     <el-form
       :model="form.info"
       label-width="120px"
-      :rules="from.rules"
+      :rules="form.rules"
       ref="formRef"
     >
       <el-form-item label="年份" prop="year">
-        <el-input v-model.trim="form.info.year" placeholder="请输入年份" />
+        <el-date-picker
+          v-model="form.info.year"
+          type="year"
+          placeholder="请选择年份"
+          value-format="YYYY"
+        />
       </el-form-item>
       <el-form-item label="标题" prop="title">
-        <el-input v-model.trim="form.info.title" placeholder="请输入标题" />
+        <el-input
+          v-model.trim="form.info.title"
+          maxlength="30"
+          show-word-limit
+          placeholder="请输入标题"
+        />
       </el-form-item>
       <el-form-item label="说明" prop="description">
         <el-input
+          type="textarea"
+          :rows="4"
+          maxlength="300"
+          show-word-limit
           v-model.trim="form.info.description"
           placeholder="请输入说明"
         />
@@ -50,7 +64,7 @@ const form = reactive({
     description: "",
   },
   rules: {
-    year: [{ required: true, message: "请输入年份", trigger: "blur" }],
+    year: [{ required: true, message: "请输入年份", trigger: "change" }],
     title: [{ required: true, message: "请输入标题", trigger: "blur" }],
     description: [{ required: true, message: "请输入说明", trigger: "blur" }],
   },
