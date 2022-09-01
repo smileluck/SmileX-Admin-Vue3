@@ -48,7 +48,15 @@
 </template>
 
 <script setup>
-import { ref, unref, reactive, toRaw, defineExpose, defineEmits } from "vue";
+import {
+  ref,
+  unref,
+  reactive,
+  toRaw,
+  defineExpose,
+  defineEmits,
+  nextTick,
+} from "vue";
 import { postAction, getAction } from "@/api/manage";
 
 const emit = defineEmits(["refresh"]);
@@ -79,8 +87,8 @@ const getInfo = () => {
 };
 
 const cancelForm = () => {
-  formRef.value.resetFields();
   dialogVisible.value = false;
+  formRef.value.resetFields();
   form.info = {};
 };
 
