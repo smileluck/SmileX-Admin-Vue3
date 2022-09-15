@@ -68,7 +68,7 @@ const formRef = ref();
 const form = reactive({
   info: {
     sectionId: "",
-    tagIds: "",
+    tagIds: [],
     articleTitle: "",
     articleDigest: "",
     articleContent: "",
