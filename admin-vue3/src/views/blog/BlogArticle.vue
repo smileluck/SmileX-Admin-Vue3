@@ -91,8 +91,21 @@
       <el-table-column type="selection" width="50" />
       <el-table-column type="expand">
         <template #default="props">
-          <el-space wrap
+          <el-space wrap alignment="stretch"
             ><el-card class="box-card" style="min-width: 500px; width: 50%">
+              <template #header>
+                <div class="card-header">
+                  <span>文章信息</span>
+                </div>
+              </template>
+              <div class="text item">
+                文章简介: {{ props.row.articleDigest }}
+              </div>
+              <div class="text item">
+                文章内容: {{ props.row.articleContent }}
+              </div>
+            </el-card>
+            <el-card class="box-card" style="min-width: 500px; width: 50%">
               <template #header>
                 <div class="card-header">
                   <span>额外信息</span>
@@ -112,8 +125,6 @@
       <el-table-column prop="sectionId" label="栏目ID" width="200" />
       <el-table-column prop="tagIds" label="标签id，以,分割" width="200" />
       <el-table-column prop="articleTitle" label="文章标题" width="200" />
-      <el-table-column prop="articleDigest" label="文章简介" width="200" />
-      <el-table-column prop="articleContent" label="文章内容" width="200" />
       <el-table-column prop="grammarType" label="语法类型" width="200">
         <template #default="scope">
           <table-column-dict
@@ -130,15 +141,19 @@
           ></table-column-dict>
         </template>
       </el-table-column>
-      <el-table-column
-        prop="publishFlag"
-        label="发布状态"
-        width="200"
-      >
+      <el-table-column prop="publishFlag" label="发布状态" width="200">
         <template #default="scope">
           <table-column-dict
             dictCode="blogPublishFlag"
             :value="scope.row.publishFlag"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
+      <el-table-column prop="topFlag" label="置顶状态" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="blogTopFlag"
+            :value="scope.row.topFlag"
           ></table-column-dict>
         </template>
       </el-table-column>
