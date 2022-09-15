@@ -48,6 +48,13 @@
                 :clearable="true" /></el-form-item
           ></el-col>
           <el-col :span="4">
+            <el-form-item label="置顶状态：" prop="topFlag">
+              <dict-select
+                dictCode="blogTopFlag"
+                v-model="pageSearchFormModel.topFlag"
+                :clearable="true" /></el-form-item
+          ></el-col>
+          <el-col :span="4">
             <el-button type="primary" @click="pageList()">
               <el-icon class="el-icon"><search /></el-icon>
               <span>搜索</span></el-button
@@ -159,6 +166,34 @@
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">
+          <el-button
+            type="primary"
+            v-if="scope.row.publishFlag == 0"
+            link
+            @click="articlePublishHandle(scope.row.id, 1)"
+            >发布</el-button
+          >
+          <el-button
+            type="danger"
+            v-else
+            link
+            @click="articlePublishHandle(scope.row.id, 0)"
+            >撤回</el-button
+          >
+          <el-button
+            type="primary"
+            v-if="scope.row.topFlag == 0"
+            link
+            @click="articleTopHandle(scope.row.id, 1)"
+            >置顶</el-button
+          >
+          <el-button
+            type="danger"
+            v-else
+            link
+            @click="articleTopHandle(scope.row.id, 0)"
+            >取消置顶</el-button
+          >
           <el-button type="primary" link @click="pageOperaAdd(scope.row.id)"
             >修改</el-button
           >
@@ -192,6 +227,7 @@
 </template>
 
 <script setup>
+import { postAction } from "@/api/manage";
 import { Search, RefreshRight } from "@element-plus/icons-vue";
 import { reactive } from "vue";
 import BlogArticleModel from "./modules/BlogArticleModel.vue";
@@ -204,6 +240,7 @@ const pageSearchFormModel = reactive({
   grammarType: "",
   visitType: "",
   publishFlag: "",
+  topFlag: "",
 });
 
 const reqPrefix = "/blog/article";
@@ -230,4 +267,36 @@ const {
   pageSearchReset,
 } = usePages(pageSearchFormModel, reqPrefix);
 pageList();
+
+/**
+ * 文章置顶
+ * @Param id 文章id
+ * @Param flag  0取消置顶，1置顶
+ */
+const articleTopHandle = (id, flag) => {
+  postAction(reqPrefix + "/top", {
+    id: id,
+    topFlag: flag,
+  }).then((res) => {
+    if (res.success) {
+      pageList();
+    }
+  });
+};
+
+/**
+ * 文章发布
+ * @Param id 文章id
+ * @Param flag  0取消发布，1发布
+ */
+const articlePublishHandle = (id, flag) => {
+  postAction(reqPrefix + "/publish", {
+    id: id,
+    publishFlag: flag,
+  }).then((res) => {
+    if (res.success) {
+      pageList();
+    }
+  });
+};
 </script>
