@@ -4,6 +4,7 @@ const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
 const path = require("path");
 
 module.exports = {
+  publicPath: process.env.NODE_ENV === "production" ? "/admin" : "/",
   css: {
     loaderOptions: {
       sass: {

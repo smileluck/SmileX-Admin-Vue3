@@ -197,8 +197,10 @@ const submitForm = () => {
 
 <style lang="scss" scoped>
 .editor {
-  ::v-deep ol {
+  :deep(ol){
     list-style: auto !important;
   }
+  // ::v-deep ol {
+  // }
 }
 </style>

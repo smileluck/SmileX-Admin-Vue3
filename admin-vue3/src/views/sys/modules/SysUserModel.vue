@@ -24,7 +24,11 @@
         />
       </el-form-item>
       <el-form-item label="密码" prop="password">
-        <el-input v-model.trim="form.info.password" type="password" placeholder="请输入密码" />
+        <el-input
+          v-model.trim="form.info.password"
+          type="password"
+          placeholder="请输入密码"
+        />
       </el-form-item>
       <el-form-item label="状态" prop="enableFlag">
         <el-switch
@@ -64,8 +68,7 @@ const form = reactive({
     username: "",
     realName: "",
     password: "",
-    salt: "",
-    enableFlag: "",
+    enableFlag: "1",
     remark: "",
   },
 });
@@ -74,10 +77,7 @@ const rules = reactive({
   username: [{ required: true, message: "请选择用户名", trigger: "blur" }],
   realName: [{ required: true, message: "请选择真实名称", trigger: "blur" }],
   password: [{ required: true, message: "请选择密码", trigger: "blur" }],
-  salt: [{ required: true, message: "请选择salt", trigger: "blur" }],
-  enableFlag: [
-    { required: true, message: "请选择是否启用，0禁用1启用", trigger: "blur" },
-  ],
+  enableFlag: [{ required: true, message: "请选择是否启用", trigger: "blur" }],
   remark: [{ required: true, message: "请选择备注", trigger: "blur" }],
 });
 
