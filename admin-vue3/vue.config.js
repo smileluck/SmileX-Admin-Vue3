@@ -15,7 +15,7 @@ const isProduction = process.env.NODE_ENV === "production"
 
 module.exports = {
   // 设置根路径与服务器nginx部署路径有关
-  publicPath: isProduction ? "./admin" : "/",
+  publicPath: isProduction ? "/admin" : "/",
 
   // 优化1 减少打包体积，不生成map文件
   productionSourceMap: isProduction ? false : true,
@@ -81,6 +81,7 @@ module.exports = {
       //     deleteOriginalAssets: true // 不删除原文件
       //   })
       // )
+    
     }
   },
   // eslint开启
