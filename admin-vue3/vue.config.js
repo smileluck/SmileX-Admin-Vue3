@@ -6,7 +6,7 @@ const path = require("path");
 // 生产优化
 // 代码压缩
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const CompressionWebpackPlugin = require('compression-webpack-plugin')
+// const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 
 // 是否是生产环境
