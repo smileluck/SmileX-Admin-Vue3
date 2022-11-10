@@ -1,10 +1,11 @@
 <template>
   <el-select
     v-if="props.type == 1"
-    v-model="dictValue"
+    v-model="_dictValue"
     :placeholder="props.placeholder"
     @change="dictChange"
     :clearable="props.clearable"
+    filterable 
   >
     <el-option
       v-for="item in options.arr"
@@ -15,13 +16,14 @@
   </el-select>
   <el-select
     v-else
-    v-model="dictValue"
+    v-model="_dictValue"
     :placeholder="props.placeholder"
     @change="dictChange"
     :clearable="props.clearable"
     :multiple="props.multiple"
     :collapse-tags="props.multiple"
     :collapse-tags-tooltip="props.multiple"
+    filterable 
   >
     <el-option
       v-for="item in options.arr"
@@ -34,7 +36,7 @@
 
 <script setup>
 import { getAction } from "@/api/manage";
-import { defineProps, defineEmits, reactive, ref, toRef } from "vue";
+import { defineProps, defineEmits, reactive, ref, toRef, computed } from "vue";
 import { useCommonStore } from "@/store/modules/common";
 
 const commonStore = useCommonStore();
@@ -75,6 +77,16 @@ let options = reactive({
 });
 
 const dictValue = toRef(props, "modelValue");
+const _dictValue = computed(() => {
+  if (
+    typeof dictValue.value == "number" ||
+    typeof dictValue.value == "string"
+  ) {
+    return dictValue.value.toString();
+  } else {
+    return dictValue.value;
+  }
+});
 
 if (props.type == 1) {
   if (dict[props.dictCode]) {
@@ -96,7 +108,8 @@ if (props.type == 1) {
 
 const dictChange = (value) => {
   console.log(value);
-  dictValue.value = value;
+  // dictValue.value = value;
+  _dictValue.value = value;
   emits("update:modelValue", value);
   emits("change", value);
 };
