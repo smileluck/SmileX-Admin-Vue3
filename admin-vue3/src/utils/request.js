@@ -94,11 +94,13 @@ http.interceptors.response.use(function (response) {
   //     return response.data;
   //   }
   if (response.data.success) {
-    ElNotification({
-      title: "系统提示",
-      message: response.data.msg,
-      type: "success",
-    });
+    if (response.config.method == "post") {
+      ElNotification({
+        title: "系统提示",
+        message: response.data.msg,
+        type: "success",
+      });
+    }
   } else {
     if (response.data instanceof Blob) {
       const reader = new FileReader();  //创建一个FileReader实例
