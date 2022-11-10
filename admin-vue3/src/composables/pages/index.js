@@ -3,7 +3,7 @@ import usePageList from "./pageList";
 import usePageOpera from "./pageOpera";
 import usePageSearch from "./pageSearch";
 
-export default function usePages(pageSearchFormModel, reqPrefix,pageCallback) {
+export default function usePages(pageSearchFormModel, reqPrefix, pageCallback) {
   const pageLoading = ref();
   const pageOperaModel = ref();
   const pageTable = ref();
@@ -26,7 +26,7 @@ export default function usePages(pageSearchFormModel, reqPrefix,pageCallback) {
       reqPrefix,
       pageCallback
     );
-  const { pageOperaAdd, pageOperaRemove } = usePageOpera(pageOperaModel, pageSelectColumn, pageList);
+  const { pageOperaAdd, pageOperaRemove } = usePageOpera(pageOperaModel, pageSelectColumn, reqPrefix, pageList);
   const { pageSearchForm, pageSearchReset } = usePageSearch(pageList);
   return {
     // 组件引用

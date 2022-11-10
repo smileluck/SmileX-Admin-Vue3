@@ -78,7 +78,7 @@ const form = reactive({
   rules: {
     sectionId: [{ required: true, message: "请选择栏目ID", trigger: "blur" }],
     tagIds: [
-      { required: true, message: "请选择标签id，以,分割", trigger: "blur" },
+      { required: true, message: "请选择标签", trigger: "blur" },
     ],
     articleTitle: [
       { required: true, message: "请选择文章标题", trigger: "blur" },
@@ -89,7 +89,7 @@ const form = reactive({
     visitType: [
       {
         required: true,
-        message: "请选择访问类型,1通用类型，2统一密码，3独立密码",
+        message: "请选择访问类型",
         trigger: "blur",
       },
     ],

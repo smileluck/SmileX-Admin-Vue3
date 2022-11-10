@@ -122,15 +122,14 @@ const submitForm = () => {
   });
 };
 
-const handleClose = ()=>{
-  console.log(111);
+const handleClose = () => {
   formRef.value.resetFields();
   dialogVisible.value = false;
-  form.address = ""
-  form.username = ""
-  form.password = ""
-  form.databaseName = ""
-}
+  form.address = "";
+  form.username = "";
+  form.password = "";
+  form.databaseName = "";
+};
 
 const initModel = () => {
   dialogVisible.value = true;

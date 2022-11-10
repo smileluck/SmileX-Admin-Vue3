@@ -1,7 +1,7 @@
 import { unref } from "vue";
 import { postAction } from "@/api/manage"
 
-export default function usePageOpera(model, pageSelectColumn, pageList) {
+export default function usePageOpera(model, pageSelectColumn, reqPrefix, pageList) {
   const pageOperaAdd = (id) => {
     unref(model).initModel(id);
   };
@@ -13,7 +13,7 @@ export default function usePageOpera(model, pageSelectColumn, pageList) {
     } else {
       ids.push(id)
     }
-    postAction("/sys/menu/remove", ids).then((res) => {
+    postAction(reqPrefix + "/remove", ids).then((res) => {
       console.log(res);
       if (res.success) {
         pageList();

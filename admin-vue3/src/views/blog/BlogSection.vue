@@ -106,6 +106,14 @@
           ></table-column-dict>
         </template>
       </el-table-column>
+      <el-table-column prop="type" label="栏目类型" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="blogSectionType"
+            :value="scope.row.type"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column prop="orderNum" label="排序" width="200" />
       <el-table-column fixed="right" label="操作" width="200">
         <template v-slot:default="scope">

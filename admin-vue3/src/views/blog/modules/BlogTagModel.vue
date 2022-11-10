@@ -46,7 +46,7 @@ const form = reactive({
   info: {
     id: null,
     tagName: "",
-    enableFlag: "",
+    enableFlag: 1,
   },
 });
 
@@ -68,7 +68,11 @@ const getInfo = () => {
 const cancelForm = () => {
   formRef.value.resetFields();
   dialogVisible.value = false;
-  form.info = {};
+  form.info = {
+    id: null,
+    tagName: "",
+    enableFlag: 1,
+  };
 };
 
 const submitForm = () => {

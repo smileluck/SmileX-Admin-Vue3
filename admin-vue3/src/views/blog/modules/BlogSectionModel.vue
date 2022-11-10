@@ -15,7 +15,7 @@
         <dict-select
           :type="2"
           dictCode="/blog/common/section,id,sectionName"
-          v-model="form.info.sectionId"
+          v-model="form.info.parentId"
           placeholder="请选择栏目"
         />
       </el-form-item>
@@ -29,11 +29,10 @@
         <dict-select
           dictCode="blogVisitType"
           v-model="form.info.visitType"
-          @change="menuTypeChange"
         />
       </el-form-item>
       <el-form-item label="排序" prop="orderNum">
-        <el-input v-model.trim="form.info.orderNum" placeholder="请输入排序" />
+        <el-input v-model.number="form.info.orderNum" placeholder="请输入排序" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -58,15 +57,16 @@ const form = reactive({
   info: {
     id: null,
     tenantId: "",
+    parentId: "",
     sectionName: "",
     visitType: "",
-    orderNum: "1",
+    orderNum: 0,
   },
 });
 
 const rules = reactive({
   parentId: [
-    { required: false, message: "请选择父ID,最上级为0", trigger: "blur" },
+    { required: false, message: "请选择上级栏目", trigger: "blur" },
   ],
   sectionName: [{ required: true, message: "请选择栏目名称", trigger: "blur" }],
   visitType: [
