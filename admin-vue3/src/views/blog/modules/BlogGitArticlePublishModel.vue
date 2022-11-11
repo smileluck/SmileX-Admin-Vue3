@@ -135,7 +135,6 @@ const getInfo = () => {
       form.info = {
         ...res.data,
         articleTitle: res.data.fileTitle,
-        sectionId: "344996145585455104",
         visitType: "1",
       };
       nextTick(() => {
