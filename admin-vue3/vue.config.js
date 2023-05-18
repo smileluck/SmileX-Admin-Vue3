@@ -88,7 +88,7 @@ module.exports = {
   lintOnSave: !isProduction,
   // 开发配置
   devServer: {
-    port: 8080,
+    port: 8001,
   }
 };
 
