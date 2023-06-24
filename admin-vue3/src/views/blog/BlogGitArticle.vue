@@ -32,6 +32,13 @@
                 :clearable="true" /></el-form-item
           ></el-col>
           <el-col :span="4">
+            <el-form-item label="是否发布" prop="publishFlag">
+              <dict-select
+                dictCode="commonYN"
+                v-model="pageSearchFormModel.publishFlag"
+                :clearable="true" /></el-form-item
+          ></el-col>
+          <el-col :span="4">
             <el-button type="primary" @click="pageList()">
               <el-icon class="el-icon"><search /></el-icon>
               <span>搜索</span></el-button
@@ -103,6 +110,14 @@
           ></table-column-dict>
         </template>
       </el-table-column>
+      <el-table-column prop="updateFlag" label="是否发布" width="200">
+        <template #default="scope">
+          <table-column-dict
+            dictCode="commonYN"
+            :value="scope.row.publishFlag"
+          ></table-column-dict>
+        </template>
+      </el-table-column>
       <el-table-column prop="asyncTime" label="同步时间" width="180" />
       <el-table-column prop="publishTime" label="发布时间" width="180" />
       <el-table-column fixed="right" label="操作" width="200">
@@ -159,6 +174,7 @@ const pageSearchFormModel = reactive({
   blogArticleId: "",
   contentUrl: "",
   updateFlag: "",
+  publishFlag: "",
 });
 
 const reqPrefix = "/blog/git/article";
