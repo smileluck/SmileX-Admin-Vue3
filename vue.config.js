@@ -83,5 +83,14 @@ module.exports = {
   // 开发配置
   devServer: {
     port: 8001,
+    client: {
+      overlay: {
+        // 编译错误仍全屏提示；警告与运行时错误（如后端未启动时的
+        // 请求 Network Error）不弹 overlay，仅保留控制台输出
+        errors: true,
+        warnings: false,
+        runtimeErrors: false,
+      },
+    },
   }
 };

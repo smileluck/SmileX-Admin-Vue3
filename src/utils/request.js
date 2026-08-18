@@ -78,7 +78,7 @@ const err = (error) => {
   } else {
     ElNotification.error({
       title: "系统提示",
-      message: "网路异常",
+      message: "网络异常",
     });
   }
   return Promise.reject(error);
