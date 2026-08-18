@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { ref, unref, reactive, toRaw, defineExpose, defineEmits } from "vue";
+import { ref, unref, reactive, toRaw } from "vue";
 import { downloadFile, postAction } from "@/api/manage";
 
 const emit = defineEmits(["refresh"]);
@@ -71,8 +71,6 @@ const downloadTypeChange = (val) => {
   console.log(val);
   if (val == 1) {
     rules.savePath[0].required = false;
-  } else if (val == 1) {
-    rules.savePath[0].required = true;
   }
 };
 

@@ -1,14 +1,4 @@
-import { ref } from "vue";
-function Checktype(name, type) {
-    if (type == 1) {
-        // 图片
-        return /\.(gif|jpg|jpeg|png)$/i.test(name)
-    } else if (type == 2) {
-        // 视频
-        return /\.(mp4||wmv|mpg|mpeg|ram|rm)$/i.test(name)
-    }
-    return true
-}
+import { ElNotification } from "element-plus";
 /**
  * 
  * @param maxSize 文件大小，最大多少M

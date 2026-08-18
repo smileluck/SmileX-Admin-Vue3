@@ -76,15 +76,7 @@
 
 <script setup>
 import { postAction, getAction } from "@/api/manage";
-import {
-  ref,
-  reactive,
-  nextTick,
-  toRaw,
-  defineEmits,
-  unref,
-  defineExpose,
-} from "vue";
+import { ref, reactive, nextTick, toRaw, unref } from "vue";
 import { useUserStore } from "@/store/modules/user";
 import Vditor from "vditor";
 import "vditor/dist/index.css";

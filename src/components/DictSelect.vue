@@ -36,7 +36,7 @@
 
 <script setup>
 import { getAction } from "@/api/manage";
-import { defineProps, defineEmits, reactive, ref, toRef, computed } from "vue";
+import { reactive, ref, toRef, computed } from "vue";
 import { useCommonStore } from "@/store/modules/common";
 
 const commonStore = useCommonStore();

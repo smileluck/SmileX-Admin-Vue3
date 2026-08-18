@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, defineExpose } from "vue";
+import { ref } from "vue";
 import { useUserStore } from "@/store/modules/user";
 import { ElNotification } from "element-plus";
 const userStore = useUserStore();

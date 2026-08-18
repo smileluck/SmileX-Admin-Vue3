@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, defineExpose, defineEmits } from "vue";
+import { ref, reactive } from "vue";
 import { postAction, getAction } from "@/api/manage";
 import { dynamicTree } from "@/utils/common";
 
@@ -148,7 +148,6 @@ const initModel = (id) => {
 };
 defineExpose({ initModel });
 </script>
-
 
 <style lang="scss" scoped>
 .custom-tree-node {

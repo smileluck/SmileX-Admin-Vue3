@@ -1,0 +1,15 @@
+shamefullyHoist: true
+overrides:
+  # @vue/cli-plugin-babel 5 自带 babel-loader ^8.2.2（cache 用原生 md4 哈希，
+  # Node 17+/OpenSSL 3 下报 error:0308010C），强制统一到改用
+  # webpack utils.createHash 的 10.x
+  babel-loader: ^10.1.1
+  # @vue/cli-plugin-eslint 5 自带 eslint-webpack-plugin ^3（面向旧式 eslintrc），
+  # 升级到支持 eslint 9/10 flat config 的 6.x
+  eslint-webpack-plugin: ^6.0.0
+allowBuilds:
+  '@parcel/watcher': true
+  core-js: true
+  cssnano: true
+  fsevents: true
+  yorkie: true

@@ -1,13 +1,6 @@
 const AutoImport = require("unplugin-auto-import/webpack");
 const Components = require("unplugin-vue-components/webpack");
 const { ElementPlusResolver } = require("unplugin-vue-components/resolvers");
-const path = require("path");
-
-// 生产优化
-// 代码压缩
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-// const CompressionWebpackPlugin = require('compression-webpack-plugin')
-
 
 // 是否是生产环境
 const isProduction = process.env.NODE_ENV === "production"
@@ -19,19 +12,53 @@ module.exports = {
 
   // 优化1 减少打包体积，不生成map文件
   productionSourceMap: isProduction ? false : true,
+
+  // 生产构建使用 webpack5 内置 terser 压缩
+  chainWebpack: (config) => {
+    // thread-loader 的 worker 进程在 Node 17+ (OpenSSL 3) 下触发 md4 报错
+    // error:0308010C:digital envelope routines::unsupported，
+    // 项目规模小，改为在主进程执行 babel，无感知性能影响
+    config.module.rule("js").uses.delete("thread-loader");
+
+    // webpack 默认 hashFunction 为 md4，OpenSSL 3 (Node 17+) 不再支持原生 md4，
+    // babel-loader 缓存等组件会经 outputOptions.hashFunction 触发；
+    // 改用 sha256 从根源规避
+    config.output.hashFunction("sha256");
+
+    // cli-plugin-eslint 会给 eslint-webpack-plugin 传入 eslint 9+ 已移除的
+    // extensions 选项（报 Invalid Options: Unknown options: extensions），
+    // 在此剥离
+    if (config.plugins.has("eslint")) {
+      config.plugin("eslint").tap((args) => {
+        delete args[0].extensions;
+        return args;
+      });
+    }
+
+    if (isProduction) {
+      config.optimization.minimizer("terser").tap((args) => {
+        const terserOptions = args[0].terserOptions;
+        terserOptions.compress = {
+          ...terserOptions.compress,
+          // 生产环境自动删除debugger与console
+          drop_debugger: true,
+          drop_console: true,
+          pure_funcs: ["console.log"],
+        };
+        return args;
+      });
+    }
+  },
+
   css: {
     loaderOptions: {
       sass: {
-        additionalData: `@import "~@/assets/styles/variables.scss";`,
+        // Dart Sass 3.0 将移除 @import，统一使用 @use（as * 保持变量全局可用）
+        additionalData: `@use "@/assets/styles/variables.scss" as *;`,
       },
     },
   },
-  chainWebpack: (config) => {
-    const types = ["vue-modules", "vue", "normal-modules", "normal"];
-    types.forEach((type) =>
-      addStyleResource(config.module.rule("stylus").oneOf(type))
-    );
-  },
+
   configureWebpack: config => {
     config.plugins.push(
       AutoImport({
@@ -50,39 +77,6 @@ module.exports = {
         resolvers: [ElementPlusResolver({ importStyle: "css" })],
         dts: "components.d.ts",
       }))
-    if (isProduction) {
-      // 代码压缩
-      config.plugins.push(
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            //生产环境自动删除console
-            warnings: false, // 若打包错误，则注释这行
-            compress: {
-              drop_debugger: true,
-              drop_console: true,
-              pure_funcs: ['console.log']
-            }
-          },
-          sourceMap: false,
-          parallel: true
-        })
-      )
-      // GZIP压缩
-      // const productionGzipExtensions = ['html', 'js', 'css']
-      // config.plugins.push(
-      //   new CompressionWebpackPlugin({
-      //     filename: '[path].gz[query]',
-      //     algorithm: 'gzip',
-      //     test: new RegExp(
-      //       '\\.(' + productionGzipExtensions.join('|') + ')$'
-      //     ),
-      //     threshold: 10240, // 只有大小大于该值的资源会被处理 10240
-      //     minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
-      //     deleteOriginalAssets: true // 不删除原文件
-      //   })
-      // )
-    
-    }
   },
   // eslint开启
   lintOnSave: !isProduction,
@@ -91,12 +85,3 @@ module.exports = {
     port: 8001,
   }
 };
-
-function addStyleResource(rule) {
-  rule
-    .use("style-resource")
-    .loader("style-resources-loader")
-    .options({
-      patterns: [path.resolve(__dirname, "./src/styles/imports.styl")],
-    });
-}

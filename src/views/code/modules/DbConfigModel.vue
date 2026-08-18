@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref, unref, reactive, toRaw, defineExpose, defineEmits } from "vue";
+import { ref, unref, reactive, toRaw } from "vue";
 import { postAction } from "@/api/manage";
 
 const emit = defineEmits(["refresh"]);
