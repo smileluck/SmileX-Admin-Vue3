@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="smilex-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B9D"/>
+      <stop offset="100%" stop-color="#B565D8"/>
+    </linearGradient>
+    <radialGradient id="smilex-glow" cx="28%" cy="22%" r="85%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.22"/>
+      <stop offset="55%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 渐变圆角徽章 -->
+  <rect width="512" height="512" rx="116" fill="url(#smilex-bg)"/>
+  <rect width="512" height="512" rx="116" fill="url(#smilex-glow)"/>
+
+  <!-- 主星芒（X）：四角星，顶部右侧 -->
+  <path
+    d="M396 78 Q396 128 446 128 Q396 128 396 178 Q396 128 346 128 Q396 128 396 78 Z"
+    fill="#FFFFFF" opacity="0.95"/>
+
+  <!-- 副星芒：左下角小星，呼应星空 -->
+  <path
+    d="M124 352 Q124 374 146 374 Q124 374 124 396 Q124 374 102 374 Q124 374 124 352 Z"
+    fill="#FFFFFF" opacity="0.5"/>
+
+  <!-- 眼睛 -->
+  <circle cx="178" cy="208" r="27" fill="#FFFFFF"/>
+  <circle cx="334" cy="208" r="27" fill="#FFFFFF"/>
+
+  <!-- 微笑 -->
+  <path
+    d="M150 286 Q256 398 362 286"
+    fill="none" stroke="#FFFFFF" stroke-width="34" stroke-linecap="round"/>
+</svg>
