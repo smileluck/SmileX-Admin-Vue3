@@ -61,7 +61,7 @@
           </el-form-item>
         </el-form>
       </div>
-      <p class="login-footer">Copyright © {{ year }} SmileX</p>
+      <p class="login-footer">Copyright © {{ year }} SmileX-Admin</p>
     </div>
   </div>
 </template>

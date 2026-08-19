@@ -25,6 +25,12 @@ module.exports = {
     // 改用 sha256 从根源规避
     config.output.hashFunction("sha256");
 
+    // 统一站点标题（html-webpack-plugin 默认取 package.json 的 name）
+    config.plugin("html").tap((args) => {
+      args[0].title = "SmileX-Admin";
+      return args;
+    });
+
     // cli-plugin-eslint 会给 eslint-webpack-plugin 传入 eslint 9+ 已移除的
     // extensions 选项（报 Invalid Options: Unknown options: extensions），
     // 在此剥离
