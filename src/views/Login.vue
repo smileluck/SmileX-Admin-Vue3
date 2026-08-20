@@ -54,6 +54,11 @@
               </div>
             </div>
           </el-form-item>
+          <el-form-item class="remember-item">
+            <div class="remember-row">
+              <el-checkbox v-model="rememberMe" size="large">记住密码</el-checkbox>
+            </div>
+          </el-form-item>
           <el-form-item>
             <el-button class="login-btn" size="large" :loading="loading" @click="onSubmit">
               登 录
@@ -88,6 +93,50 @@ const form = reactive({
   captchaCode: "",
 });
 
+// ==================== 记住密码 ====================
+// localStorage 持久化，密码仅 base64 混淆（防肩窥，非加密），
+// 勾选状态下登录成功才保存；取消勾选后登录成功即清除
+const REMEMBER_KEY = "store_login_remember";
+const rememberMe = ref(false);
+
+const encodeText = (text) => {
+  try {
+    return btoa(unescape(encodeURIComponent(text)));
+  } catch (e) {
+    return "";
+  }
+};
+const decodeText = (text) => {
+  try {
+    return decodeURIComponent(escape(atob(text)));
+  } catch (e) {
+    return "";
+  }
+};
+
+// 进入页面回填已记住的账号密码
+const savedLogin = JSON.parse(localStorage.getItem(REMEMBER_KEY) || "null");
+if (savedLogin) {
+  form.username = savedLogin.username || "";
+  form.password = decodeText(savedLogin.password || "");
+  rememberMe.value = !!(savedLogin.username && savedLogin.password);
+}
+
+const saveOrClearRemember = () => {
+  if (rememberMe.value) {
+    localStorage.setItem(
+      REMEMBER_KEY,
+      JSON.stringify({
+        username: form.username,
+        password: encodeText(form.password),
+      })
+    );
+  } else {
+    localStorage.removeItem(REMEMBER_KEY);
+  }
+};
+// ================================================
+
 const captchaKey = ref(
   new Date().getTime().toString() + "" + Math.random().toString(36).slice(-6)
 );
@@ -106,6 +155,7 @@ const onSubmit = () => {
       })
         .then((res) => {
           if (res.success) {
+            saveOrClearRemember();
             userStore.login(res.data);
             router.push({
               path: "/",
@@ -306,6 +356,21 @@ captchaGet();
   height: 100%;
   object-fit: fill;
   display: block;
+}
+
+// 记住密码行：贴近登录按钮，弱化留白
+.remember-item {
+  margin-bottom: 10px;
+}
+
+.remember-row {
+  display: flex;
+  align-items: center;
+
+  :deep(.el-checkbox__label) {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
+  }
 }
 
 .captcha-holder {

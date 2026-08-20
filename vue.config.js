@@ -89,6 +89,15 @@ module.exports = {
   // 开发配置
   devServer: {
     port: 8001,
+    // 本地开发代理：浏览器同源请求 /sys/** → 后端 /sys/sys/**
+    // 后端 context-path 为 /sys，Controller 内部路径又带 /sys 前缀，实际是双前缀
+    proxy: {
+      "/sys": {
+        target: "http://localhost:8081",
+        changeOrigin: true,
+        pathRewrite: { "^/sys": "/sys/sys" },
+      },
+    },
     client: {
       overlay: {
         // 编译错误仍全屏提示；警告与运行时错误（如后端未启动时的

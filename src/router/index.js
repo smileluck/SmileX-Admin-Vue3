@@ -46,7 +46,10 @@ const baseRouters = [
       // console.debug("to:", to, ",from:", from)
       const userStore = useUserStore();
       if (!userStore.isLogin()) {
-        next({ path: '/login' })
+        // 重定向后必须 return，否则 next() 被调用两次，
+        // vue-router 会报 "next was called more than once"
+        next({ path: '/login' });
+        return;
       }
       next();
     }
