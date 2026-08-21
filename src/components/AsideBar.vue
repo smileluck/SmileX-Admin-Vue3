@@ -1,6 +1,9 @@
 <template>
   <div class="base-aside">
-    <div class="base-aside-logo">SmileX-Admin</div>
+    <div class="base-aside-logo">
+      <div class="logo-glow"></div>
+      <span class="logo-text">SmileX-Admin</span>
+    </div>
     <div class="base-aside-menu">
       <el-menu
         :default-active="activeNum"
@@ -8,6 +11,9 @@
         unique-opened
         router
         ref="menuRef"
+        background-color="#001529"
+        text-color="rgba(255, 255, 255, 0.65)"
+        active-text-color="#ffffff"
       >
         <el-menu-item index="/home">
           <span>首页</span>
@@ -15,18 +21,6 @@
         <el-menu-item index="/codeGen">
           <span>代码生成器</span>
         </el-menu-item>
-        <!-- <el-sub-menu
-          v-for="item in menus"
-          :key="item.id"
-          :index="item.routeUrl"
-        >
-          <template #title>{{ item.menuName }}</template>
-          <aside-bar-sub-menu
-            v-for="(item2, index2) in item.children"
-            :menu="item2"
-            :key="index2"
-          ></aside-bar-sub-menu>
-        </el-sub-menu> -->
         <aside-bar-sub-menu
           v-for="item in menus"
           :key="item.id"
@@ -46,11 +40,11 @@ import { useUserStore } from "@/store/modules/user";
 
 const router = useRouter();
 const userStore = useUserStore();
+
 const activeNum = ref("/home");
 const menuRef = ref();
 
 const menus = userStore.getShowMenus;
-console.log(menus);
 activeNum.value = router.currentRoute.value.path;
 </script>
 
@@ -60,20 +54,109 @@ activeNum.value = router.currentRoute.value.path;
   height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #001529;
+
   &-logo {
+    position: relative;
     flex: 0 0 60px;
     height: 60px;
-    text-align: center;
-    line-height: 60px;
-    color: #fff;
-    background-color: #1890ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0a1f4d 0%, #122a6b 50%, #2f6bff 130%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    // 科技感光斑
+    .logo-glow {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      right: -40px;
+      top: -60px;
+      background: radial-gradient(
+        circle,
+        rgba(92, 140, 255, 0.4) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .logo-text {
+      position: relative;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 0 14px rgba(92, 140, 255, 0.55);
+      white-space: nowrap;
+    }
   }
+
   &-menu {
     height: 100%;
-    background-color: #fff;
-    // border-right: 1px solid #d1d1d1;
+    background-color: #001529;
+    overflow-y: auto;
+    overflow-x: hidden;
+
     .menu {
       height: 100%;
+      border-right: none;
+      padding: 8px;
+
+      // 菜单项统一圆角胶囊
+      :deep(.el-menu-item),
+      :deep(.el-sub-menu__title) {
+        height: 44px;
+        line-height: 44px;
+        border-radius: 8px;
+        margin-bottom: 2px;
+        transition: all 0.25s;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.06) !important;
+          color: #fff !important;
+        }
+      }
+
+      :deep(.el-menu-item.is-active) {
+        background: linear-gradient(
+          90deg,
+          rgba(47, 107, 255, 0.9) 0%,
+          rgba(47, 107, 255, 0.55) 100%
+      ) !important;
+        box-shadow: 0 2px 8px rgba(47, 107, 255, 0.35);
+
+        // 左侧指示条
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 3px;
+          height: 18px;
+          border-radius: 2px;
+          background: #fff;
+        }
+      }
+
+      // 子菜单展开区域
+      :deep(.el-menu .el-menu-item) {
+        background-color: #000c1a !important;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        &.is-active {
+          background: linear-gradient(
+            90deg,
+            rgba(47, 107, 255, 0.85) 0%,
+            rgba(47, 107, 255, 0.5) 100%
+          ) !important;
+        }
+      }
     }
   }
 }

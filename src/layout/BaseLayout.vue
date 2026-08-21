@@ -8,10 +8,9 @@
         <header-bar></header-bar>
       </header>
       <main class="layout-main">
-        <!-- <scroll-bar-nav></scroll-bar-nav> -->
-        <el-card class="box-card">
+        <div class="main-container">
           <router-view />
-        </el-card>
+        </div>
       </main>
     </section>
   </section>
@@ -19,7 +18,6 @@
 
 <script setup>
 import { watch, ref } from "vue";
-// import ScrollBarNav from "@/components/ScrollBarNav.vue";
 import AsideBar from "@/components/AsideBar.vue";
 import { useCommonStore } from "@/store/modules/common";
 import HeaderBar from "@/components/HeaderBar.vue";
@@ -30,8 +28,7 @@ watch(
   () => {
     return commonStore.getExpandAside;
   },
-  (newVal, oldVal) => {
-    console.log(newVal, oldVal);
+  (newVal) => {
     expandAside.value = newVal;
   }
 );
@@ -47,41 +44,56 @@ watch(
   flex: auto;
   overflow-x: hidden;
   &-aside {
-    width: 200px;
+    flex: 0 0 220px;
+    max-width: 220px;
+    min-width: 220px;
+    width: 220px;
     height: 100%;
-    flex: 0 0 200px;
-    max-width: 200px;
-    min-width: 200px;
-    width: 200px;
     transition: all 0.3s;
     &-hide {
       width: 0;
       flex: 0 0 0px;
       min-width: 0;
+      overflow: hidden;
     }
   }
   &-header {
     flex: 0 0 60px;
     height: 60px;
     width: 100%;
-    background-color: #1890ff;
+    background-color: #fff;
+    border-bottom: 1px solid #eef1f6;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
+    position: relative;
+    z-index: 10;
   }
   &-main {
-    background: #f6f6f6;
+    background: #f0f2f5;
     width: 100%;
     height: 100%;
     overflow: auto;
-    display: flex;
-    flex-direction: column;
   }
 }
 .layout_vertical {
   flex-direction: column;
   flex: auto;
+  min-width: 0;
 }
-.box-card {
-  margin: 10px;
-  height: 100%;
+.main-container {
+  margin: 16px;
+  height: calc(100% - 32px);
+  // 所有页面的白色内容面板
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+  padding: 20px;
   overflow-y: auto;
+
+  // 内容区若使用 el-card，统一卡片观感
+  :deep(.el-card) {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+  }
 }
 </style>

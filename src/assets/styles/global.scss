@@ -7,8 +7,7 @@ html {
 
 body {
   line-height: 1.5;
-  font-size: 16px;
-  // font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+  font-size: 14px;
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   width: 100vw;
@@ -18,78 +17,249 @@ body {
   overflow-x: hidden;
   overflow-y: auto !important;
 }
+
+// ==================== Element Plus 深度主题（Arco/Ant 级观感） ====================
+:root {
+  // ---- 主色（科技蓝）与色阶 ----
+  --el-color-primary: #2f6bff;
+  --el-color-primary-light-1: #4a80ff;
+  --el-color-primary-light-2: #6594ff;
+  --el-color-primary-light-3: #80a8ff;
+  --el-color-primary-light-4: #9bbcff;
+  --el-color-primary-light-5: #b6cfff;
+  --el-color-primary-light-6: #d1e3ff;
+  --el-color-primary-light-7: #e4eeff;
+  --el-color-primary-light-8: #f0f5ff;
+  --el-color-primary-light-9: #f6f9ff;
+  --el-color-primary-dark-2: #1f4ecc;
+
+  // ---- 中性色（更冷的灰阶） ----
+  --el-text-color-primary: #1d2129;
+  --el-text-color-regular: #4e5969;
+  --el-text-color-secondary: #86909c;
+  --el-text-color-placeholder: #a9aeb8;
+  --el-text-color-disabled: #c9cdd4;
+  --el-border-color: #e5e6eb;
+  --el-border-color-light: #f2f3f5;
+  --el-border-color-lighter: #f7f8fa;
+  --el-fill-color-light: #f7f8fa;
+
+  // ---- 几何：现代组件普遍 6px 圆角 ----
+  --el-border-radius-base: 6px;
+  --el-border-radius-small: 4px;
+  --el-border-radius-round: 16px;
+
+  // ---- 字号体系 ----
+  --el-font-size-base: 14px;
+  --el-font-size-small: 13px;
+  --el-font-size-extra-small: 12px;
+
+  // ---- 焦点环：细 + 主色 ----
+  --el-component-size: 36px;
+  --el-component-size-small: 32px;
+
+  // ---- 按钮字重：Arco 风格 500 而非 EP 默认 600 ----
+  --el-button-font-weight: 500;
+}
+
+// ---- 按钮：去掉 EP 默认的“重”感 ----
+.el-button {
+  transition: all 0.2s;
+
+  &:focus-visible {
+    outline: 2px solid var(--el-color-primary-light-4);
+    outline-offset: 1px;
+  }
+}
+
+.el-button--primary {
+  --el-button-bg-color: var(--el-color-primary);
+  box-shadow: 0 2px 4px rgba(47, 107, 255, 0.15);
+
+  &:hover {
+    box-shadow: 0 4px 10px rgba(47, 107, 255, 0.25);
+  }
+
+  &.is-link,
+  &.is-text {
+    box-shadow: none;
+  }
+}
+
+// ---- 输入类：统一聚焦环 ----
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select__wrapper {
+  transition: box-shadow 0.2s;
+}
+
+// ---- 表单标签 ----
+.el-form-item__label {
+  font-weight: 500;
+  color: var(--el-text-color-regular);
+}
+
+// ---- 下拉/弹层：圆角 + 阴影 + 呼吸边距 ----
+.el-popper.is-light {
+  border-radius: 8px;
+  border-color: transparent;
+  box-shadow: 0 6px 16px rgba(29, 33, 41, 0.08), 0 2px 4px rgba(29, 33, 41, 0.04);
+}
+
+.el-dropdown-menu {
+  padding: 4px !important;
+
+  .el-dropdown-menu__item {
+    border-radius: 6px;
+    line-height: 30px;
+    padding: 0 12px;
+    transition: all 0.15s;
+  }
+}
+
+// ---- 标签：圆角胶囊 + 字重 ----
+.el-tag {
+  font-weight: 500;
+  border-radius: var(--el-border-radius-base);
+}
+
+// ---- 复选/单选/开关主色自动跟随 ----
+.el-switch.is-checked .el-switch__core {
+  box-shadow: 0 2px 6px rgba(47, 107, 255, 0.3);
+}
+
 .wrapper {
   width: 100%;
   position: relative;
   height: 100vh;
 }
+
+// ==================== 滚动条 ====================
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 10px #f8f8f8;
   border-radius: 10px;
-  background: #f8f8f8;
+  background: transparent;
 }
 ::-webkit-scrollbar-track-piece {
-  //滚动条凹槽的颜色，还可以设置边框属性
-  background-color: #f8f8f8;
+  background-color: transparent;
 }
 ::-webkit-scrollbar {
-  //滚动条的宽度
   width: 6px;
   height: 6px;
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  //滚动条的设置
-  background-color: #dddddd;
+  background-color: #c9d2e0;
   background-clip: padding-box;
   min-height: 28px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: #bbb;
+
+  &:hover {
+    background-color: #a8b4c6;
+  }
 }
 
+// ==================== 表格页通用类 ====================
 .table-card {
   width: 100%;
   height: 100%;
   text-align: left;
   position: relative;
-  //   overflow-y: auto;
   &-pagination {
-    margin-top: 20px;
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 
+// 搜索区：浅灰面板 + 底部分隔线
 .table-search {
   display: block;
   width: 100%;
-  margin: 8px 0;
+  margin: 0 0 4px;
+  padding: 16px 16px 4px;
   overflow: hidden;
+  background: #f7f9fc;
+  border-radius: 8px;
+
+  :deep(.el-form-item) {
+    margin-bottom: 12px;
+    margin-right: 0;
+  }
+
+  :deep(.el-form-item__label) {
+    color: #4b5563;
+    font-weight: 500;
+  }
 }
 .table-operate {
   display: block;
   width: 100%;
-  margin: 10px 0;
+  margin: 14px 0 12px;
   overflow: hidden;
 }
 .table-selection {
-  border: 1px solid #409eff;
-  background: #b7e8ff;
-  // width: 100%;
+  border: 1px solid var(--el-color-primary-light-5);
+  background: var(--el-color-primary-light-8);
   padding: 6px 14px;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   margin-bottom: 10px;
   & > .selection-span {
     text-align: left;
     & > a {
-      color: #409eff;
+      color: var(--el-color-primary);
+      font-weight: 600;
     }
   }
   & > .selection-operate {
     margin-left: 10px;
-    color: #409eff;
+    color: var(--el-color-primary);
     cursor: pointer;
+
+    &:hover {
+      color: var(--el-color-primary-dark-2);
+    }
+  }
+}
+
+// ==================== Element Plus 表格质感 ====================
+.el-table {
+  // 圆角边框 + 更柔和的分割线
+  --el-table-border-color: #edf0f5;
+  --el-table-header-bg-color: #f7f9fc;
+  --el-table-row-hover-bg-color: #f6f9ff;
+  border-radius: 8px;
+
+  .el-table__header {
+    th {
+      color: #4b5563;
+      font-weight: 600;
+    }
+  }
+
+  // 操作列按钮间距
+  .el-table__fixed-right .el-button + .el-button {
+    margin-left: 12px;
+  }
+}
+
+// 弹窗表单（各 *Model.vue）统一观感
+.el-dialog {
+  border-radius: 12px;
+
+  .el-dialog__header {
+    padding: 18px 24px 12px;
+    margin-right: 0;
+    border-bottom: 1px solid #f0f2f5;
+
+    .el-dialog__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 20px 24px;
   }
 }

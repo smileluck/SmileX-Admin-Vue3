@@ -1,6 +1,10 @@
 <template>
   <div class="wrapper">
     <div class="login">
+      <!-- 装饰层：科技感网格 + 光斑 -->
+      <div class="deco-grid"></div>
+      <div class="deco-glow deco-glow-1"></div>
+      <div class="deco-glow deco-glow-2"></div>
       <div class="login-card">
         <div class="login-header">
           <img class="login-logo" src="../assets/logo.svg" alt="logo" />
@@ -225,24 +229,49 @@ captchaGet();
 
 <style lang="scss" scoped>
 .login {
-  background: url("../assets/images/login-bg.jpg") center center / cover no-repeat;
+  background: linear-gradient(135deg, #050b24 0%, #0a1f4d 45%, #122a6b 100%);
   width: 100%;
   height: 100%;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
 
-  // 深色遮罩，压暗背景、突出卡片
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      ellipse at center,
-      rgba(10, 14, 38, 0.2) 0%,
-      rgba(8, 10, 30, 0.55) 100%
-    );
+// 科技感网格
+.deco-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(92, 140, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(92, 140, 255, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  pointer-events: none;
+}
+
+// 光斑
+.deco-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+
+  &-1 {
+    width: 420px;
+    height: 420px;
+    left: -120px;
+    top: -140px;
+    background: rgba(47, 107, 255, 0.28);
+  }
+
+  &-2 {
+    width: 360px;
+    height: 360px;
+    right: -100px;
+    bottom: -120px;
+    background: rgba(99, 91, 255, 0.22);
   }
 }
 
@@ -274,7 +303,7 @@ captchaGet();
     }
 
     &.is-focus {
-      box-shadow: 0 0 0 1px #ff7bac inset;
+      box-shadow: 0 0 0 1px #5c8cff inset;
     }
   }
 
@@ -292,7 +321,7 @@ captchaGet();
   }
 
   :deep(.el-form-item__error) {
-    color: #ffb3c8;
+    color: #9bc0ff;
   }
 }
 
@@ -347,7 +376,7 @@ captchaGet();
 
   &:hover {
     border-color: rgba(255, 255, 255, 0.45);
-    box-shadow: 0 0 0 2px rgba(255, 123, 172, 0.25);
+    box-shadow: 0 0 0 2px rgba(92, 140, 255, 0.35);
   }
 }
 
@@ -393,15 +422,15 @@ captchaGet();
   letter-spacing: 8px;
   text-indent: 8px;
   color: #fff;
-  background: linear-gradient(135deg, #ff6b9d 0%, #b565d8 100%);
-  box-shadow: 0 8px 20px rgba(255, 107, 157, 0.35);
+  background: linear-gradient(135deg, #2f6bff 0%, #635bff 100%);
+  box-shadow: 0 8px 20px rgba(47, 107, 255, 0.4);
   transition: all 0.3s;
 
   &:hover,
   &:focus {
     color: #fff;
-    background: linear-gradient(135deg, #ff85ad 0%, #c47ae0 100%);
-    box-shadow: 0 10px 24px rgba(255, 107, 157, 0.45);
+    background: linear-gradient(135deg, #4a80ff 0%, #7a72ff 100%);
+    box-shadow: 0 10px 26px rgba(47, 107, 255, 0.55);
     transform: translateY(-1px);
   }
 

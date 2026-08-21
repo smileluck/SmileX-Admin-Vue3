@@ -89,6 +89,8 @@ module.exports = {
   // 开发配置
   devServer: {
     port: 8001,
+    // history 路由回退：直接访问/刷新 /login 等路径时返回 index.html
+    historyApiFallback: true,
     // 本地开发代理：浏览器同源请求 /sys/** → 后端 /sys/sys/**
     // 后端 context-path 为 /sys，Controller 内部路径又带 /sys 前缀，实际是双前缀
     proxy: {

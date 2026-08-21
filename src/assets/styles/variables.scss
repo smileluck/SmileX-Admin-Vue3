@@ -1,4 +1,26 @@
-$S-Box-Shadow: 0 3px 10px rgb(143, 143, 143);
-$S-Box-Shadow-Hover: 0 3px 15px rgb(87, 87, 87);
+// ==================== SmileX 设计令牌（深色科技风） ====================
+// 阴影
+$S-Box-Shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+$S-Box-Shadow-Hover: 0 4px 16px rgba(15, 23, 42, 0.12);
 $S-Box-Border-Radius: 8px;
 $S-Box-Padding: 20px 20px;
+
+// 主色（科技蓝）
+$S-Color-Primary: #2f6bff;
+$S-Color-Primary-Light: #5c8cff;
+$S-Color-Primary-Dark: #1f4ecc;
+
+// 布局色
+$S-Aside-Bg: #001529; // 侧边栏深蓝黑
+$S-Aside-Bg-Dark: #000c1a; // 侧边栏更深一层（子菜单/hover）
+$S-Header-Bg: #ffffff; // 顶栏白色
+$S-Main-Bg: #f0f2f5; // 主内容区浅灰
+
+// 文字层级
+$S-Text-Main: #1f2937;
+$S-Text-Regular: #4b5563;
+$S-Text-Secondary: #8a94a6;
+$S-Text-Placeholder: #b0b8c7;
+
+// 边框
+$S-Border-Color: #e5e9f0;
