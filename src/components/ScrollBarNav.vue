@@ -45,7 +45,7 @@ const clickItemHandler = (key) => {
     cursor: pointer;
     margin: 0 5px 0 0;
     &_active {
-      border-bottom: 2px solid #1890ff;
+      border-bottom: 2px solid $S-Color-Primary;
     }
   }
   &-scroll {

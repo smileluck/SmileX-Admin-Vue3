@@ -119,21 +119,21 @@ const dateText = new Date().toLocaleDateString("zh-CN", {
 
 // 静态占位数据，后续可替换为真实接口
 const stats = [
-  { title: "用户总数", value: 128, path: "/sys/user", icon: User, color: "#2f6bff", bg: "rgba(47,107,255,0.1)" },
-  { title: "文章总数", value: 36, path: "/blog/article", icon: Document, color: "#00b578", bg: "rgba(0,181,120,0.1)" },
-  { title: "今日访问", value: 1024, path: "/home", icon: Monitor, color: "#ff8f1f", bg: "rgba(255,143,31,0.1)" },
-  { title: "系统日志", value: 3256, path: "/sys/log", icon: Tickets, color: "#635bff", bg: "rgba(99,91,255,0.1)" },
+  { title: "用户总数", value: 128, path: "/sys/user", icon: User, color: "#4b8ef1", bg: "rgba(75,142,241,0.1)" },
+  { title: "文章总数", value: 36, path: "/blog/article", icon: Document, color: "#16a34a", bg: "rgba(22,163,74,0.1)" },
+  { title: "今日访问", value: 1024, path: "/home", icon: Monitor, color: "#f59e0b", bg: "rgba(245,158,11,0.1)" },
+  { title: "系统日志", value: 3256, path: "/sys/log", icon: Tickets, color: "#7c6cf0", bg: "rgba(124,108,240,0.1)" },
 ];
 
 const shortcuts = [
-  { title: "用户管理", path: "/sys/user", icon: User, color: "#2f6bff", bg: "rgba(47,107,255,0.1)" },
-  { title: "角色管理", path: "/sys/role", icon: "User", color: "#00b578", bg: "rgba(0,181,120,0.1)" },
-  { title: "菜单管理", path: "/sys/menu", icon: Menu, color: "#ff8f1f", bg: "rgba(255,143,31,0.1)" },
-  { title: "部门管理", path: "/sys/dept", icon: "Setting", color: "#635bff", bg: "rgba(99,91,255,0.1)" },
-  { title: "系统配置", path: "/sys/config", icon: "Setting", color: "#e0407d", bg: "rgba(224,64,125,0.1)" },
-  { title: "系统日志", path: "/sys/log", icon: "Tickets", color: "#00b578", bg: "rgba(0,181,120,0.1)" },
-  { title: "代码生成", path: "/codeGen", icon: Cpu, color: "#2f6bff", bg: "rgba(47,107,255,0.1)" },
-  { title: "数据字典", path: "/sys/dict", icon: "Menu", color: "#ff8f1f", bg: "rgba(255,143,31,0.1)" },
+  { title: "用户管理", path: "/sys/user", icon: User, color: "#4b8ef1", bg: "rgba(75,142,241,0.1)" },
+  { title: "角色管理", path: "/sys/role", icon: "User", color: "#16a34a", bg: "rgba(22,163,74,0.1)" },
+  { title: "菜单管理", path: "/sys/menu", icon: Menu, color: "#f59e0b", bg: "rgba(245,158,11,0.1)" },
+  { title: "部门管理", path: "/sys/dept", icon: "Setting", color: "#7c6cf0", bg: "rgba(124,108,240,0.1)" },
+  { title: "系统配置", path: "/sys/config", icon: "Setting", color: "#ec4899", bg: "rgba(236,72,153,0.1)" },
+  { title: "系统日志", path: "/sys/log", icon: "Tickets", color: "#0ea5e9", bg: "rgba(14,165,233,0.1)" },
+  { title: "代码生成", path: "/codeGen", icon: Cpu, color: "#4b8ef1", bg: "rgba(75,142,241,0.1)" },
+  { title: "数据字典", path: "/sys/dict", icon: "Menu", color: "#f59e0b", bg: "rgba(245,158,11,0.1)" },
 ];
 </script>
 
@@ -162,7 +162,12 @@ const shortcuts = [
   justify-content: space-between;
   padding: 28px 32px;
   color: #fff;
-  background: linear-gradient(120deg, #0a1f4d 0%, #1a3a8f 55%, #2f6bff 120%);
+  background: linear-gradient(
+    120deg,
+    $S-Brand-Dark-5 0%,
+    $S-Brand-Dark-4 55%,
+    $S-Color-Primary 120%
+  );
   overflow: hidden;
 
   .welcome-glow {
@@ -172,7 +177,7 @@ const shortcuts = [
     right: 60px;
     top: -150px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(92, 140, 255, 0.45) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba($S-Color-Primary, 0.45) 0%, transparent 70%);
     pointer-events: none;
   }
 }
@@ -215,7 +220,7 @@ const shortcuts = [
 }
 
 .stat-card {
-  border: 1px solid #f0f2f5;
+  border: 1px solid $S-Border-Color-Light;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.25s;
@@ -243,12 +248,12 @@ const shortcuts = [
 
 .stat-title {
   font-size: 13px;
-  color: #8a94a6;
+  color: $S-Text-Secondary;
 }
 
 // ==================== 快捷入口 ====================
 .shortcut-card {
-  border: 1px solid #f0f2f5;
+  border: 1px solid $S-Border-Color-Light;
   border-radius: 12px;
 
   .card-header {
@@ -257,7 +262,7 @@ const shortcuts = [
     justify-content: space-between;
     font-size: 15px;
     font-weight: 600;
-    color: #1f2937;
+    color: $S-Text-Main;
 
     .el-link .el-icon {
       margin-left: 2px;
@@ -280,7 +285,7 @@ const shortcuts = [
   transition: all 0.25s;
 
   &:hover {
-    background: #f6f9ff;
+    background: var(--el-color-primary-light-9);
     transform: translateY(-2px);
   }
 
@@ -291,6 +296,6 @@ const shortcuts = [
 
 .shortcut-title {
   font-size: 13px;
-  color: #4b5563;
+  color: $S-Text-Regular;
 }
 </style>

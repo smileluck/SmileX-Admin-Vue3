@@ -5,16 +5,7 @@
       <span class="logo-text">SmileX-Admin</span>
     </div>
     <div class="base-aside-menu">
-      <el-menu
-        :default-active="activeNum"
-        class="menu"
-        unique-opened
-        router
-        ref="menuRef"
-        background-color="#001529"
-        text-color="rgba(255, 255, 255, 0.65)"
-        active-text-color="#ffffff"
-      >
+      <el-menu :default-active="activeNum" class="menu" unique-opened router ref="menuRef">
         <el-menu-item index="/home">
           <span>首页</span>
         </el-menu-item>
@@ -54,7 +45,7 @@ activeNum.value = router.currentRoute.value.path;
   height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #001529;
+  background-color: $S-Aside-Bg;
 
   &-logo {
     position: relative;
@@ -64,7 +55,12 @@ activeNum.value = router.currentRoute.value.path;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background: linear-gradient(135deg, #0a1f4d 0%, #122a6b 50%, #2f6bff 130%);
+    background: linear-gradient(
+      135deg,
+      $S-Brand-Dark-5 0%,
+      $S-Brand-Dark-4 50%,
+      $S-Color-Primary 130%
+    );
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 
     // 科技感光斑
@@ -76,7 +72,7 @@ activeNum.value = router.currentRoute.value.path;
       top: -60px;
       background: radial-gradient(
         circle,
-        rgba(92, 140, 255, 0.4) 0%,
+        rgba($S-Color-Primary, 0.4) 0%,
         transparent 70%
       );
       pointer-events: none;
@@ -88,14 +84,14 @@ activeNum.value = router.currentRoute.value.path;
       font-weight: 700;
       letter-spacing: 2px;
       color: #fff;
-      text-shadow: 0 0 14px rgba(92, 140, 255, 0.55);
+      text-shadow: 0 0 14px rgba($S-Color-Primary, 0.55);
       white-space: nowrap;
     }
   }
 
   &-menu {
     height: 100%;
-    background-color: #001529;
+    background-color: $S-Aside-Bg;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -103,6 +99,12 @@ activeNum.value = router.currentRoute.value.path;
       height: 100%;
       border-right: none;
       padding: 8px;
+      background-color: transparent;
+      // el-menu 主题色统一走变量，不再用字符串属性硬编码
+      --el-menu-bg-color: transparent;
+      --el-menu-text-color: rgba(255, 255, 255, 0.65);
+      --el-menu-active-color: #ffffff;
+      --el-menu-hover-bg-color: transparent;
 
       // 菜单项统一圆角胶囊
       :deep(.el-menu-item),
@@ -122,10 +124,10 @@ activeNum.value = router.currentRoute.value.path;
       :deep(.el-menu-item.is-active) {
         background: linear-gradient(
           90deg,
-          rgba(47, 107, 255, 0.9) 0%,
-          rgba(47, 107, 255, 0.55) 100%
-      ) !important;
-        box-shadow: 0 2px 8px rgba(47, 107, 255, 0.35);
+          rgba($S-Color-Primary, 0.9) 0%,
+          rgba($S-Color-Primary, 0.55) 100%
+        ) !important;
+        box-shadow: 0 2px 8px rgba($S-Color-Primary, 0.35);
 
         // 左侧指示条
         &::before {
@@ -143,7 +145,7 @@ activeNum.value = router.currentRoute.value.path;
 
       // 子菜单展开区域
       :deep(.el-menu .el-menu-item) {
-        background-color: #000c1a !important;
+        background-color: $S-Aside-Bg-Dark !important;
 
         &:hover {
           background-color: rgba(255, 255, 255, 0.06) !important;
@@ -152,8 +154,8 @@ activeNum.value = router.currentRoute.value.path;
         &.is-active {
           background: linear-gradient(
             90deg,
-            rgba(47, 107, 255, 0.85) 0%,
-            rgba(47, 107, 255, 0.5) 100%
+            rgba($S-Color-Primary, 0.85) 0%,
+            rgba($S-Color-Primary, 0.5) 100%
           ) !important;
         }
       }

@@ -1,3 +1,16 @@
+@use "sass:color";
+
+// ==================== soybean 式色阶派生 ====================
+// 语义色 base → light-1~9（向白逐级混合）+ dark-2（向黑加深 20%），
+// 与 Element Plus 的变量消费方式对齐，换主色只需改 variables.scss 一处。
+@mixin s-palette($name, $base) {
+  --el-color-#{$name}: #{$base};
+  @for $i from 1 through 9 {
+    --el-color-#{$name}-light-#{$i}: #{color.mix(#ffffff, $base, $i * 10%)};
+  }
+  --el-color-#{$name}-dark-2: #{color.mix(#000000, $base, 20%)};
+}
+
 html {
   position: relative;
   // 抗锯齿渲染
@@ -18,31 +31,25 @@ body {
   overflow-y: auto !important;
 }
 
-// ==================== Element Plus 深度主题（Arco/Ant 级观感） ====================
+// ==================== Element Plus 深度主题（soybean 色板派生） ====================
 :root {
-  // ---- 主色（科技蓝）与色阶 ----
-  --el-color-primary: #2f6bff;
-  --el-color-primary-light-1: #4a80ff;
-  --el-color-primary-light-2: #6594ff;
-  --el-color-primary-light-3: #80a8ff;
-  --el-color-primary-light-4: #9bbcff;
-  --el-color-primary-light-5: #b6cfff;
-  --el-color-primary-light-6: #d1e3ff;
-  --el-color-primary-light-7: #e4eeff;
-  --el-color-primary-light-8: #f0f5ff;
-  --el-color-primary-light-9: #f6f9ff;
-  --el-color-primary-dark-2: #1f4ecc;
+  @include s-palette(primary, $S-Color-Primary);
+  @include s-palette(success, $S-Color-Success);
+  @include s-palette(warning, $S-Color-Warning);
+  @include s-palette(danger, $S-Color-Error);
+  @include s-palette(error, $S-Color-Error);
+  @include s-palette(info, $S-Color-Info);
 
-  // ---- 中性色（更冷的灰阶） ----
-  --el-text-color-primary: #1d2129;
-  --el-text-color-regular: #4e5969;
-  --el-text-color-secondary: #86909c;
-  --el-text-color-placeholder: #a9aeb8;
+  // ---- 中性色（Arco/soybean 灰阶） ----
+  --el-text-color-primary: #{$S-Text-Main};
+  --el-text-color-regular: #{$S-Text-Regular};
+  --el-text-color-secondary: #{$S-Text-Secondary};
+  --el-text-color-placeholder: #{$S-Text-Placeholder};
   --el-text-color-disabled: #c9cdd4;
-  --el-border-color: #e5e6eb;
-  --el-border-color-light: #f2f3f5;
-  --el-border-color-lighter: #f7f8fa;
-  --el-fill-color-light: #f7f8fa;
+  --el-border-color: #{$S-Border-Color};
+  --el-border-color-light: #{$S-Border-Color-Light};
+  --el-border-color-lighter: #{$S-Fill-Color-Light};
+  --el-fill-color-light: #{$S-Fill-Color-Light};
 
   // ---- 几何：现代组件普遍 6px 圆角 ----
   --el-border-radius-base: 6px;
@@ -58,7 +65,7 @@ body {
   --el-component-size: 36px;
   --el-component-size-small: 32px;
 
-  // ---- 按钮字重：Arco 风格 500 而非 EP 默认 600 ----
+  // ---- 按钮字重：500 而非 EP 默认 600 ----
   --el-button-font-weight: 500;
 }
 
@@ -74,10 +81,10 @@ body {
 
 .el-button--primary {
   --el-button-bg-color: var(--el-color-primary);
-  box-shadow: 0 2px 4px rgba(47, 107, 255, 0.15);
+  box-shadow: 0 2px 4px rgba(75, 142, 241, 0.18);
 
   &:hover {
-    box-shadow: 0 4px 10px rgba(47, 107, 255, 0.25);
+    box-shadow: 0 4px 10px rgba(75, 142, 241, 0.28);
   }
 
   &.is-link,
@@ -125,7 +132,7 @@ body {
 
 // ---- 复选/单选/开关主色自动跟随 ----
 .el-switch.is-checked .el-switch__core {
-  box-shadow: 0 2px 6px rgba(47, 107, 255, 0.3);
+  box-shadow: 0 2px 6px rgba(75, 142, 241, 0.3);
 }
 
 .wrapper {
@@ -148,13 +155,13 @@ body {
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #c9d2e0;
+  background-color: #c9cdd4;
   background-clip: padding-box;
   min-height: 28px;
   border-radius: 5px;
 
   &:hover {
-    background-color: #a8b4c6;
+    background-color: #a9aeb8;
   }
 }
 
@@ -178,7 +185,7 @@ body {
   margin: 0 0 4px;
   padding: 16px 16px 4px;
   overflow: hidden;
-  background: #f7f9fc;
+  background: $S-Fill-Color-Light;
   border-radius: 8px;
 
   :deep(.el-form-item) {
@@ -187,7 +194,7 @@ body {
   }
 
   :deep(.el-form-item__label) {
-    color: #4b5563;
+    color: $S-Text-Regular;
     font-weight: 500;
   }
 }
@@ -225,14 +232,14 @@ body {
 // ==================== Element Plus 表格质感 ====================
 .el-table {
   // 圆角边框 + 更柔和的分割线
-  --el-table-border-color: #edf0f5;
-  --el-table-header-bg-color: #f7f9fc;
-  --el-table-row-hover-bg-color: #f6f9ff;
+  --el-table-border-color: #{$S-Border-Color-Light};
+  --el-table-header-bg-color: #{$S-Fill-Color-Light};
+  --el-table-row-hover-bg-color: var(--el-color-primary-light-9);
   border-radius: 8px;
 
   .el-table__header {
     th {
-      color: #4b5563;
+      color: $S-Text-Regular;
       font-weight: 600;
     }
   }
@@ -250,12 +257,12 @@ body {
   .el-dialog__header {
     padding: 18px 24px 12px;
     margin-right: 0;
-    border-bottom: 1px solid #f0f2f5;
+    border-bottom: 1px solid $S-Border-Color-Light;
 
     .el-dialog__title {
       font-size: 16px;
       font-weight: 600;
-      color: #1f2937;
+      color: $S-Text-Main;
     }
   }
 

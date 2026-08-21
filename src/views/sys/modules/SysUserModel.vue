@@ -68,7 +68,7 @@ const form = reactive({
     username: "",
     realName: "",
     password: "",
-    enableFlag: "1",
+    enableFlag: 1,
     remark: "",
   },
 });

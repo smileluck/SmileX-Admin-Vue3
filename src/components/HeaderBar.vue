@@ -68,30 +68,30 @@ const handleCommand = (command) => {
   justify-content: space-between;
   height: 100%;
   padding: 0 20px;
-  background: #fff;
+  background: $S-Header-Bg;
 
   .left-wrapper {
     display: flex;
     align-items: center;
-    color: #1f2937;
+    color: $S-Text-Main;
 
     .expand-btn {
       cursor: pointer;
-      color: #4b5563;
+      color: $S-Text-Regular;
       padding: 6px;
       border-radius: 8px;
       transition: all 0.25s;
 
       &:hover {
-        color: #2f6bff;
-        background: rgba(47, 107, 255, 0.08);
+        color: $S-Color-Primary;
+        background: rgba($S-Color-Primary, 0.08);
       }
     }
 
     .welcome-text {
       margin-left: 12px;
       font-size: 14px;
-      color: #8a94a6;
+      color: $S-Text-Secondary;
     }
   }
 
@@ -109,20 +109,20 @@ const handleCommand = (command) => {
     transition: all 0.25s;
 
     &:hover {
-      background: #f3f5f9;
+      background: $S-Fill-Color-Light;
     }
 
     .user-name {
       margin-left: 10px;
       font-size: 14px;
       font-weight: 500;
-      color: #1f2937;
+      color: $S-Text-Main;
     }
 
     .user-arrow {
       margin-left: 4px;
       font-size: 12px;
-      color: #8a94a6;
+      color: $S-Text-Secondary;
     }
   }
 }

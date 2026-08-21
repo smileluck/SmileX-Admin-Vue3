@@ -1,26 +1,54 @@
-// ==================== SmileX 设计令牌（深色科技风） ====================
+// ==================== SmileX 设计令牌（soybean 配色逻辑） ====================
+// 组织方式参考 soybean-admin：主色 + 由主色派生的色阶（hover 提亮 / active 加深），
+// 语义色同样派生 1~9 级色阶，灰阶统一为一套（详见 global.scss）。
+@use "sass:color";
+
 // 阴影
 $S-Box-Shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
 $S-Box-Shadow-Hover: 0 4px 16px rgba(15, 23, 42, 0.12);
 $S-Box-Border-Radius: 8px;
 $S-Box-Padding: 20px 20px;
 
-// 主色（科技蓝）
-$S-Color-Primary: #2f6bff;
-$S-Color-Primary-Light: #5c8cff;
-$S-Color-Primary-Dark: #1f4ecc;
+// ---- 主色（soybean 默认蓝）----
+$S-Color-Primary: #4b8ef1;
+// soybean 派生逻辑：hover 向白混合、active 向黑加深
+$S-Color-Primary-Hover: color.mix(#ffffff, $S-Color-Primary, 20%);
+$S-Color-Primary-Active: color.mix(#000000, $S-Color-Primary, 20%);
+$S-Color-Primary-Light: $S-Color-Primary-Hover;
+$S-Color-Primary-Dark: $S-Color-Primary-Active;
 
-// 布局色
-$S-Aside-Bg: #001529; // 侧边栏深蓝黑
-$S-Aside-Bg-Dark: #000c1a; // 侧边栏更深一层（子菜单/hover）
-$S-Header-Bg: #ffffff; // 顶栏白色
-$S-Main-Bg: #f0f2f5; // 主内容区浅灰
+// ---- 语义色（soybean 系）----
+$S-Color-Success: #16a34a;
+$S-Color-Warning: #f59e0b;
+$S-Color-Error: #dc2626;
+$S-Color-Info: #64748b;
 
-// 文字层级
-$S-Text-Main: #1f2937;
-$S-Text-Regular: #4b5563;
-$S-Text-Secondary: #8a94a6;
-$S-Text-Placeholder: #b0b8c7;
+// ---- 功能色（首页快捷卡片，soybean 推荐）----
+$S-Color-Cyan: #0ea5e9;
+$S-Color-Purple: #7c6cf0;
+$S-Color-Pink: #ec4899;
 
-// 边框
-$S-Border-Color: #e5e9f0;
+// ---- 布局色 ----
+// 侧边栏深色底由主色向黑压暗派生，hover 层再压暗一档
+$S-Aside-Bg: color.mix(#000000, $S-Color-Primary, 92%);
+$S-Aside-Bg-Dark: color.mix(#000000, $S-Color-Primary, 96%);
+$S-Header-Bg: #ffffff;
+$S-Main-Bg: #f2f3f5;
+
+// ---- 品牌渐变（logo / hero / 登录页，主色向黑分级派生）----
+$S-Brand-Dark-1: color.mix(#000000, $S-Color-Primary, 96%);
+$S-Brand-Dark-2: color.mix(#000000, $S-Color-Primary, 86%);
+$S-Brand-Dark-3: color.mix(#000000, $S-Color-Primary, 74%);
+$S-Brand-Dark-4: color.mix(#000000, $S-Color-Primary, 62%);
+$S-Brand-Dark-5: color.mix(#000000, $S-Color-Primary, 85%);
+
+// ---- 文字层级（Arco/soybean 灰阶）----
+$S-Text-Main: #1d2129;
+$S-Text-Regular: #4e5969;
+$S-Text-Secondary: #86909c;
+$S-Text-Placeholder: #a9aeb8;
+
+// ---- 边框 / 填充 ----
+$S-Border-Color: #e5e6eb;
+$S-Border-Color-Light: #f2f3f5;
+$S-Fill-Color-Light: #f7f8fa;

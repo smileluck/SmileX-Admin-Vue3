@@ -61,14 +61,14 @@ watch(
     flex: 0 0 60px;
     height: 60px;
     width: 100%;
-    background-color: #fff;
-    border-bottom: 1px solid #eef1f6;
+    background-color: $S-Header-Bg;
+    border-bottom: 1px solid $S-Border-Color-Light;
     box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
     position: relative;
     z-index: 10;
   }
   &-main {
-    background: #f0f2f5;
+    background: $S-Main-Bg;
     width: 100%;
     height: 100%;
     overflow: auto;

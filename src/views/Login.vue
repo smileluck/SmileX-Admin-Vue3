@@ -229,7 +229,12 @@ captchaGet();
 
 <style lang="scss" scoped>
 .login {
-  background: linear-gradient(135deg, #050b24 0%, #0a1f4d 45%, #122a6b 100%);
+  background: linear-gradient(
+    135deg,
+    $S-Brand-Dark-1 0%,
+    $S-Brand-Dark-2 45%,
+    $S-Brand-Dark-3 100%
+  );
   width: 100%;
   height: 100%;
   position: relative;
@@ -243,8 +248,8 @@ captchaGet();
 .deco-grid {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(92, 140, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(92, 140, 255, 0.06) 1px, transparent 1px);
+  background-image: linear-gradient(rgba($S-Color-Primary, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($S-Color-Primary, 0.06) 1px, transparent 1px);
   background-size: 42px 42px;
   mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
@@ -263,7 +268,7 @@ captchaGet();
     height: 420px;
     left: -120px;
     top: -140px;
-    background: rgba(47, 107, 255, 0.28);
+    background: rgba($S-Color-Primary, 0.28);
   }
 
   &-2 {
@@ -271,7 +276,7 @@ captchaGet();
     height: 360px;
     right: -100px;
     bottom: -120px;
-    background: rgba(99, 91, 255, 0.22);
+    background: rgba($S-Color-Purple, 0.22);
   }
 }
 
@@ -303,7 +308,7 @@ captchaGet();
     }
 
     &.is-focus {
-      box-shadow: 0 0 0 1px #5c8cff inset;
+      box-shadow: 0 0 0 1px $S-Color-Primary-Hover inset;
     }
   }
 
@@ -321,7 +326,7 @@ captchaGet();
   }
 
   :deep(.el-form-item__error) {
-    color: #9bc0ff;
+    color: rgba($S-Color-Primary, 0.75);
   }
 }
 
@@ -422,7 +427,7 @@ captchaGet();
   letter-spacing: 8px;
   text-indent: 8px;
   color: #fff;
-  background: linear-gradient(135deg, #2f6bff 0%, #635bff 100%);
+  background: linear-gradient(135deg, $S-Color-Primary 0%, $S-Color-Purple 100%);
   box-shadow: 0 8px 20px rgba(47, 107, 255, 0.4);
   transition: all 0.3s;
 
